@@ -19,6 +19,8 @@
         enable = true;
         userName = "GnomedDev";
         userEmail = "daisy2005thomas@gmail.com";
+
+        extraConfig.push.autoSetupRemote = "true";
       };
 
       # The state version is required and should stay at the version you
