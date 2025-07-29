@@ -41,6 +41,7 @@
 
   # List services that you want to enable:
   services.tailscale.enable = true;
+  programs.fish.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -1,5 +1,6 @@
 {
   home-manager,
+  pkgs,
   ...
 }:
 
@@ -8,6 +9,8 @@
   users.users.gnome = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+
+    shell = pkgs.fish;
   };
 
   home-manager.useGlobalPkgs = true;
@@ -22,6 +25,12 @@
 
         extraConfig.push.autoSetupRemote = "true";
       };
+
+      programs.fish.enable = true;
+      programs.fish.functions.fish_greeting = "";
+
+      programs.starship.enable = true;
+      programs.starship.enableFishIntegration = true;
 
       # The state version is required and should stay at the version you
       # originally installed.
