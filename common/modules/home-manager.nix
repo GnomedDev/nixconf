@@ -18,6 +18,14 @@
   home-manager.users.gnome =
     { pkgs, ... }:
     {
+      # Allow unfree packages like the Android SDK
+      xdg.configFile."nixpkgs/config.nix".text = ''
+        {...}: {
+          allowUnfree = true;
+          android_sdk.accept_license = true;
+        }
+      '';
+
       programs.fish.enable = true;
       programs.fish.functions.fish_greeting = "";
 
