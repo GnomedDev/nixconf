@@ -28,6 +28,7 @@
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
+          ./common/modules/git.nix
           ./common/modules/home-manager.nix
           ./common/modules/disable-sleep.nix
           ./machines/gnome-x86-mac/modules/t2fanrd
