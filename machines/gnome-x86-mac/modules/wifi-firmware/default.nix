@@ -4,6 +4,7 @@
   # Use NetworkManager with IWD for stable WiFI on T2
   networking.hostName = "gnome-x86-mac";
   networking.networkmanager = {
+    unmanaged = [ "type:ethernet" ];
     wifi.backend = "iwd";
     enable = true;
   };
