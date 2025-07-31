@@ -14,31 +14,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Use a 16gb swapfile.
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024;
-    }
-  ];
-
-  # Use zswap to compress ram in-place before moving to swapfile.
-  boot.kernelParams = [
-    "zswap.enabled=1" # enables zswap
-    "zswap.compressor=lz4" # compression algorithm
-    "zswap.max_pool_percent=20" # maximum percentage of RAM that zswap is allowed to use
-    "zswap.shrinker_enabled=1" # whether to shrink the pool proactively on high memory pressure
-  ];
-
-  # Use NetworkManager with IWD for stable WiFI on T2
-  networking.hostName = "gnome-x86-mac"; # Define your hostname.
-  networking.networkmanager = {
-    wifi.backend = "iwd";
-    enable = true;
-  };
-
   # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/London";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";

@@ -40,5 +40,25 @@
           nixos-hardware.nixosModules.apple-t2
         ];
       };
+
+      nixosConfigurations.living-pi-mac = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration.nix
+          ./common/modules/git.nix
+          ./common/modules/home-manager.nix
+          ./common/modules/disable-sleep.nix
+          ./machines/gnome-x86-mac/modules/t2fanrd
+          ./machines/gnome-x86-mac/modules/swapfile.nix
+          ./machines/gnome-x86-mac/modules/wifi-firmware
+          ./machines/gnome-x86-mac/modules/substituter.nix
+          ./machines/gnome-x86-mac/modules/hardware-configuration.nix
+
+          ./machines/living-pi/modules/kodi.nix
+
+          home-manager.nixosModules.home-manager
+          nixos-hardware.nixosModules.apple-t2
+        ];
+      };
     };
 }
