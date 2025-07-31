@@ -19,6 +19,19 @@ in
     ];
   };
 
+  # Allow any user to power off or reboot the machine.
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.login1.power-off" ||
+          action.id == "org.freedesktop.login1.power-off-multiple-sessions" ||
+          action.id == "org.freedesktop.login1.reboot" ||
+          action.id == "org.freedesktop.login1.reboot-multiple-sessions")
+      {
+          return polkit.Result.YES;
+      }
+    });
+  '';
+
   # Create a user to sandbox Kodi, so it doesn't interfere or rely on user-specific config.
   users.users.kodi = {
     enable = true;
