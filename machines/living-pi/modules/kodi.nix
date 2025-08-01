@@ -5,16 +5,23 @@ let
 in
 {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (self: super: {
+      kodi-gbm = super.kodi-gbm.override {
+        pipewireSupport = false;
+        opticalSupport = false;
+        waylandSupport = false;
+        pulseSupport = false;
+        x11Support = false;
+      };
+    })
+  ];
 
   # Enable the ALSA for Kodi Audio.
   hardware.alsa.enable = true;
 
-  # Enable graphical drivers, using Intel for now.
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-    ];
-  };
+  # Enable graphical drivers.
+  hardware.graphics.enable = true;
 
   # Allow any user to power off or reboot the machine.
   security.polkit.extraConfig = ''
