@@ -47,12 +47,14 @@
         modules = [
           ./configuration.nix
           ./common/modules/git.nix
+          ./common/modules/ssh.nix
           ./common/modules/home-manager.nix
 
           ./machines/living-pi/modules/boot.nix
           ./machines/living-pi/modules/kodi.nix
           ./machines/living-pi/modules/samba.nix
           ./machines/living-pi/modules/firmware.nix
+          ./machines/living-pi/modules/swapfile.nix
           ./machines/living-pi/modules/networking.nix
           ./machines/living-pi/modules/remote-control.nix
           ./machines/living-pi/modules/hardware-configuration.nix

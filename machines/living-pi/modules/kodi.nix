@@ -1,21 +1,10 @@
 { pkgs, ... }:
 
 let
-  kodiPkg = pkgs.kodi-gbm;
+  kodiPkg = pkgs.kodi-wayland;
 in
 {
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [
-    (self: super: {
-      kodi-gbm = super.kodi-gbm.override {
-        pipewireSupport = false;
-        opticalSupport = false;
-        waylandSupport = false;
-        pulseSupport = false;
-        x11Support = false;
-      };
-    })
-  ];
 
   # Enable the ALSA for Kodi Audio.
   hardware.alsa.enable = true;
@@ -51,6 +40,13 @@ in
 
       home.stateVersion = "25.11";
     };
+
+  # Use the Cage wayland compositor to draw Kodi to the screen.
+  services.cage = {
+    enable = true;
+    user = "kodi";
+    program = "${kodiPkg}/bin/kodi-standalone";
+  };
 
   # Configure systemd to start kodi
   systemd.services.kodi = {
