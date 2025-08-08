@@ -33,6 +33,7 @@
           ./common/modules/disable-sleep.nix
           ./machines/gnome-x86-mac/modules/t2fanrd
           ./machines/gnome-x86-mac/modules/boot.nix
+          ./machines/gnome-x86-mac/modules/swapfile.nix
           ./machines/gnome-x86-mac/modules/wifi-firmware
           ./machines/gnome-x86-mac/modules/substituter.nix
           ./machines/gnome-x86-mac/modules/hardware-configuration.nix
