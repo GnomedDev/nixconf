@@ -10,6 +10,9 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
 
+    # General development tools which are going to be needed anyway.
+    packages = with pkgs; [ python3 ];
+
     shell = pkgs.fish;
   };
 
