@@ -12,6 +12,10 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    plasma-manager.url = "github:nix-community/plasma-manager";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
   };
 
   outputs =
@@ -19,6 +23,7 @@
       nixpkgs,
       nixos-hardware,
       home-manager,
+      plasma-manager,
       ...
     }:
     {
@@ -28,9 +33,16 @@
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-          ./common/modules/git.nix
+
+          ./common/modules/kde.nix
           ./common/modules/home-manager.nix
           ./common/modules/disable-sleep.nix
+
+          ./common/users/fox/general.nix
+
+          ./common/users/gnome/git.nix
+          ./common/users/gnome/general.nix
+
           ./machines/gnome-x86-mac/modules/t2fanrd
           ./machines/gnome-x86-mac/modules/boot.nix
           ./machines/gnome-x86-mac/modules/swapfile.nix
@@ -47,9 +59,12 @@
         system = "aarch64-linux";
         modules = [
           ./configuration.nix
-          ./common/modules/git.nix
-          ./common/modules/ssh.nix
+
           ./common/modules/home-manager.nix
+
+          ./common/users/gnome/git.nix
+          ./common/users/gnome/ssh.nix
+          ./common/users/gnome/general.nix
 
           ./machines/living-pi/modules/boot.nix
           ./machines/living-pi/modules/kodi.nix

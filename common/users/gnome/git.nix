@@ -1,4 +1,4 @@
-{ home, ... }:
+{ ... }:
 
 {
   home-manager.users.gnome =
