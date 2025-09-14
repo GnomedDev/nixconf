@@ -15,17 +15,6 @@ in
 
   # Login screen settings
   services.displayManager.sddm.settings.Users.HideUsers = "gnome";
-  nixpkgs.config.overrides = [
-    (final: prev: {
-      kdePackages = prev.kdePackages.overrideScope (
-        kdeFinal: kdePrev: {
-          plasma-desktop = pkgs.callPackage ./sddm-theme.nix {
-            wallpaperPath = kdeWallpaperPath;
-          };
-        }
-      );
-    })
-  ];
 
   # Get rid of plasma packages that we don't need
   environment.plasma6.excludePackages = with pkgs.kdePackages; [

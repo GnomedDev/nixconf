@@ -29,6 +29,10 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
+      overlays.default = [
+        ./common/users/fox/sddm-theme-overlay.nix
+      ];
+
       nixosConfigurations.gnome-x86-mac = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
