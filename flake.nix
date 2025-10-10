@@ -29,6 +29,11 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
+      homeConfigurations.gnome = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        modules = [ ./common/users/gnome/home.nix ];
+      };
+
       nixosConfigurations.gnome-x86-mac = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
