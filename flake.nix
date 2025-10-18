@@ -34,6 +34,28 @@
         modules = [ ./common/users/gnome/home.nix ];
       };
 
+      nixosConfigurations.gnome-desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          plasma-manager;
+        };
+        modules = [
+          ./configuration.nix
+
+          ./common/modules/kde.nix
+          ./common/modules/systemd-boot.nix
+
+          ./common/users/gnome/home.nix
+          ./common/users/gnome/general.nix
+          ./common/users/gnome/graphical.nix
+
+          ./machines/gnome-desktop/modules/swapfile.nix
+          ./machines/gnome-desktop/modules/wifi-firmware.nix
+
+          home-manager.nixosModules.home-manager
+        ];
+      };
+
       nixosConfigurations.gnome-x86-mac = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
@@ -43,6 +65,7 @@
           ./configuration.nix
 
           ./common/modules/kde.nix
+          ./common/modules/systemd-boot.nix
           ./common/modules/home-manager.nix
           ./common/modules/disable-sleep.nix
 
@@ -50,7 +73,6 @@
           ./common/users/gnome/general.nix
 
           ./machines/gnome-x86-mac/modules/t2fanrd
-          ./machines/gnome-x86-mac/modules/boot.nix
           ./machines/gnome-x86-mac/modules/swapfile.nix
           ./machines/gnome-x86-mac/modules/wifi-firmware
           ./machines/gnome-x86-mac/modules/substituter.nix
