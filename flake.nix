@@ -26,6 +26,21 @@
       plasma-manager,
       ...
     }:
+
+    let
+      nixPkgsConfig = {
+        allowUnfree = true;
+        android_sdk.accept_license = true;
+      };
+      pkgsX86 = import nixpkgs {
+        system = "x86_64-linux";
+        config = nixPkgsConfig;
+      };
+      pkgsARM = import nixpkgs {
+        system = "aarch64-linux";
+        config = nixPkgsConfig;
+      };
+    in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
@@ -34,8 +49,9 @@
         modules = [ ./common/users/gnome/home.nix ];
       };
 
-      nixosConfigurations.gnome-x86-mac = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.gnome-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        pkgs = pkgsX86;
         specialArgs = {
           inherit plasma-manager;
         };
@@ -43,6 +59,32 @@
           ./configuration.nix
 
           ./common/modules/kde.nix
+          ./common/modules/nvidia.nix
+          ./common/modules/systemd-boot.nix
+          ./common/modules/home-manager.nix
+
+          ./common/users/gnome/general.nix
+          ./common/users/gnome/graphical.nix
+
+          ./machines/gnome-desktop/modules/swapfile.nix
+          ./machines/gnome-desktop/modules/wifi-firmware
+          ./machines/gnome-desktop/modules/hardware-configuration.nix
+
+          home-manager.nixosModules.home-manager
+        ];
+      };
+
+      nixosConfigurations.gnome-x86-mac = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        pkgs = pkgsX86;
+        specialArgs = {
+          inherit plasma-manager;
+        };
+        modules = [
+          ./configuration.nix
+
+          ./common/modules/kde.nix
+          ./common/modules/systemd-boot.nix
           ./common/modules/home-manager.nix
           ./common/modules/disable-sleep.nix
 
@@ -50,7 +92,6 @@
           ./common/users/gnome/general.nix
 
           ./machines/gnome-x86-mac/modules/t2fanrd
-          ./machines/gnome-x86-mac/modules/boot.nix
           ./machines/gnome-x86-mac/modules/swapfile.nix
           ./machines/gnome-x86-mac/modules/wifi-firmware
           ./machines/gnome-x86-mac/modules/substituter.nix
@@ -63,6 +104,7 @@
 
       nixosConfigurations.living-pi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
+        pkgs = pkgsARM;
         modules = [
           ./configuration.nix
 

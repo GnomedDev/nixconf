@@ -6,6 +6,7 @@
   config,
   lib,
   pkgs,
+  nixpkgs,
   ...
 }:
 
@@ -18,6 +19,12 @@
 
   # Use nix-ld for compatiblity with vsc-server
   programs.nix-ld.enable = true;
+
+  # Allow nix command/flakes
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).

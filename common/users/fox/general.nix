@@ -35,15 +35,6 @@ in
     })
   ];
 
-  # Get rid of plasma packages that we don't need
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-    ktexteditor
-    khelpcenter
-    elisa
-    kate
-  ];
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.fox = {
     isNormalUser = true;
@@ -70,14 +61,6 @@ in
   home-manager.users.fox =
     { pkgs, ... }:
     {
-      # Allow unfree packages like the Android SDK
-      xdg.configFile."nixpkgs/config.nix".text = ''
-        {...}: {
-          allowUnfree = true;
-          android_sdk.accept_license = true;
-        }
-      '';
-
       programs = {
         # KDE apps
         plasma = {

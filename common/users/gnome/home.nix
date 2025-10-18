@@ -1,13 +1,5 @@
 { pkgs, ... }:
 {
-  # Allow unfree packages like the Android SDK
-  xdg.configFile."nixpkgs/config.nix".text = ''
-    {...}: {
-      allowUnfree = true;
-      android_sdk.accept_license = true;
-    }
-  '';
-
   programs.git = {
     enable = true;
     userName = "GnomedDev";
@@ -36,7 +28,10 @@
   home = {
     username = "gnome";
     homeDirectory = "/home/gnome";
-    packages = with pkgs; [ python3 nixfmt ];
+    packages = with pkgs; [
+      python3
+      nixfmt
+    ];
 
     # Do not change.
     stateVersion = "25.11";
