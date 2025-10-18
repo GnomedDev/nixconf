@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
-  # Login screen settings
-  services.displayManager.sddm.settings.Users.HideUsers = "gnome";
+  # Enable display brightness control in KDE
+  hardware.i2c.enable = true;
   nixpkgs.overlays = [
     (final: prev: {
       kdePackages = prev.kdePackages.overrideScope (
@@ -28,7 +28,39 @@
         workspace.colorScheme = "BreezeDark";
 
         # Panel = Taskbar
-        panels = [ { height = 46; } ];
+        panels = [
+          {
+            height = 46;
+            location = "bottom";
+            widgets = [
+              {
+                name = "org.kde.plasma.kickoff";
+                config.General.icon = "nix-snowflake-white";
+              }
+              "org.kde.plasma.pager"
+              "org.kde.plasma.icontasks"
+              "org.kde.plasma.marginsseparator"
+              "org.kde.plasma.systemtray"
+              "org.kde.plasma.digitalclock"
+              "org.kde.plasma.showdesktop"
+            ];
+          }
+        ];
+
+        input = {
+          keyboard.layouts = [
+            { layout = "gb"; }
+          ];
+          mice = [
+            {
+              vendorId = "1532";
+              productId = "00c5";
+              acceleration = -0.4;
+              accelerationProfile = "none";
+              name = "Razer DeathAdder V3 HyperSpeed";
+            }
+          ];
+        };
       };
 
       # Vesktop (Discord)

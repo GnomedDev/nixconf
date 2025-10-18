@@ -33,6 +33,8 @@
     curl
     btop
     nixfmt
+    usbutils
+    pciutils
   ];
 
   # Open ports in the firewall.
