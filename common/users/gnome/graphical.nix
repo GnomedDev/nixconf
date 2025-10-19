@@ -17,6 +17,14 @@
     })
   ];
 
+  users.users.gnome.packages = with pkgs; [
+    # LibreOffice
+    libreoffice-qt
+    hunspell
+    hyphenDicts.en_US
+    hunspellDicts.en_GB-ise
+  ];
+
   home-manager.users.gnome = {
     programs = {
       # KDE apps
@@ -25,7 +33,11 @@
         enable = true;
         overrideConfig = true;
 
+        # Set dark theme, doesn't fully seem to work.
         workspace.colorScheme = "BreezeDark";
+
+        # Disable mouse barrier between screens.
+        kwin.edgeBarrier = 0;
 
         # Panel = Taskbar
         panels = [
@@ -34,11 +46,17 @@
             location = "bottom";
             widgets = [
               {
-                name = "org.kde.plasma.kickoff";
-                config.General.icon = "nix-snowflake-white";
+                kickoff.icon = "nix-snowflake-white";
               }
               "org.kde.plasma.pager"
-              "org.kde.plasma.icontasks"
+              {
+                iconTasks.launchers = [
+                  "applications:firefox.desktop"
+                  "applications:org.kde.dolphin.desktop"
+                  "applications:vesktop.desktop"
+                  "applications:org.kde.konsole.desktop"
+                ];
+              }
               "org.kde.plasma.marginsseparator"
               "org.kde.plasma.systemtray"
               "org.kde.plasma.digitalclock"
