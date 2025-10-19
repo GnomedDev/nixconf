@@ -57,7 +57,7 @@
               productId = "00c5";
               acceleration = -0.4;
               accelerationProfile = "none";
-              name = "Razer DeathAdder V3 HyperSpeed";
+              name = "Razer Razer DeathAdder V3 HyperSpeed";
             }
           ];
         };
