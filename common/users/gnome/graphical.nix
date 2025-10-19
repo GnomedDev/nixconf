@@ -39,6 +39,9 @@
         # Disable mouse barrier between screens.
         kwin.edgeBarrier = 0;
 
+        # Set spectacle settings (no high level module for it yet).
+        configFile.spectaclerc.General.clipboardGroup = "PostScreenshotCopyImage";
+
         # Panel = Taskbar
         panels = [
           {
