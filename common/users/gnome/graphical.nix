@@ -18,11 +18,17 @@
   ];
 
   users.users.gnome.packages = with pkgs; [
+    # Video Player
+    haruna
+
     # LibreOffice
     libreoffice-qt
     hunspell
     hyphenDicts.en_US
     hunspellDicts.en_GB-ise
+
+    # Custom packages
+    (pkgs.callPackage ../../packages/ffmpeg4discord.nix { })
   ];
 
   home-manager.users.gnome = {
