@@ -13,6 +13,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    darwin.url = "github:nix-darwin/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
@@ -22,6 +25,7 @@
     {
       nixpkgs,
       nixos-hardware,
+      darwin,
       home-manager,
       plasma-manager,
       ...
@@ -40,13 +44,30 @@
         system = "aarch64-linux";
         config = nixPkgsConfig;
       };
+      pkgsARMDarwin = import nixpkgs {
+        system = "aarch64-darwin";
+        config = nixPkgsConfig;
+      };
     in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
 
       homeConfigurations.gnome = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        pkgs = pkgsARM;
         modules = [ ./common/users/gnome/home.nix ];
+      };
+
+      darwinConfigurations.gnome = darwin.lib.darwinSystem {
+        pkgs = pkgsARMDarwin;
+        modules = [
+          home-manager.darwinModules.home-manager
+          ./configuration.darwin.nix
+
+          ./common/modules/home-manager.nix
+
+          ./common/users/gnome/general.nix
+          ./common/users/gnome/graphical.nix
+        ];
       };
 
       nixosConfigurations.gnome-desktop = nixpkgs.lib.nixosSystem {
@@ -65,6 +86,7 @@
 
           ./common/users/gnome/general.nix
           ./common/users/gnome/graphical.nix
+          ./common/users/gnome/kde.nix
 
           ./machines/gnome-desktop/modules/swapfile.nix
           ./machines/gnome-desktop/modules/wifi-firmware

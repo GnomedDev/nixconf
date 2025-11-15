@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
+let
+  homeDirectory = if pkgs.stdenv.isDarwin then "/Users/gnome" else "/home/gnome";
+in
 {
   programs.git = {
     enable = true;
@@ -14,7 +17,7 @@
       signByDefault = true;
 
       format = "ssh";
-      key = "/home/gnome/.ssh/id_rsa";
+      key = "${homeDirectory}/.ssh/id_rsa";
     };
   };
 
@@ -30,7 +33,7 @@
 
   home = {
     username = "gnome";
-    homeDirectory = "/home/gnome";
+    inherit homeDirectory;
     packages = with pkgs; [
       python3
       nixfmt

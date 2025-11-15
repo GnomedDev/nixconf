@@ -1,6 +1,7 @@
 {
   home-manager,
   pkgs,
+  lib,
   ...
 }:
 
@@ -13,10 +14,12 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gnome = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-
+    home = if pkgs.stdenv.isDarwin then "/Users/gnome" else "/home/gnome";
     shell = pkgs.fish;
+  }
+  // lib.optionalAttrs pkgs.stdenv.isLinux {
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    isNormalUser = true;
   };
 
   home-manager.users.gnome = import ./home.nix;
