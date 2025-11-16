@@ -17,6 +17,7 @@
     })
   ];
 
+  programs.partition-manager.enable = true;
   users.users.gnome.packages = with pkgs; [
     # Video Player
     haruna

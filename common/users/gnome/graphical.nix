@@ -1,9 +1,8 @@
 { pkgs, ... }:
 {
-
   users.users.gnome.packages = with pkgs; [
     # LibreOffice
-    libreoffice-bin
+    (if pkgs.stdenv.isDarwin then libreoffice-bin else libreoffice-qt)
     hunspell
     hyphenDicts.en_US
     hunspellDicts.en_GB-ise

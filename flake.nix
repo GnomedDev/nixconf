@@ -77,10 +77,10 @@
       };
 
       nixosConfigurations.gnome-desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         pkgs = pkgsX86;
         specialArgs = {
           inherit plasma-manager;
+          inherit nix-index-database;
         };
         modules = [
           ./configuration.nix
@@ -103,10 +103,10 @@
       };
 
       nixosConfigurations.gnome-x86-mac = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         pkgs = pkgsX86;
         specialArgs = {
           inherit plasma-manager;
+          inherit nix-index-database;
         };
         modules = [
           ./configuration.nix
@@ -131,8 +131,8 @@
       };
 
       nixosConfigurations.living-pi = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
         pkgs = pkgsARM;
+        specialArgs = { inherit nix-index-database; };
         modules = [
           ./configuration.nix
 
