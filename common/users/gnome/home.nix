@@ -29,6 +29,8 @@ in
   programs.starship.enable = true;
   programs.starship.enableFishIntegration = true;
 
+  programs.nix-index-database.comma.enable = true;
+
   programs.home-manager.enable = true;
 
   home = {

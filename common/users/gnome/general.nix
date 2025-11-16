@@ -1,4 +1,5 @@
 {
+  nix-index-database,
   home-manager,
   pkgs,
   lib,
@@ -23,4 +24,7 @@
   };
 
   home-manager.users.gnome = import ./home.nix;
+  home-manager.sharedModules = [
+    nix-index-database.homeModules.nix-index
+  ];
 }

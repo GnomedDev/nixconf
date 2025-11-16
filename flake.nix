@@ -16,6 +16,9 @@
     darwin.url = "github:nix-darwin/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
@@ -25,6 +28,7 @@
     {
       nixpkgs,
       nixos-hardware,
+      nix-index-database,
       darwin,
       home-manager,
       plasma-manager,
@@ -59,6 +63,7 @@
 
       darwinConfigurations.gnome = darwin.lib.darwinSystem {
         pkgs = pkgsARMDarwin;
+        specialArgs = { inherit nix-index-database; };
         modules = [
           home-manager.darwinModules.home-manager
           ./configuration.darwin.nix
@@ -67,6 +72,7 @@
 
           ./common/users/gnome/general.nix
           ./common/users/gnome/graphical.nix
+          ./common/users/gnome/general.darwin.nix
         ];
       };
 
