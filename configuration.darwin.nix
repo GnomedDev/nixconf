@@ -13,6 +13,9 @@
     nixfmt
   ];
 
+  # Allow sudo to authenticate with touch ID
+  security.pam.services.sudo_local.touchIdAuth = true;
+
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
   system.defaults.hitoolbox.AppleFnUsageType = "Do Nothing";
   system.defaults.screencapture.target = "clipboard";
