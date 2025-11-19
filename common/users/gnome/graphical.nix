@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  # Graphical systems have enough processing power to run dockerd in the background, even if not strictly necessary.
+  virtualisation.docker.enable = true;
+
   users.users.gnome.packages = with pkgs; [
     # LibreOffice
     (if pkgs.stdenv.isDarwin then libreoffice-bin else libreoffice-qt)
