@@ -19,8 +19,12 @@
     shell = pkgs.fish;
   }
   // lib.optionalAttrs pkgs.stdenv.isLinux {
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     isNormalUser = true;
+    # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
   };
 
   home-manager.users.gnome = import ./home.nix;
