@@ -7,7 +7,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -36,22 +36,13 @@
     }:
 
     let
-      nixPkgsConfig = {
+      nixpkgsConfig.config = {
         allowUnfree = true;
         android_sdk.accept_license = true;
       };
-      pkgsX86 = import nixpkgs {
-        system = "x86_64-linux";
-        config = nixPkgsConfig;
-      };
-      pkgsARM = import nixpkgs {
-        system = "aarch64-linux";
-        config = nixPkgsConfig;
-      };
-      pkgsARMDarwin = import nixpkgs {
-        system = "aarch64-darwin";
-        config = nixPkgsConfig;
-      };
+      pkgsX86 = import nixpkgs (nixpkgsConfig // { system = "x86_64-linux"; });
+      pkgsARM = import nixpkgs (nixpkgsConfig // { system = "aarch64-linux"; });
+      pkgsARMDarwin = import nixpkgs (nixpkgsConfig // { system = "aarch64-darwin"; });
     in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
@@ -70,9 +61,9 @@
 
           ./common/modules/home-manager.nix
 
-          ./common/users/gnome/general.nix
+          ./common/users/gnome/general
+          ./common/users/gnome/general/darwin.nix
           ./common/users/gnome/graphical.nix
-          ./common/users/gnome/general.darwin.nix
         ];
       };
 
@@ -90,7 +81,8 @@
           ./common/modules/systemd-boot.nix
           ./common/modules/home-manager.nix
 
-          ./common/users/gnome/general.nix
+          ./common/users/gnome/general
+          ./common/users/gnome/general/linux.nix
           ./common/users/gnome/graphical.nix
           ./common/users/gnome/kde.nix
 
@@ -117,7 +109,8 @@
           ./common/modules/disable-sleep.nix
 
           ./common/users/fox/general.nix
-          ./common/users/gnome/general.nix
+          ./common/users/gnome/general
+          ./common/users/gnome/general/linux.nix
 
           ./machines/gnome-x86-mac/modules/t2fanrd
           ./machines/gnome-x86-mac/modules/swapfile.nix
@@ -139,7 +132,8 @@
           ./common/modules/home-manager.nix
 
           ./common/users/gnome/ssh.nix
-          ./common/users/gnome/general.nix
+          ./common/users/gnome/general
+          ./common/users/gnome/general/linux.nix
 
           ./machines/living-pi/modules/boot.nix
           ./machines/living-pi/modules/kodi.nix

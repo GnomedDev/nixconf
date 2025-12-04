@@ -39,6 +39,7 @@ in
     packages = with pkgs; [
       python3
       nixfmt
+      nil
     ];
 
     # Do not change.

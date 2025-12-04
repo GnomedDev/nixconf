@@ -1,5 +1,8 @@
 { pkgs, ... }:
 {
+  # Graphical systems have enough processing power to run dockerd in the background, even if not strictly necessary.
+  virtualisation.docker.enable = true;
+
   # Enable display brightness control in KDE
   hardware.i2c.enable = true;
   nixpkgs.overlays = [
