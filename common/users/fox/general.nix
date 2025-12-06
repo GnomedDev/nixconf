@@ -11,8 +11,6 @@ let
   kdeWallpaperPath = "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Mountain/contents/images_dark/5120x2880.png";
 in
 {
-  nixpkgs.config.allowUnfree = true;
-
   # Login screen settings
   services.displayManager.sddm.settings.Users.HideUsers = "gnome";
   nixpkgs.overlays = [
