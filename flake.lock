@@ -27,11 +27,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764872372,
-        "narHash": "sha256-uZuXRz9CzeCHsRbc2MQvKomwoX6GcFC5BUMEk3ouSFU=",
+        "lastModified": 1764998300,
+        "narHash": "sha256-fZatn/KLfHLDXnF0wy7JxXqGaZmGDTVufT4o/AOlj44=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "05a56dbf24f195c62286e3273a2671d3b4904b00",
+        "rev": "27a6182347ccae90a88231ae0dc5dfa7d15815bb",
         "type": "github"
       },
       "original": {
@@ -77,11 +77,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1764854611,
-        "narHash": "sha256-VgKiNaoL9dA0oxuetR+STr3rMV6sS/T3yGc9/KPheg8=",
+        "lastModified": 1764990765,
+        "narHash": "sha256-OSEAjYY3X0fwmEWzuKlO35LwvVkFU0ymFofI1RTSiBI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3a4b875aef660bbd148e86b92cffea2a360c3275",
+        "rev": "3e23f80781cb424196e7961dba118307016946dc",
         "type": "github"
       },
       "original": {
@@ -121,7 +121,28 @@
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "plasma-manager": "plasma-manager"
+        "plasma-manager": "plasma-manager",
+        "t2fanrd": "t2fanrd"
+      }
+    },
+    "t2fanrd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1759597823,
+        "narHash": "sha256-/dPXlAeZhIxRq+2+vQ4LnWRDtC+0MvIPQkJwuHG0ZmQ=",
+        "owner": "GnomedDev",
+        "repo": "t2fanrd",
+        "rev": "ae705d7b38181c34c12410478473b00d8374a5b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "GnomedDev",
+        "repo": "t2fanrd",
+        "type": "github"
       }
     }
   },

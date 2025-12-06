@@ -10,10 +10,12 @@ This is public for troubleshooting or as an example for others.
 
 A self-built gaming PC, with an AMD processor and NVIDIA GPU using an out-of-tree rtw89 driver for WIFI.
 
-### gnome-x86-mac
+### living-mac
 
-A 2020 Macbook Air, requires special firmware (see `wifi-firmware`) and daemons (see `t2fanrd`).
+A 2020 Macbook Air with 8GB of ram used as a server, requires special firmware (see `wifi-firmware`) and daemons (see `t2fanrd`).
 
-### living-pi
+This runs Samba, Home Assistant, Predbat, and other software you'd find on a home server.
 
-A Raspberry Pi 4 with 2GB of RAM, a 32gb SD card, and an external hard drive working as a NAS.
+### darwinConfigurations.gnome
+
+An M2 Macbook Pro with 16GB of ram running MacOS and being managed with nix-darwin.

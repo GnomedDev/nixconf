@@ -1,6 +1,8 @@
 { ... }:
 {
+  # Remember to run `sudo smbpasswd -sa {user}` to set up passwords!
   services.samba = {
+    enable = true;
     smbd.enable = true;
     settings = {
       global = {

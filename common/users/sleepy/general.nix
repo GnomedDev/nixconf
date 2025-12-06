@@ -1,8 +1,8 @@
 { ... }:
 {
-  users.users.fox = {
+  users.users.sleepy = {
     isNormalUser = true;
-    home = "/home/fox";
+    home = "/home/sleepy";
 
     # Enable ‘sudo’ for the user.
     extraGroups = [ "wheel" ];
