@@ -1,16 +1,28 @@
 { pkgs, ... }:
 
 let
-  kodiPkg = pkgs.kodi-wayland;
+  kodiPkg = pkgs.kodi-gbm;
+  sleepyIp = "192.168.1.71";
 in
 {
-  nixpkgs.config.allowUnfree = true;
-
   # Enable the ALSA for Kodi Audio.
   hardware.alsa.enable = true;
 
+  # Disable the internal display.
+  boot.kernelParams = [
+    "video=eDP-1:d"
+    "video=HDMI-A-1:2560x1440@60"
+  ];
+
   # Enable graphical drivers.
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver
+      intel-ocl
+    ];
+  };
 
   # Allow any user to power off or reboot the machine.
   security.polkit.extraConfig = ''
@@ -35,18 +47,30 @@ in
   home-manager.users.kodi =
     { pkgs, ... }:
     {
-      programs.kodi.enable = true;
-      programs.kodi.package = kodiPkg;
+      programs.kodi = {
+        enable = true;
+        package = kodiPkg;
+        sources.video.source = [
+          {
+            name = "External HDD";
+            path = "/mnt/ext-hdd/Media";
+            allowsharing = "true";
+          }
+          {
+            name = "Movies";
+            path = "ftp://${sleepyIp}:21/Movies";
+            allowsharing = "true";
+          }
+          {
+            name = "TV Shows";
+            path = "ftp://${sleepyIp}:21/TV Shows";
+            allowsharing = "true";
+          }
+        ];
+      };
 
       home.stateVersion = "25.11";
     };
-
-  # Use the Cage wayland compositor to draw Kodi to the screen.
-  services.cage = {
-    enable = true;
-    user = "kodi";
-    program = "${kodiPkg}/bin/kodi-standalone";
-  };
 
   # Configure systemd to start kodi
   systemd.services.kodi = {

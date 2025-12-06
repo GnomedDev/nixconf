@@ -1,11 +1,4 @@
 {
-  nixConfig = {
-    extra-substituters = [
-      "https://cache.soopy.moe"
-    ];
-    extra-trusted-public-keys = [ "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo=" ];
-  };
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -18,6 +11,9 @@
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    t2fanrd.url = "github:GnomedDev/t2fanrd";
+    t2fanrd.inputs.nixpkgs.follows = "nixpkgs";
 
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +28,7 @@
       darwin,
       home-manager,
       plasma-manager,
+      t2fanrd,
       ...
     }:
 
@@ -94,58 +91,32 @@
         ];
       };
 
-      nixosConfigurations.gnome-x86-mac = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.living-mac = nixpkgs.lib.nixosSystem {
         pkgs = pkgsX86;
-        specialArgs = {
-          inherit plasma-manager;
-          inherit nix-index-database;
-        };
-        modules = [
-          ./configuration.nix
-
-          ./common/modules/kde.nix
-          ./common/modules/systemd-boot.nix
-          ./common/modules/home-manager.nix
-          ./common/modules/disable-sleep.nix
-
-          ./common/users/fox/general.nix
-          ./common/users/gnome/general
-          ./common/users/gnome/general/linux.nix
-
-          ./machines/gnome-x86-mac/modules/t2fanrd
-          ./machines/gnome-x86-mac/modules/swapfile.nix
-          ./machines/gnome-x86-mac/modules/wifi-firmware
-          ./machines/gnome-x86-mac/modules/substituter.nix
-          ./machines/gnome-x86-mac/modules/hardware-configuration.nix
-
-          home-manager.nixosModules.home-manager
-          nixos-hardware.nixosModules.apple-t2
-        ];
-      };
-
-      nixosConfigurations.living-pi = nixpkgs.lib.nixosSystem {
-        pkgs = pkgsARM;
         specialArgs = { inherit nix-index-database; };
         modules = [
           ./configuration.nix
 
           ./common/modules/home-manager.nix
+          ./common/modules/systemd-boot.nix
+          ./common/modules/disable-sleep.nix
 
           ./common/users/gnome/ssh.nix
           ./common/users/gnome/general
           ./common/users/gnome/general/linux.nix
 
-          ./machines/living-pi/modules/boot.nix
-          ./machines/living-pi/modules/kodi.nix
-          ./machines/living-pi/modules/samba.nix
-          ./machines/living-pi/modules/firmware.nix
-          ./machines/living-pi/modules/swapfile.nix
-          ./machines/living-pi/modules/networking.nix
-          ./machines/living-pi/modules/remote-control.nix
-          ./machines/living-pi/modules/hardware-configuration.nix
+          ./machines/living-mac/modules/kodi.nix
+          ./machines/living-mac/modules/samba.nix
+          ./machines/living-mac/modules/swapfile.nix
+          ./machines/living-mac/modules/firmware.nix
+          ./machines/living-mac/modules/t2fanrd.nix
+          ./machines/living-mac/modules/qbittorrent.nix
+          ./machines/living-mac/modules/home-assistant.nix
+          ./machines/living-mac/modules/hardware-configuration.nix
 
           home-manager.nixosModules.home-manager
-          nixos-hardware.nixosModules.raspberry-pi-4
+          nixos-hardware.nixosModules.apple-t2
+          t2fanrd.nixosModules.t2fanrd
         ];
       };
     };
