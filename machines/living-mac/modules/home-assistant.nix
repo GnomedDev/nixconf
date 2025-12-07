@@ -59,6 +59,27 @@
         };
         automation = [
           {
+            alias = "Living Mac Battery Notification";
+            id = "living_mac_battery_notification";
+            triggers = [
+              {
+                trigger = "numeric_state";
+                entity_id = [ "sensor.battery" ];
+                below = 50;
+              }
+            ];
+            actions = [
+              {
+                action = "notify.notify";
+                metadata = { };
+                data = {
+                  title = "Living Mac Battery Low!";
+                  message = "Living Room Macbook's battery level has dropped below 50%";
+                };
+              }
+            ];
+          }
+          {
             alias = "Force Charge Power Translator";
             id = "force_charge_power_translator";
             triggers = [
