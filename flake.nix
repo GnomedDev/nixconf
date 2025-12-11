@@ -77,6 +77,7 @@
           ./common/modules/nvidia.nix
           ./common/modules/systemd-boot.nix
           ./common/modules/home-manager.nix
+          ./common/modules/disable-sleep.nix
 
           ./common/users/gnome/general
           ./common/users/gnome/general/linux.nix
