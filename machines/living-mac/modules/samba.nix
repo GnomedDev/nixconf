@@ -27,6 +27,10 @@
         path = "/mnt/ext-hdd/";
         "read only" = false;
         browsable = "yes";
+
+        # Force all new folders/files to be created with read/write permissions for all users.
+        "force create mode" = 777;
+        "force directory mode" = 777;
       };
     };
   };
