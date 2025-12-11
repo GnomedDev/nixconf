@@ -132,15 +132,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1759597823,
-        "narHash": "sha256-/dPXlAeZhIxRq+2+vQ4LnWRDtC+0MvIPQkJwuHG0ZmQ=",
+        "lastModified": 1765491771,
+        "narHash": "sha256-sx5FZs6Lm97bAr7grlGBrTlZ8KbIy4716iySJqZFsL4=",
         "owner": "GnomedDev",
         "repo": "t2fanrd",
-        "rev": "ae705d7b38181c34c12410478473b00d8374a5b8",
+        "rev": "bd39827730e612fad08aa94334ff107bbfa5a69f",
         "type": "github"
       },
       "original": {
         "owner": "GnomedDev",
+        "ref": "feat/min-max-override",
         "repo": "t2fanrd",
         "type": "github"
       }

@@ -12,7 +12,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    t2fanrd.url = "github:GnomedDev/t2fanrd";
+    t2fanrd.url = "github:GnomedDev/t2fanrd/feat/min-max-override";
     t2fanrd.inputs.nixpkgs.follows = "nixpkgs";
 
     plasma-manager.url = "github:nix-community/plasma-manager";
