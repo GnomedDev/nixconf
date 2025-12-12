@@ -20,20 +20,13 @@
 
       # Things we actually want.
       "weatherflow"
-      "linux_battery"
+      "systemmonitor"
 
       # Performance optimisation
       "isal"
     ];
     config = {
       default_config = { };
-
-      sensor = [
-        {
-          platform = "linux_battery";
-          battery = 0;
-        }
-      ];
 
       http = {
         ssl_certificate = "/var/certs/living-mac.tail272b81.ts.net.crt";
