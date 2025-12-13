@@ -1,17 +1,26 @@
 { pkgs, ... }:
 {
-  users.users.gnome.packages = with pkgs; [
-    # LibreOffice
-    (if pkgs.stdenv.isDarwin then libreoffice-bin else libreoffice-qt)
-    hunspell
-    hyphenDicts.en_US
-    hunspellDicts.en_GB-ise
-
-    # Custom packages
-    (pkgs.callPackage ../../packages/ffmpeg4discord.nix { })
-  ];
-
   home-manager.users.gnome = {
+    # Adding packages here instead of users.users.gnome.packages allows for them to be copied to Home Manager Apps on MacOS.
+    home.packages =
+      with pkgs;
+      [
+        # LibreOffice
+        hunspell
+        hyphenDicts.en_US
+        hunspellDicts.en_GB-ise
+
+        # Custom packages
+        (pkgs.callPackage ../../packages/ffmpeg4discord.nix { })
+      ]
+      ++ lib.optionals pkgs.stdenv.isDarwin [
+        libreoffice-bin
+        vlc-bin
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        libreoffice-qt
+      ];
+
     programs = {
       # Vesktop (Discord)
       vesktop = {
