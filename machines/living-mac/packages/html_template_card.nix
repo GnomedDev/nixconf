@@ -1,7 +1,6 @@
 {
   fetchFromGitHub,
   stdenvNoCC,
-  pkgs,
 }:
 let
   pname = "Home-Assistant-Lovelace-HTML-Jinja2-Template-card";

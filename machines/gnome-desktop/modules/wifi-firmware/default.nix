@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
   hardware.usb-modeswitch.enable = true;
 
@@ -7,7 +7,7 @@
     enable = true;
   };
 
-  boot.extraModulePackages = with pkgs; [
+  boot.extraModulePackages = [
     (config.boot.kernelPackages.callPackage ./rtw89.nix { })
   ];
 }

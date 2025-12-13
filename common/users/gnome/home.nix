@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/gnome" else "/home/gnome";
 in

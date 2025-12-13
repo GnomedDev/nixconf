@@ -49,7 +49,6 @@ stdenv.mkDerivation {
     description = " Driver for Realtek 8852AE, 8852BE, and 8853CE, 802.11ax devices";
     homepage = "https://github.com/morrownr/rtw89";
     license = with licenses; [ gpl2Only ];
-    maintainers = with maintainers; [ ];
     platforms = platforms.linux;
     broken = kernel.kernelOlder "5.7";
     priority = -1;

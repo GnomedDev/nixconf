@@ -1,11 +1,4 @@
-{
-  plasma-manager,
-  home-manager,
-  nixpkgs,
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, ... }:
 let
   kdeWallpaperPath = "${pkgs.kdePackages.plasma-workspace-wallpapers}/share/wallpapers/Mountain/contents/images_dark/5120x2880.png";
 in

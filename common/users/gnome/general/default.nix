@@ -1,4 +1,4 @@
-{ nix-index-database, pkgs, ... }:
+{ nix-index-database, ... }:
 {
   programs.fish.enable = true;
 

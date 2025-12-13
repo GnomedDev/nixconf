@@ -1,7 +1,6 @@
 {
   buildHomeAssistantComponent,
   fetchFromGitHub,
-  home-assistant,
 }:
 let
   owner = "nathanmarlor";
