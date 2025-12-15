@@ -39,8 +39,15 @@
       # Disable mouse barrier between screens.
       kwin.edgeBarrier = 0;
 
-      # Set spectacle settings (no high level module for it yet).
-      configFile.spectaclerc.General.clipboardGroup = "PostScreenshotCopyImage";
+      # Set settings for which there is no high level module for
+      configFile = {
+        spectaclerc.General.clipboardGroup = "PostScreenshotCopyImage";
+        dolphinrc = {
+          Dolphin.ViewMode = 1; # Details
+          DetailsMode.PreviewSize = 16;
+          General.Version = 202;
+        };
+      };
 
       # Panel = Taskbar
       panels = [
