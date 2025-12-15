@@ -8,6 +8,7 @@
 
     # Enable ‘sudo’ for the user.
     extraGroups = [
+      "i2c"
       "wheel"
       "docker"
     ];
