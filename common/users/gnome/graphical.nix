@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  fonts.packages = with pkgs; [
+    # Fonts for development
+    nerd-fonts.droid-sans-mono
+  ];
+
   home-manager.users.gnome = {
     # Adding packages here instead of users.users.gnome.packages allows for them to be copied to Home Manager Apps on MacOS.
     home.packages =
