@@ -14,9 +14,6 @@
         hunspell
         hyphenDicts.en_US
         hunspellDicts.en_GB-ise
-
-        # Custom packages
-        (pkgs.callPackage ../../packages/ffmpeg4discord.nix { })
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
         libreoffice-bin

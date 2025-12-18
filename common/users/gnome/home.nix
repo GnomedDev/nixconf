@@ -37,9 +37,12 @@ in
     username = "gnome";
     inherit homeDirectory;
     packages = with pkgs; [
+      # Custom packages
+      (callPackage ../../packages/ffmpeg4discord.nix { })
+      (callPackage ../../packages/mach.nix { })
+
+      # General stuff I just want avaliable
       python3
-      nixfmt
-      nil
     ];
 
     # Do not change.
