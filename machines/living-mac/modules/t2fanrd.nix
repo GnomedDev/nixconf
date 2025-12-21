@@ -7,7 +7,7 @@
       high_temp = 100;
       speed_curve = "linear";
       always_full_speed = false;
-      max_speed_override = 5000;
+      max_speed_override = 6000;
     };
   };
 }

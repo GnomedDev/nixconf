@@ -11,7 +11,7 @@ in
   # Disable the internal display.
   boot.kernelParams = [
     "video=eDP-1:d"
-    "video=HDMI-A-1:2560x1440@60"
+    "video=HDMI-A-1:3840x2160@60"
   ];
 
   # Enable graphical drivers.
