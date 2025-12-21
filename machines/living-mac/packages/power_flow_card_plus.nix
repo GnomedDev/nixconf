@@ -1,7 +1,7 @@
 {
   fetchFromGitHub,
+  fetchPnpmDeps,
   stdenvNoCC,
-  pnpm,
   pkgs,
 }:
 let
@@ -20,11 +20,12 @@ stdenvNoCC.mkDerivation {
   inherit pname version src;
 
   nativeBuildInputs = with pkgs; [
+    pnpm
     nodejs
-    pnpm.configHook
+    pnpmConfigHook
   ];
 
-  pnpmDeps = pnpm.fetchDeps {
+  pnpmDeps = fetchPnpmDeps {
     inherit pname version src;
     fetcherVersion = 2;
     hash = "sha256-1vfYwkvft8mYe+PVMmJslO1Y6628sG1a9oOzwx4aH+o=";

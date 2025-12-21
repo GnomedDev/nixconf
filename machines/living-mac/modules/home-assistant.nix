@@ -21,6 +21,7 @@
       # Things we actually want.
       "weatherflow"
       "systemmonitor"
+      "qbittorrent"
 
       # Performance optimisation
       "isal"
