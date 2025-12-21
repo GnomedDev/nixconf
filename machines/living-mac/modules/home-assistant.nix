@@ -1,16 +1,22 @@
 # Required stateful files:
 # /var/certs contains HTTPS certificates
 # /var/predbat/apps.yaml is the predbat configuration with secrets
-{ pkgs, ... }:
+{
+  pkgs,
+  foxessModbusSrc,
+  powerFlowCardSrc,
+  jninja2TemplateSrc,
+  ...
+}:
 {
   services.home-assistant = {
     enable = true;
     customComponents = [
-      (pkgs.callPackage ../packages/foxess_modbus.nix { })
+      (pkgs.callPackage ../packages/foxess_modbus.nix { inherit foxessModbusSrc; })
     ];
     customLovelaceModules = [
-      (pkgs.callPackage ../packages/power_flow_card_plus.nix { })
-      (pkgs.callPackage ../packages/html_template_card.nix { })
+      (pkgs.callPackage ../packages/power_flow_card_plus.nix { inherit powerFlowCardSrc; })
+      (pkgs.callPackage ../packages/html_template_card.nix { inherit jninja2TemplateSrc; })
     ];
     extraComponents = [
       # Defaults

@@ -1,20 +1,11 @@
 {
-  fetchFromGitHub,
   stdenvNoCC,
+  jninja2TemplateSrc,
 }:
-let
-  pname = "Home-Assistant-Lovelace-HTML-Jinja2-Template-card";
-  version = "1.0.2";
-in
 stdenvNoCC.mkDerivation {
-  inherit pname version;
-
-  src = fetchFromGitHub {
-    owner = "PiotrMachowski";
-    repo = pname;
-    tag = "v${version}";
-    hash = "sha256-xmPDwj6FicMAehsRaXnXUiJgWlESTtR2P0qYEt9T+fU=";
-  };
+  pname = "Home-Assistant-Lovelace-HTML-Jinja2-Template-card";
+  version = jninja2TemplateSrc.shortRev;
+  src = jninja2TemplateSrc;
 
   installPhase = ''
     mkdir $out

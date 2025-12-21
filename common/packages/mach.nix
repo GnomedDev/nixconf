@@ -1,23 +1,14 @@
 {
   pkgs,
   rustPlatform,
-  fetchFromGitHub,
+  machSrc,
   ...
 }:
-let
-  src = fetchFromGitHub {
-    owner = "cloudflare";
-    repo = "networkquality-rs";
-    rev = "d3cfd772f4c14790944b7aabe8c8ef24a7c5a846";
-    hash = "sha256-qMs7HiHVoL8yXale/1fQm53svB/YCu47zNJZv/ht7rw=";
-  };
-in
 rustPlatform.buildRustPackage {
-  pname = "mach";
-  version = "3.3.0";
+  name = "mach";
 
-  inherit src;
-  cargoLock.lockFile = "${src}/Cargo.lock";
+  src = machSrc;
+  cargoLock.lockFile = "${machSrc}/Cargo.lock";
   buildInputs = [ pkgs.boringssl ];
   nativeBuildInputs = with pkgs; [
     rustPlatform.bindgenHook

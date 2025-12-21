@@ -18,19 +18,49 @@
     plasma-manager.url = "github:nix-community/plasma-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.inputs.home-manager.follows = "home-manager";
+
+    # Raw inputs
+    machSrc = {
+      type = "github";
+      owner = "cloudflare";
+      repo = "networkquality-rs";
+      flake = false;
+    };
+    rtw89Src = {
+      type = "github";
+      owner = "morrownr";
+      repo = "rtw89";
+      flake = false;
+    };
+    foxessModbusSrc = {
+      type = "github";
+      owner = "nathanmarlor";
+      repo = "foxess_modbus";
+      flake = false;
+    };
+    jninja2TemplateSrc = {
+      type = "github";
+      owner = "PiotrMachowski";
+      repo = "Home-Assistant-Lovelace-HTML-Jinja2-Template-card";
+      flake = false;
+    };
+    powerFlowCardSrc = {
+      type = "github";
+      owner = "flixlix";
+      repo = "power-flow-card-plus";
+      flake = false;
+    };
   };
 
   outputs =
     {
       nixpkgs,
       nixos-hardware,
-      nix-index-database,
       darwin,
       home-manager,
-      plasma-manager,
       t2fanrd,
       ...
-    }:
+    }@inputs:
 
     let
       nixpkgsConfig.config = {
@@ -40,6 +70,8 @@
       pkgsX86 = import nixpkgs (nixpkgsConfig // { system = "x86_64-linux"; });
       pkgsARM = import nixpkgs (nixpkgsConfig // { system = "aarch64-linux"; });
       pkgsARMDarwin = import nixpkgs (nixpkgsConfig // { system = "aarch64-darwin"; });
+
+      specialArgs = inputs;
     in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
@@ -51,7 +83,7 @@
 
       darwinConfigurations.gnome = darwin.lib.darwinSystem {
         pkgs = pkgsARMDarwin;
-        specialArgs = { inherit nix-index-database; };
+        inherit specialArgs;
         modules = [
           home-manager.darwinModules.home-manager
           ./configuration.darwin.nix
@@ -66,10 +98,7 @@
 
       nixosConfigurations.gnome-desktop = nixpkgs.lib.nixosSystem {
         pkgs = pkgsX86;
-        specialArgs = {
-          inherit plasma-manager;
-          inherit nix-index-database;
-        };
+        inherit specialArgs;
         modules = [
           ./configuration.nix
 
@@ -94,7 +123,7 @@
 
       nixosConfigurations.living-mac = nixpkgs.lib.nixosSystem {
         pkgs = pkgsX86;
-        specialArgs = { inherit nix-index-database; };
+        inherit specialArgs;
         modules = [
           ./configuration.nix
 

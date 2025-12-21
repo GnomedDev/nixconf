@@ -1,23 +1,16 @@
 {
-  fetchFromGitHub,
+  powerFlowCardSrc,
   fetchPnpmDeps,
   stdenvNoCC,
   pkgs,
 }:
 let
-  owner = "flixlix";
   pname = "power-flow-card-plus";
-  version = "0.2.6";
-
-  src = fetchFromGitHub {
-    inherit owner;
-    repo = pname;
-    tag = "v${version}";
-    hash = "sha256-qg4/7Xn4liZLjl2dwsC7vB8zmjWuHYW7ycuBewgDEfk=";
-  };
+  version = powerFlowCardSrc.shortRev;
 in
 stdenvNoCC.mkDerivation {
-  inherit pname version src;
+  inherit pname version;
+  src = powerFlowCardSrc;
 
   nativeBuildInputs = with pkgs; [
     pnpm
@@ -26,7 +19,8 @@ stdenvNoCC.mkDerivation {
   ];
 
   pnpmDeps = fetchPnpmDeps {
-    inherit pname version src;
+    inherit pname version;
+    src = powerFlowCardSrc;
     fetcherVersion = 2;
     hash = "sha256-1vfYwkvft8mYe+PVMmJslO1Y6628sG1a9oOzwx4aH+o=";
   };
