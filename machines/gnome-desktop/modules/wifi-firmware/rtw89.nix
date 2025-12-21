@@ -3,9 +3,9 @@
 {
   stdenv,
   lib,
-  fetchFromGitHub,
   kernel,
   kernelModuleMakeFlags,
+  rtw89Src,
 }:
 
 let
@@ -15,12 +15,7 @@ stdenv.mkDerivation {
   pname = "rtw89-morrownr";
   version = "b82ae7d9";
 
-  src = fetchFromGitHub {
-    owner = "morrownr";
-    repo = "rtw89";
-    rev = "7cd894dc2201f14cfe2431a9d2d71fb9792ae916";
-    sha256 = "sha256-blGvclqdcRSxbauqMtCylg/KaQiZZwfy9zZHPi5a2U8=";
-  };
+  src = rtw89Src;
 
   nativeBuildInputs = kernel.moduleBuildDependencies;
   makeFlags = kernelModuleMakeFlags ++ [

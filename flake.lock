@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "foxessModbusSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755112581,
+        "narHash": "sha256-VJYFLOooHphzz2wSXU3oKGbBBjzN3l7n/Kp8tznJ5cA=",
+        "owner": "nathanmarlor",
+        "repo": "foxess_modbus",
+        "rev": "2b3107016bcc0cc2a563c0fb2dabcd573a2a1a9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nathanmarlor",
+        "repo": "foxess_modbus",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -37,6 +53,38 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "jninja2TemplateSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1743812786,
+        "narHash": "sha256-k3xNm7AF0TBh9lzxbfD7RHVZJ88Ga9lCZYvKf0GIc3A=",
+        "owner": "PiotrMachowski",
+        "repo": "Home-Assistant-Lovelace-HTML-Jinja2-Template-card",
+        "rev": "1da4df8f0e926c5532921c8c91cfef4a8dec58fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PiotrMachowski",
+        "repo": "Home-Assistant-Lovelace-HTML-Jinja2-Template-card",
+        "type": "github"
+      }
+    },
+    "machSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1761243092,
+        "narHash": "sha256-qMs7HiHVoL8yXale/1fQm53svB/YCu47zNJZv/ht7rw=",
+        "owner": "cloudflare",
+        "repo": "networkquality-rs",
+        "rev": "d3cfd772f4c14790944b7aabe8c8ef24a7c5a846",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cloudflare",
+        "repo": "networkquality-rs",
         "type": "github"
       }
     },
@@ -117,12 +165,32 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "foxessModbusSrc": "foxessModbusSrc",
         "home-manager": "home-manager",
+        "jninja2TemplateSrc": "jninja2TemplateSrc",
+        "machSrc": "machSrc",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager",
+        "rtw89Src": "rtw89Src",
         "t2fanrd": "t2fanrd"
+      }
+    },
+    "rtw89Src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1766267328,
+        "narHash": "sha256-psl39LMyXZh4Not6qWSdanze19GX0G52QbtLM7cO8JA=",
+        "owner": "morrownr",
+        "repo": "rtw89",
+        "rev": "7da080fc2fc75709364943c7ef2b39fa5abcef77",
+        "type": "github"
+      },
+      "original": {
+        "owner": "morrownr",
+        "repo": "rtw89",
+        "type": "github"
       }
     },
     "t2fanrd": {

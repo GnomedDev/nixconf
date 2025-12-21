@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, machSrc, ... }:
 let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/gnome" else "/home/gnome";
 in
@@ -39,7 +39,7 @@ in
     packages = with pkgs; [
       # Custom packages
       (callPackage ../../packages/ffmpeg4discord.nix { })
-      (callPackage ../../packages/mach.nix { })
+      (callPackage ../../packages/mach.nix { inherit machSrc; })
 
       # General stuff I just want avaliable
       python3
