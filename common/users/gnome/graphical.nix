@@ -10,6 +10,11 @@
     home.packages =
       with pkgs;
       [
+        # Random stuff
+        utm
+        ares
+        localsend
+
         # LibreOffice
         hunspell
         hyphenDicts.en_US
