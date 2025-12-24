@@ -1,5 +1,6 @@
-# Required stateful files:
-# /var/certs contains HTTPS certificates
+# Required state:
+# - /var/certs contains HTTPS certificates
+# - Router is set up to port forward TCP/UDP on 31766 to living-mac
 { ... }:
 {
   services.qbittorrent = {
@@ -8,6 +9,7 @@
     serverConfig = {
       LegalNotice.Accepted = true;
       Preferences = {
+        Bittorrent.Session.Port = 31766;
         Queueing.QueueingEnabled = false;
         Downloads.DefaultSavePath = "/mnt/ext-hdd/Torrenting";
         WebUI = {
