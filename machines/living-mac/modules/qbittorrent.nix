@@ -24,4 +24,7 @@
       };
     };
   };
+
+  # Set qBittorrent's IO scheduler config to only use HDD when nothing else wants it.
+  systemd.services.qbittorrent.serviceConfig.IOSchedulingClass = "idle";
 }
