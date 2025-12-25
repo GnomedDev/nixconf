@@ -23,6 +23,7 @@
       ++ lib.optionals pkgs.stdenv.isDarwin [
         libreoffice-bin
         vlc-bin
+        (callPackage ../../packages/hot.nix { })
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
         libreoffice-qt
