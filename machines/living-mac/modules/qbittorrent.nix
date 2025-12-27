@@ -6,10 +6,10 @@
   services.qbittorrent = {
     enable = true;
     webuiPort = 20036;
+    torrentingPort = 31766;
     serverConfig = {
       LegalNotice.Accepted = true;
       Preferences = {
-        Bittorrent.Session.Port = 31766;
         Queueing.QueueingEnabled = false;
         Downloads.DefaultSavePath = "/mnt/ext-hdd/Torrenting";
         WebUI = {
