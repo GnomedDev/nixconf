@@ -50,6 +50,7 @@ in
       programs.kodi = {
         enable = true;
         package = kodiPkg;
+        settings.filecache.buffermode = "5"; # Buffer all content, including local FS
         sources.video.source = [
           {
             name = "External HDD";
