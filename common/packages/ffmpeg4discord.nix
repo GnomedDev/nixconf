@@ -6,7 +6,7 @@
 }:
 let
   pname = "ffmpeg4discord";
-  version = "0.1.9";
+  version = "0.2.0";
 in
 python3Packages.buildPythonApplication {
   inherit pname version;
@@ -14,7 +14,7 @@ python3Packages.buildPythonApplication {
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-6JUKnsqQRMh2tIgAHho7IAFBO3scE22QNy8zVVxaOXo=";
+    hash = "sha256-tl8i1rsErShrErUp5qQkdejaKK++D3cnrgAJpuDbypM=";
   };
 
   pythonRelaxDeps = [ "flask" ];
