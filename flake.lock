@@ -20,6 +20,22 @@
         "type": "github"
       }
     },
+    "edenSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767247364,
+        "narHash": "sha256-TUO0OixQl4i+DHFtaZAJUE36zyZTk0QqLZ0xA2VQjRM=",
+        "ref": "refs/heads/master",
+        "rev": "82f9d489e7916318b56dac59fc52efc46fe0df7e",
+        "revCount": 28158,
+        "type": "git",
+        "url": "https://git.eden-emu.dev/eden-emu/eden.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.eden-emu.dev/eden-emu/eden.git"
+      }
+    },
     "foxessModbusSrc": {
       "flake": false,
       "locked": {
@@ -88,6 +104,22 @@
         "type": "github"
       }
     },
+    "mclSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742164024,
+        "narHash": "sha256-uTOiOlMzKbZSjKjtVSqFU+9m8v8horoCq3wL0O2E8sI=",
+        "owner": "azahar-emu",
+        "repo": "mcl",
+        "rev": "7b08d83418f628b800dfac1c9a16c3f59036fbad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "azahar-emu",
+        "repo": "mcl",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -139,6 +171,22 @@
         "type": "github"
       }
     },
+    "oaknutSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759564464,
+        "narHash": "sha256-NWJMottKMiG6Rk2/ACNtBiYfWDsCeSGznPTqVO809P0=",
+        "owner": "eden-emulator",
+        "repo": "oaknut",
+        "rev": "a89bcf601f724e4b49e4ffea96aa51db5e0fbb69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eden-emulator",
+        "repo": "oaknut",
+        "type": "github"
+      }
+    },
     "plasma-manager": {
       "inputs": {
         "home-manager": [
@@ -181,16 +229,20 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "edenSrc": "edenSrc",
         "foxessModbusSrc": "foxessModbusSrc",
         "home-manager": "home-manager",
         "jninja2TemplateSrc": "jninja2TemplateSrc",
         "machSrc": "machSrc",
+        "mclSrc": "mclSrc",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "oaknutSrc": "oaknutSrc",
         "plasma-manager": "plasma-manager",
         "powerFlowCardSrc": "powerFlowCardSrc",
         "rtw89Src": "rtw89Src",
+        "siritSrc": "siritSrc",
         "t2fanrd": "t2fanrd"
       }
     },
@@ -207,6 +259,22 @@
       "original": {
         "owner": "morrownr",
         "repo": "rtw89",
+        "type": "github"
+      }
+    },
+    "siritSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1763960311,
+        "narHash": "sha256-eBr+KorrAOFVzxRGZ2L3H6abfNAGrdVvO/NzOFwauTA=",
+        "owner": "eden-emulator",
+        "repo": "sirit",
+        "rev": "4aa0fe9f2ca0b31d8345f89c8ca2757156ff2393",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eden-emulator",
+        "repo": "sirit",
         "type": "github"
       }
     },

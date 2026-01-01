@@ -26,6 +26,29 @@
       repo = "networkquality-rs";
       flake = false;
     };
+    edenSrc = {
+      type = "git";
+      url = "https://git.eden-emu.dev/eden-emu/eden.git";
+      flake = false;
+    };
+    oaknutSrc = {
+      type = "github";
+      owner = "eden-emulator";
+      repo = "oaknut";
+      flake = false;
+    };
+    siritSrc = {
+      type = "github";
+      owner = "eden-emulator";
+      repo = "sirit";
+      flake = false;
+    };
+    mclSrc = {
+      type = "github";
+      owner = "azahar-emu";
+      repo = "mcl";
+      flake = false;
+    };
     rtw89Src = {
       type = "github";
       owner = "morrownr";
@@ -63,26 +86,37 @@
     }@inputs:
 
     let
-      nixpkgsConfig.config = {
-        allowUnfree = true;
-        android_sdk.accept_license = true;
-      };
-      pkgsX86 = import nixpkgs (nixpkgsConfig // { system = "x86_64-linux"; });
-      pkgsARM = import nixpkgs (nixpkgsConfig // { system = "aarch64-linux"; });
-      pkgsARMDarwin = import nixpkgs (nixpkgsConfig // { system = "aarch64-darwin"; });
+      lib = nixpkgs.lib;
+      pkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
+        system:
+        import nixpkgs ({
+          inherit system;
+          config = {
+            allowUnfree = true;
+            android_sdk.accept_license = true;
+          };
+        })
+      );
 
       specialArgs = inputs;
     in
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      packages = {
+        aarch64-darwin.hot = pkgs.callPackage ./common/packages/hot.nix specialArgs;
+      }
+      // lib.mapAttrs (system: pkgs: {
+        eden = pkgs.callPackage ./common/packages/eden.nix specialArgs;
+        mach = pkgs.callPackage ./common/packages/mach.nix specialArgs;
+        ff4d = pkgs.callPackage ./common/packages/ffmpeg4discord.nix specialArgs;
+      }) pkgs;
 
       homeConfigurations.gnome = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgsARM;
+        pkgs = pkgs.aarch64-linux;
         modules = [ ./common/users/gnome/home.nix ];
       };
 
       darwinConfigurations.gnome = darwin.lib.darwinSystem {
-        pkgs = pkgsARMDarwin;
+        pkgs = pkgs.aarch64-darwin;
         inherit specialArgs;
         modules = [
           home-manager.darwinModules.home-manager
@@ -97,7 +131,7 @@
       };
 
       nixosConfigurations.gnome-desktop = nixpkgs.lib.nixosSystem {
-        pkgs = pkgsX86;
+        pkgs = pkgs.x86_64-linux;
         inherit specialArgs;
         modules = [
           ./configuration.nix
@@ -122,7 +156,7 @@
       };
 
       nixosConfigurations.living-mac = nixpkgs.lib.nixosSystem {
-        pkgs = pkgsX86;
+        pkgs = pkgs.x86_64-linux;
         inherit specialArgs;
         modules = [
           ./configuration.nix

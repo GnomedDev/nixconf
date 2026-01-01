@@ -1,4 +1,11 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  mclSrc,
+  edenSrc,
+  siritSrc,
+  oaknutSrc,
+  ...
+}:
 {
   fonts.packages = with pkgs; [
     # Fonts for development
@@ -14,6 +21,14 @@
         utm
         ares
         localsend
+        (callPackage ../../packages/eden.nix {
+          inherit
+            edenSrc
+            oaknutSrc
+            siritSrc
+            mclSrc
+            ;
+        })
 
         # LibreOffice
         hunspell
