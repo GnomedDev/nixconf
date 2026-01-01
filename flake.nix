@@ -139,6 +139,7 @@
 
           ./machines/living-mac/modules/kodi.nix
           ./machines/living-mac/modules/samba.nix
+          ./machines/living-mac/modules/beesd.nix
           ./machines/living-mac/modules/swapfile.nix
           ./machines/living-mac/modules/firmware.nix
           ./machines/living-mac/modules/t2fanrd.nix
