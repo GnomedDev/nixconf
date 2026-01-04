@@ -33,6 +33,7 @@
     nixfmt
     usbutils
     pciutils
+    ghostty.terminfo
   ];
 
   # Open ports in the firewall.

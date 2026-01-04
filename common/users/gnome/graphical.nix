@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   fonts.packages = with pkgs; [
     # Fonts for development
@@ -22,12 +22,27 @@
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
         libreoffice-bin
+        ghostty-bin
         vlc-bin
         (callPackage ../../packages/hot.nix { })
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
         libreoffice-qt
       ];
+
+    xdg.configFile.ghostty-config = {
+      target = "ghostty/config";
+      enable = pkgs.stdenv.isDarwin;
+      source = (pkgs.formats.toml { }).generate "ghostty-config.toml" {
+        command = lib.getExe pkgs.fish;
+        shell-integration = "fish";
+
+        macos-titlebar-style = "tabs";
+        window-show-tab-bar = "always";
+
+        theme = "Apple System Colors";
+      };
+    };
 
     programs = {
       # Vesktop (Discord)
