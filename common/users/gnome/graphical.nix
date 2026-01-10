@@ -55,13 +55,45 @@
         };
       };
 
-      # VSCode
-      vscode = {
+      zed-editor = {
         enable = true;
-        package = pkgs.vscode;
+        userSettings = {
+          # I do not like creating slopware.
+          disable_ai = true;
+          # Setting a terminal globally is a complete pain.
+          terminal.shell.program = lib.getExe pkgs.fish;
+          # Automatically fetch dependencies of Nix projects.
+          lsp.nil.settings.nil.nix.autoArchive = true;
+          # Set prettier as a third party formatter for all files, since it supports a lot.
+          formatter = [
+            "language_server"
+            {
+              external = {
+                command = lib.getExe pkgs.prettier;
+                arguments = [
+                  "--stdin-filepath"
+                  "{buffer_path}"
+                ];
+              };
+            }
+          ];
 
-        # Sync extensions via settings sync.
-        mutableExtensionsDir = true;
+          # Language specific configuration
+          languages.Nix.formatter.external.command = "nixfmt";
+
+          # Coming from VSCode
+          theme = "VSCode Dark Modern";
+        };
+        userKeymaps = [
+          { bindings.f1 = "command_palette::Toggle"; }
+        ];
+        extensions = [
+          "nix"
+          "toml"
+          "dependi"
+          "github-actions"
+          "vscode-dark-modern"
+        ];
       };
 
       # Others
