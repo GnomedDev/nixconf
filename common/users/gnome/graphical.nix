@@ -76,6 +76,8 @@
           disable_ai = true;
           # Setting a terminal globally is a complete pain.
           terminal.shell.program = lib.getExe pkgs.fish;
+          # Show diagnostics inline, a'la VSCode Error Lens
+          diagnostics.inline.enabled = true;
           # Set prettier as a third party formatter for all files, since it supports a lot.
           formatter = [
             "language_server"
