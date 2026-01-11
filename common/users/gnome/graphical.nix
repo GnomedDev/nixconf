@@ -11,7 +11,6 @@
       with pkgs;
       [
         # Random stuff
-        utm
         ares
         localsend
 
@@ -24,6 +23,7 @@
         libreoffice-bin
         ghostty-bin
         vlc-bin
+        utm
         (callPackage ../../packages/hot.nix { })
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
