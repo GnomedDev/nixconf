@@ -1,6 +1,7 @@
 { pkgs, machSrc, ... }:
 let
   homeDirectory = if pkgs.stdenv.isDarwin then "/Users/gnome" else "/home/gnome";
+  sshKey = "${homeDirectory}/.ssh/id_rsa";
 in
 {
   programs.git = {
@@ -9,10 +10,15 @@ in
       push.autoSetupRemote = "true";
       core.excludesfile = "${pkgs.writeText "global-gitignore" ''
         .direnv
+        .envrc
       ''}";
       user = {
         name = "GnomedDev";
         email = "daisy2005thomas@gmail.com";
+      };
+      Host."github.com" = {
+        User = "git";
+        IdentityFile = sshKey;
       };
     };
 
@@ -20,7 +26,7 @@ in
       signByDefault = true;
 
       format = "ssh";
-      key = "${homeDirectory}/.ssh/id_rsa";
+      key = sshKey;
     };
   };
 
