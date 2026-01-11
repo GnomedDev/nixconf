@@ -11,9 +11,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  # Use nix-ld for compatiblity with vsc-server
-  programs.nix-ld.enable = true;
-
   # Allow nix command/flakes
   nix.settings.experimental-features = [
     "nix-command"
@@ -26,11 +23,9 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    nil
     nano
     curl
     btop
-    nixfmt
     usbutils
     pciutils
     ghostty.terminfo

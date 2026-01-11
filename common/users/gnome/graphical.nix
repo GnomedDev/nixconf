@@ -57,13 +57,25 @@
 
       zed-editor = {
         enable = true;
+        # Wrap zed executable with tools that need to be in PATH
+        package =
+          let
+            zed-pkgs = with pkgs; [
+              nixd
+              nixfmt
+              direnv
+            ];
+          in
+          pkgs.runCommandLocal "zed-wrapped" { nativeBuildInputs = [ pkgs.makeBinaryWrapper ]; } ''
+            mkdir -p $out/bin
+            makeBinaryWrapper ${pkgs.zed-editor}/bin/zeditor $out/bin/zeditor \
+              --prefix PATH : ${lib.makeBinPath zed-pkgs}
+          '';
         userSettings = {
           # I do not like creating slopware.
           disable_ai = true;
           # Setting a terminal globally is a complete pain.
           terminal.shell.program = lib.getExe pkgs.fish;
-          # Automatically fetch dependencies of Nix projects.
-          lsp.nil.settings.nil.nix.autoArchive = true;
           # Set prettier as a third party formatter for all files, since it supports a lot.
           formatter = [
             "language_server"
@@ -79,7 +91,13 @@
           ];
 
           # Language specific configuration
-          languages.Nix.formatter.external.command = "nixfmt";
+          languages.Nix = {
+            formatter.external.command = lib.getExe pkgs.nixfmt;
+            language_servers = [
+              "nixd"
+              "!nil"
+            ];
+          };
 
           # Coming from VSCode
           theme = "VSCode Dark Modern";

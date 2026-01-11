@@ -7,6 +7,9 @@ in
     enable = true;
     settings = {
       push.autoSetupRemote = "true";
+      core.excludesfile = "${pkgs.writeText "global-gitignore" ''
+        .direnv
+      ''}";
       user = {
         name = "GnomedDev";
         email = "daisy2005thomas@gmail.com";
