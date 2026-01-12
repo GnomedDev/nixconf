@@ -35,8 +35,16 @@ in
   programs.fish.enable = true;
   programs.fish.functions.fish_greeting = "";
 
-  programs.starship.enable = true;
-  programs.starship.enableFishIntegration = true;
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      package.disabled = true;
+      git_status.stashed = "";
+      git_branch.truncation_length = 20;
+      nix_shell.format = "with [$symbol]($style)[Nix Dev Shell]($style) ";
+    };
+  };
 
   programs.nix-index-database.comma.enable = true;
 

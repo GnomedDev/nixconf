@@ -1,4 +1,15 @@
 { pkgs, lib, ... }:
+let
+  prettierFormatter = {
+    external = {
+      command = lib.getExe pkgs.prettier;
+      arguments = [
+        "--stdin-filepath"
+        "{buffer_path}"
+      ];
+    };
+  };
+in
 {
   fonts.packages = with pkgs; [
     # Fonts for development
@@ -57,20 +68,17 @@
 
       zed-editor = {
         enable = true;
-        # Wrap zed executable with tools that need to be in PATH
-        package =
-          let
-            zed-pkgs = with pkgs; [
-              nixd
-              nixfmt
-              direnv
-            ];
-          in
-          pkgs.runCommandLocal "zed-wrapped" { nativeBuildInputs = [ pkgs.makeBinaryWrapper ]; } ''
-            mkdir -p $out/bin
-            makeBinaryWrapper ${pkgs.zed-editor}/bin/zeditor $out/bin/zeditor \
-              --prefix PATH : ${lib.makeBinPath zed-pkgs}
-          '';
+        extraPackages = with pkgs; [
+          nixd
+          nixfmt
+        ];
+
+        # I want to manage as much configuration via Nix as possible
+        mutableUserSettings = false;
+        mutableUserKeymaps = false;
+        mutableUserTasks = false;
+        mutableUserDebug = false;
+
         userSettings = {
           # I do not like creating slopware.
           disable_ai = true;
@@ -78,36 +86,41 @@
           terminal.shell.program = lib.getExe pkgs.fish;
           # Show diagnostics inline, a'la VSCode Error Lens
           diagnostics.inline.enabled = true;
-          # Set prettier as a third party formatter for all files, since it supports a lot.
-          formatter = [
-            "language_server"
-            {
-              external = {
-                command = lib.getExe pkgs.prettier;
-                arguments = [
-                  "--stdin-filepath"
-                  "{buffer_path}"
-                ];
-              };
-            }
-          ];
+          # Sensible tab width
+          tab_size = 4;
 
           # Language specific configuration
-          languages.Nix = {
-            formatter.external.command = lib.getExe pkgs.nixfmt;
-            language_servers = [
-              "nixd"
-              "!nil"
-            ];
+          languages = {
+            CSS.formatter = prettierFormatter;
+            Markdown.formatter = prettierFormatter;
+            Python.formatter.external = {
+              command = "poetry";
+              arguments = [
+                "run"
+                "black"
+                "--stdin-filename"
+                "{buffer_path}"
+                "-"
+              ];
+            };
+            Nix = {
+              tab_size = 2;
+              formatter.external.command = lib.getExe pkgs.nixfmt;
+              language_servers = [
+                "nixd"
+                "!nil"
+              ];
+            };
           };
+
+          file_types.XML = [ "kml" ];
 
           # Coming from VSCode
           theme = "VSCode Dark Modern";
         };
-        userKeymaps = [
-          { bindings.f1 = "command_palette::Toggle"; }
-        ];
+
         extensions = [
+          "xml"
           "nix"
           "toml"
           "dependi"
