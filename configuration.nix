@@ -11,11 +11,15 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  # Allow nix command/flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    # Expand trusted users to anyone in wheel group, instead of just root.
+    trusted-users = [ "@wheel" ];
+    # Allow nix command/flakes
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   # Avoid slow kernel OOM killer by using systemd-oomd.
   systemd.oomd.enable = true;
