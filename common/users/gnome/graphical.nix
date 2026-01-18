@@ -113,6 +113,9 @@ in
             };
           };
 
+          # Set a different target directory for Rust-Analyzer to prevent cache fighting.
+          lsp.rust-analyzer.initialization_options.rust.analyzerTargetDir = true;
+
           file_types.XML = [ "kml" ];
 
           # Coming from VSCode
