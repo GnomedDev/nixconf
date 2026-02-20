@@ -45,7 +45,7 @@ in
 
   # Enable the Kodi package for the kodi user specifically.
   home-manager.users.kodi =
-    { pkgs, ... }:
+    { ... }:
     {
       programs.kodi = {
         enable = true;
@@ -74,27 +74,9 @@ in
     };
 
   # Configure systemd to start kodi
-  systemd.services.kodi = {
+  services.cage = {
     enable = true;
-    after = [ "sound.target" ];
-    wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
-    serviceConfig = {
-      # Run as the Kodi User
-      User = "kodi";
-      Type = "simple";
-      ExecStart = "${kodiPkg}/bin/kodi-standalone";
-      # Run with raw video/input/audio permissions
-      SupplementaryGroups = [
-        "video"
-        "input"
-        "audio"
-      ];
-      # Restart if crashed/stopped
-      Restart = "always";
-      # Wait for 15s before force killing if asked to stop
-      TimeoutStopSec = "15s";
-      TimeoutStopFailureMode = "kill";
-    };
+    user = "kodi";
+    program = "${kodiPkg}/bin/kodi";
   };
 }
