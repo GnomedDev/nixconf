@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  kodiPkg = pkgs.kodi-gbm;
+  kodiPkg = pkgs.kodi-wayland;
   sleepyIp = "192.168.1.71";
 in
 {
@@ -41,6 +41,7 @@ in
   users.users.kodi = {
     enable = true;
     isNormalUser = true;
+    extraGroups = [ "audio" ];
   };
 
   # Enable the Kodi package for the kodi user specifically.
@@ -70,10 +71,16 @@ in
         ];
       };
 
+      xdg.configFile."kanshi/config".text = ''
+        profile tv {
+          output "*" mode 3840x2160@60
+        }
+      '';
+
       home.stateVersion = "25.11";
     };
 
-  # Configure systemd to start kodi
+  # Configure Cage to wrap Kodi via Systemd.
   services.cage = {
     enable = true;
     user = "kodi";
