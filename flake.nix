@@ -124,6 +124,7 @@
           ./common/users/gnome/kde.nix
 
           ./machines/gnome-desktop/modules/swapfile.nix
+          ./machines/gnome-desktop/modules/graphical.nix
           ./machines/gnome-desktop/modules/wifi-firmware
           ./machines/gnome-desktop/modules/hardware-configuration.nix
 
