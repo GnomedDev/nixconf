@@ -31,7 +31,10 @@
     konsole.enable = true;
     plasma = {
       enable = true;
-      overrideConfig = true;
+      # TODO: Reenable this, currently disabled due to:
+      # - Lack of primary screen configuration
+      # - Lack of baloo configuration
+      # overrideConfig = true;
 
       # Set dark theme, doesn't fully seem to work.
       workspace.colorScheme = "BreezeDark";
