@@ -37,6 +37,14 @@
     AppleInterfaceStyle = "Dark";
     KeyRepeat = 2;
   };
+  # TODO: Specific to me, set with home-manager?
+  system.defaults.dock.persistent-apps = [
+    { app = "/System/Applications/Apps.app"; }
+    { app = "${pkgs.firefox}/Applications/Firefox.app"; }
+    { app = "${pkgs.vesktop}/Applications/Vesktop.app"; }
+    { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
+    { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
+  ];
 
   # Do not change.
   system.stateVersion = 6;

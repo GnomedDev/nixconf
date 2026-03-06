@@ -58,21 +58,6 @@ in
       # Vesktop (Discord)
       vesktop = {
         enable = true;
-        package = pkgs.vesktop.overrideAttrs (old: {
-          buildPhase = ''
-            runHook preBuild
-
-            pnpm build
-            pnpm exec electron-builder \
-              --dir \
-              -c.asarUnpack="**/*.node" \
-              -c.electronDist=${if pkgs.stdenv.hostPlatform.isDarwin then "." else "electron-dist"} \
-              -c.electronVersion=${pkgs.electron.version} \
-              ${if pkgs.stdenv.hostPlatform.isDarwin then "-c.mac.identity=null" else ""}
-
-            runHook postBuild
-          '';
-        });
         settings = {
           discordBranch = "stable";
           minimizeToTray = true;
