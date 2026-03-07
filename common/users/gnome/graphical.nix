@@ -24,6 +24,11 @@ in
         # Random stuff
         ares
         localsend
+        (dolphin-emu.overrideAttrs (
+          final: prev: {
+            meta.badPlatforms = [ ];
+          }
+        ))
 
         # LibreOffice
         hunspell

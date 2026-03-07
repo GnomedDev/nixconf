@@ -66,13 +66,23 @@
       lib = nixpkgs.lib;
       pkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
         system:
-        import nixpkgs ({
+        import nixpkgs {
           inherit system;
+          overlays = [
+            (final: prev: {
+              miniaudio = null;
+              sfml = prev.sfml.overrideAttrs (
+                final: prev: {
+                  patches = [ ];
+                }
+              );
+            })
+          ];
           config = {
             allowUnfree = true;
             android_sdk.accept_license = true;
           };
-        })
+        }
       );
 
       specialArgs = inputs;
