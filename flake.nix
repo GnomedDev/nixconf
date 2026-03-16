@@ -68,16 +68,6 @@
         system:
         import nixpkgs {
           inherit system;
-          overlays = [
-            (final: prev: {
-              miniaudio = null;
-              sfml = prev.sfml.overrideAttrs (
-                final: prev: {
-                  patches = [ ];
-                }
-              );
-            })
-          ];
           config = {
             allowUnfree = true;
             android_sdk.accept_license = true;

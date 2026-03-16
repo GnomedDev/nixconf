@@ -44,6 +44,7 @@
     { app = "${pkgs.vesktop}/Applications/Vesktop.app"; }
     { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
     { app = "${pkgs.ghostty-bin}/Applications/Ghostty.app"; }
+    { app = "/System/Applications/System Settings.app"; }
   ];
 
   # Do not change.
