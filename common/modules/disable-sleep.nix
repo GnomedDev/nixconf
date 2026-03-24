@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  systemd.sleep.extraConfig = ''
-    AllowSuspend=no
-  '';
+  systemd.sleep.settings.Sleep = {
+    AllowSuspend = "no";
+  };
 }

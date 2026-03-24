@@ -44,6 +44,7 @@ in
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
         libreoffice-qt
+        azahar
       ];
 
     xdg.configFile.ghostty-config = {
