@@ -78,12 +78,10 @@
       specialArgs = inputs;
     in
     {
-      packages = {
-        aarch64-darwin.hot = pkgs.callPackage ./common/packages/hot.nix specialArgs;
-      }
-      // lib.mapAttrs (system: pkgs: {
+      packages = lib.mapAttrs (system: pkgs: {
         mach = pkgs.callPackage ./common/packages/mach.nix specialArgs;
         ff4d = pkgs.callPackage ./common/packages/ffmpeg4discord.nix specialArgs;
+        azahar-bin = pkgs.callPackage ./common/packages/azahar-bin.nix specialArgs;
       }) pkgs;
 
       homeConfigurations.gnome = home-manager.lib.homeManagerConfiguration {

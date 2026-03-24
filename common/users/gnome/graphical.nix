@@ -1,4 +1,8 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 let
   prettierFormatter = {
     external = {
@@ -32,6 +36,7 @@ in
         hunspellDicts.en_GB-ise
       ]
       ++ lib.optionals pkgs.stdenv.isDarwin [
+        (pkgs.callPackage ../../packages/azahar-bin.nix { })
         libreoffice-bin
         ghostty-bin
         vlc-bin
