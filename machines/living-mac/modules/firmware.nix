@@ -1,7 +1,10 @@
 { ... }:
 {
   # Enable T2 specific kernel drivers/wifi firmware.
-  hardware.apple-t2.firmware.enable = true;
+  hardware.apple-t2 = {
+    firmware.enable = true;
+    kernelChannel = "latest";
+  };
 
   # Use the T2 patches to set the battery limit to 80% via systemd.
   systemd.tmpfiles.settings = {

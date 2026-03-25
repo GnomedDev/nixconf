@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -55,6 +56,7 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-small,
       nixos-hardware,
       darwin,
       home-manager,
@@ -66,13 +68,22 @@
       lib = nixpkgs.lib;
       pkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
         system:
-        import nixpkgs {
-          inherit system;
-          config = {
-            allowUnfree = true;
-            android_sdk.accept_license = true;
+        let
+          pkgsArgs = {
+            inherit system;
+            config = {
+              allowUnfree = true;
+              android_sdk.accept_license = true;
+            };
           };
-        }
+          pkgsSmall = import nixpkgs-small pkgsArgs;
+        in
+        import nixpkgs (
+          pkgsArgs
+          // {
+            overlays = [ (final: prev: { home-assistant = pkgsSmall.home-assistant; }) ];
+          }
+        )
       );
 
       specialArgs = inputs;
