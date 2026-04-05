@@ -76,6 +76,22 @@
       );
 
       specialArgs = inputs;
+      ttsServiceModules = [
+        ./configuration.nix
+
+        ./common/modules/home-manager.nix
+        ./common/modules/systemd-boot.nix
+        ./common/modules/disable-sleep.nix
+        ./common/modules/tailscale-server.nix
+
+        ./common/users/gnome/general
+        ./common/users/gnome/general/linux.nix
+
+        ./machines/tts-service/modules/environment.nix
+        ./machines/tts-service/modules/hardware-configuration.nix
+
+        home-manager.nixosModules.home-manager
+      ];
     in
     {
       packages = lib.mapAttrs (system: pkgs: {
@@ -139,6 +155,7 @@
           ./common/modules/home-manager.nix
           ./common/modules/systemd-boot.nix
           ./common/modules/disable-sleep.nix
+          ./common/modules/tailscale-server.nix
 
           ./common/users/gnome/general
           ./common/users/gnome/general/linux.nix
@@ -161,6 +178,26 @@
           nixos-hardware.nixosModules.apple-t2
           t2fanrd.nixosModules.t2fanrd
         ];
+      };
+
+      nixosConfigurations.tts-service = nixpkgs.lib.nixosSystem {
+        pkgs = pkgs.x86_64-linux;
+        inherit specialArgs;
+        modules = ttsServiceModules ++ [
+          ./machines/tts-service/modules
+        ];
+      };
+      nixosConfigurations.tts-service-initial = nixpkgs.lib.nixosSystem {
+        pkgs = pkgs.x86_64-linux;
+        inherit specialArgs;
+        modules = ttsServiceModules ++ [
+          ./common/users/gnome/ssh.nix
+        ];
+      };
+      nixosConfigurations.tts-service-setup = nixpkgs.lib.nixosSystem {
+        pkgs = pkgs.x86_64-linux;
+        inherit specialArgs;
+        modules = ttsServiceModules;
       };
     };
 }
