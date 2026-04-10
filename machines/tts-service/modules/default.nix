@@ -46,7 +46,7 @@ in
       "${ipEnvPath}"
     ];
     environment = {
-      LOG_LEVEL = "INFO";
+      LOG_LEVEL = "WARN";
       GOOGLE_APPLICATION_CREDENTIALS = "/gcp.json";
       AWS_REGION = "eu-central-1";
       CACHE_MAX_CAPACITY = "75000"; # Around 6gb of memory usage
