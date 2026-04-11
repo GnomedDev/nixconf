@@ -76,22 +76,46 @@
       );
 
       specialArgs = inputs;
-      ttsServiceModules = [
-        ./configuration.nix
+      mkTTSServices =
+        index:
+        let
+          serviceSpecialArgs = specialArgs // {
+            tailscaleHostname = "tts-service-${index}";
+          };
+          modules = [
+            ./configuration.nix
 
-        ./common/modules/home-manager.nix
-        ./common/modules/systemd-boot.nix
-        ./common/modules/disable-sleep.nix
-        ./common/modules/tailscale-server.nix
+            ./common/modules/home-manager.nix
+            ./common/modules/systemd-boot.nix
+            ./common/modules/disable-sleep.nix
+            ./common/modules/tailscale-server.nix
 
-        ./common/users/gnome/general
-        ./common/users/gnome/general/linux.nix
+            ./common/users/gnome/general
+            ./common/users/gnome/general/linux.nix
 
-        ./machines/tts-service/modules/environment.nix
-        ./machines/tts-service/modules/hardware-configuration.nix
+            ./machines/tts-service/modules/environment.nix
+            ./machines/tts-service/modules/hardware-configuration.nix
 
-        home-manager.nixosModules.home-manager
-      ];
+            home-manager.nixosModules.home-manager
+          ];
+        in
+        {
+          "tts-service-${index}" = nixpkgs.lib.nixosSystem {
+            pkgs = pkgs.x86_64-linux;
+            specialArgs = serviceSpecialArgs;
+            modules = modules ++ [ ./machines/tts-service/modules ];
+          };
+          "tts-service-${index}-setup" = nixpkgs.lib.nixosSystem {
+            pkgs = pkgs.x86_64-linux;
+            specialArgs = serviceSpecialArgs;
+            inherit modules;
+          };
+          "tts-service-${index}-initial" = nixpkgs.lib.nixosSystem {
+            pkgs = pkgs.x86_64-linux;
+            specialArgs = serviceSpecialArgs;
+            modules = modules ++ [ ./common/users/gnome/ssh.nix ];
+          };
+        };
     in
     {
       packages = lib.mapAttrs (system: pkgs: {
@@ -120,84 +144,67 @@
         ];
       };
 
-      nixosConfigurations.gnome-desktop = nixpkgs.lib.nixosSystem {
-        pkgs = pkgs.x86_64-linux;
-        inherit specialArgs;
-        modules = [
-          ./configuration.nix
+      nixosConfigurations = {
+        gnome-desktop = nixpkgs.lib.nixosSystem {
+          pkgs = pkgs.x86_64-linux;
+          inherit specialArgs;
+          modules = [
+            ./configuration.nix
 
-          ./common/modules/kde.nix
-          ./common/modules/nvidia.nix
-          ./common/modules/systemd-boot.nix
-          ./common/modules/home-manager.nix
-          ./common/modules/disable-sleep.nix
+            ./common/modules/kde.nix
+            ./common/modules/nvidia.nix
+            ./common/modules/systemd-boot.nix
+            ./common/modules/home-manager.nix
+            ./common/modules/disable-sleep.nix
 
-          ./common/users/gnome/general
-          ./common/users/gnome/general/linux.nix
-          ./common/users/gnome/graphical.nix
-          ./common/users/gnome/kde.nix
+            ./common/users/gnome/general
+            ./common/users/gnome/general/linux.nix
+            ./common/users/gnome/graphical.nix
+            ./common/users/gnome/kde.nix
 
-          ./machines/gnome-desktop/modules/swapfile.nix
-          ./machines/gnome-desktop/modules/graphical.nix
-          ./machines/gnome-desktop/modules/wifi-firmware
-          ./machines/gnome-desktop/modules/hardware-configuration.nix
+            ./machines/gnome-desktop/modules/swapfile.nix
+            ./machines/gnome-desktop/modules/graphical.nix
+            ./machines/gnome-desktop/modules/wifi-firmware
+            ./machines/gnome-desktop/modules/hardware-configuration.nix
 
-          home-manager.nixosModules.home-manager
-        ];
-      };
+            home-manager.nixosModules.home-manager
+          ];
+        };
 
-      nixosConfigurations.living-mac = nixpkgs.lib.nixosSystem {
-        pkgs = pkgs.x86_64-linux;
-        inherit specialArgs;
-        modules = [
-          ./configuration.nix
+        living-mac = nixpkgs.lib.nixosSystem {
+          pkgs = pkgs.x86_64-linux;
+          inherit specialArgs;
+          modules = [
+            ./configuration.nix
 
-          ./common/modules/home-manager.nix
-          ./common/modules/systemd-boot.nix
-          ./common/modules/disable-sleep.nix
-          ./common/modules/tailscale-server.nix
+            ./common/modules/home-manager.nix
+            ./common/modules/systemd-boot.nix
+            ./common/modules/disable-sleep.nix
+            ./common/modules/tailscale-server.nix
 
-          ./common/users/gnome/general
-          ./common/users/gnome/general/linux.nix
+            ./common/users/gnome/general
+            ./common/users/gnome/general/linux.nix
 
-          ./common/users/fox/general.nix
-          ./common/users/sleepy/general.nix
+            ./common/users/fox/general.nix
+            ./common/users/sleepy/general.nix
 
-          ./machines/living-mac/modules/kodi.nix
-          ./machines/living-mac/modules/samba.nix
-          ./machines/living-mac/modules/beesd.nix
-          ./machines/living-mac/modules/swapfile.nix
-          ./machines/living-mac/modules/firmware.nix
-          ./machines/living-mac/modules/t2fanrd.nix
-          ./machines/living-mac/modules/tailscale.nix
-          ./machines/living-mac/modules/qbittorrent.nix
-          ./machines/living-mac/modules/home-assistant.nix
-          ./machines/living-mac/modules/hardware-configuration.nix
+            ./machines/living-mac/modules/kodi.nix
+            ./machines/living-mac/modules/samba.nix
+            ./machines/living-mac/modules/beesd.nix
+            ./machines/living-mac/modules/swapfile.nix
+            ./machines/living-mac/modules/firmware.nix
+            ./machines/living-mac/modules/t2fanrd.nix
+            ./machines/living-mac/modules/tailscale.nix
+            ./machines/living-mac/modules/qbittorrent.nix
+            ./machines/living-mac/modules/home-assistant.nix
+            ./machines/living-mac/modules/hardware-configuration.nix
 
-          home-manager.nixosModules.home-manager
-          nixos-hardware.nixosModules.apple-t2
-          t2fanrd.nixosModules.t2fanrd
-        ];
-      };
-
-      nixosConfigurations.tts-service = nixpkgs.lib.nixosSystem {
-        pkgs = pkgs.x86_64-linux;
-        inherit specialArgs;
-        modules = ttsServiceModules ++ [
-          ./machines/tts-service/modules
-        ];
-      };
-      nixosConfigurations.tts-service-initial = nixpkgs.lib.nixosSystem {
-        pkgs = pkgs.x86_64-linux;
-        inherit specialArgs;
-        modules = ttsServiceModules ++ [
-          ./common/users/gnome/ssh.nix
-        ];
-      };
-      nixosConfigurations.tts-service-setup = nixpkgs.lib.nixosSystem {
-        pkgs = pkgs.x86_64-linux;
-        inherit specialArgs;
-        modules = ttsServiceModules;
-      };
+            home-manager.nixosModules.home-manager
+            nixos-hardware.nixosModules.apple-t2
+            t2fanrd.nixosModules.t2fanrd
+          ];
+        };
+      }
+      // mkTTSServices "1";
     };
 }
