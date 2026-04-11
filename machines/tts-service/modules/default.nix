@@ -53,6 +53,9 @@ in
     };
     extraOptions = [
       "--network=host"
+      "--ulimit"
+      "nofile=65535"
     ];
   };
+
 }
