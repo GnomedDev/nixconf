@@ -33,7 +33,7 @@ in
 
   virtualisation.oci-containers.backend = oci-backend;
   virtualisation.oci-containers.containers.tts-service = {
-    image = "gnomeddev/tts-service:dispatch";
+    image = "gnomeddev/tts-service";
     volumes = [
       "/var/tts-service/gcloud_tts.json:/gcp.json"
     ];
