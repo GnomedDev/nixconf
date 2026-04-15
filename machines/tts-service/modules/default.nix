@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  ttsServiceSrc,
+  ...
+}:
 let
   oci-backend = "docker";
   ipEnvPath = "/var/tts-service/ip.env";
@@ -33,7 +38,7 @@ in
 
   virtualisation.oci-containers.backend = oci-backend;
   virtualisation.oci-containers.containers.tts-service = {
-    image = "gnomeddev/tts-service";
+    image = "gnomeddev/tts-service:${ttsServiceSrc.rev}";
     volumes = [
       "/var/tts-service/gcloud_tts.json:/gcp.json"
     ];

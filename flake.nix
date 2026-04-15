@@ -50,6 +50,12 @@
       repo = "power-flow-card-plus";
       flake = false;
     };
+    ttsServiceSrc = {
+      type = "github";
+      owner = "Discord-TTS";
+      repo = "tts-service";
+      flake = false;
+    };
   };
 
   outputs =
