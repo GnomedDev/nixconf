@@ -82,6 +82,40 @@
       );
 
       specialArgs = inputs;
+      mkBuildVM =
+        pkgs:
+        nixpkgs.lib.nixosSystem {
+          inherit pkgs specialArgs;
+          modules = [
+            ./configuration.nix
+
+            ./common/modules/systemd-boot.nix
+
+            ./common/users/gnome/general
+            ./common/users/gnome/general/linux.nix
+            ./common/users/gnome/ssh.nix
+
+            {
+              imports = [ "${nixpkgs}/nixos/modules/profiles/qemu-guest.nix" ];
+              services.spice-webdavd.enable = true;
+              services.spice-vdagentd.enable = true;
+              services.spice-autorandr.enable = true;
+              services.qemuGuest.enable = true;
+              fileSystems = {
+                "/" = {
+                  device = "/dev/vda2";
+                  fsType = "btrfs";
+                };
+                "/boot" = {
+                  device = "/dev/vda1";
+                  fsType = "vfat";
+                };
+              };
+            }
+
+            home-manager.nixosModules.home-manager
+          ];
+        };
       mkTTSServices =
         index:
         let
@@ -210,6 +244,9 @@
             t2fanrd.nixosModules.t2fanrd
           ];
         };
+
+        vm-x86_64-linux = mkBuildVM pkgs.x86_64-linux;
+        vm-aarch64-linux = mkBuildVM pkgs.aarch64-linux;
       }
       // mkTTSServices "1";
     };
