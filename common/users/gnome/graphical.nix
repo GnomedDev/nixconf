@@ -39,6 +39,7 @@ in
         (pkgs.callPackage ../../packages/azahar-bin.nix { })
         libreoffice-bin
         ghostty-bin
+        orbstack
         vlc-bin
         utm
       ]
