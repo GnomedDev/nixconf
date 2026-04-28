@@ -96,6 +96,8 @@ in
           # Sensible tab width
           tab_size = 4;
 
+          project_panel.dock = "left";
+
           # Language specific configuration
           languages = {
             CSS.formatter = prettierFormatter;
