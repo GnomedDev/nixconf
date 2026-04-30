@@ -57,6 +57,7 @@ in
       CACHE_MAX_CAPACITY = "360000"; # Around 14gb of memory usage
     };
     extraOptions = [
+      "--init"
       "--network=host"
       "--ulimit"
       "nofile=65535"

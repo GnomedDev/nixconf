@@ -1,4 +1,4 @@
-{ config, tailscaleHostname, ... }:
+{ tailscaleHostname, ... }:
 {
   services.cloud-init = {
     enable = true;
