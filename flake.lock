@@ -43,11 +43,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777518431,
-        "narHash": "sha256-SwgiG2T5pbyo33Vz7/vUCAhEMgwCK8Pa2nDSx5a6/WE=",
+        "lastModified": 1777653543,
+        "narHash": "sha256-4aWmureGW5Nzp7MvLUZqwBUb9meTGvhZjx+Vah7TbvY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2e54a938cdd4c8e414b2518edc3d82308027c670",
+        "rev": "9a3efa079c3a91567c4bedeadc9a58f47244ef4b",
         "type": "github"
       },
       "original": {
@@ -108,7 +108,7 @@
         "type": "github"
       }
     },
-    "nixos-hardware": {
+    "nixos-hardware-unpatched": {
       "locked": {
         "lastModified": 1776983936,
         "narHash": "sha256-ZOQyNqSvJ8UdrrqU1p7vaFcdL53idK+LOM8oRWEWh6o=",
@@ -165,16 +165,16 @@
     "powerFlowCardSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1777409451,
-        "narHash": "sha256-78ch4XW7dlp32FWjuUCanYsSY9T6Dh3+1VvNReLGTUM=",
+        "lastModified": 1777409405,
+        "narHash": "sha256-bl1fgEJxBRh2QstqXx5ctQBkRBcBGb77uVTAUvQzND4=",
         "owner": "flixlix",
-        "repo": "power-flow-card-plus",
-        "rev": "9f396c83c227ce3bf93c3675aa412ad438ecc15d",
+        "repo": "flixlix-cards",
+        "rev": "87bb1a54bb707b204e76d3a2ee6d6c92476eee6c",
         "type": "github"
       },
       "original": {
         "owner": "flixlix",
-        "repo": "power-flow-card-plus",
+        "repo": "flixlix-cards",
         "type": "github"
       }
     },
@@ -186,7 +186,7 @@
         "jninja2TemplateSrc": "jninja2TemplateSrc",
         "machSrc": "machSrc",
         "nix-index-database": "nix-index-database",
-        "nixos-hardware": "nixos-hardware",
+        "nixos-hardware-unpatched": "nixos-hardware-unpatched",
         "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager",
         "powerFlowCardSrc": "powerFlowCardSrc",
@@ -198,11 +198,11 @@
     "rtw89Src": {
       "flake": false,
       "locked": {
-        "lastModified": 1777571594,
-        "narHash": "sha256-EjmBOkPQxhEg2fQ368/YlOXKa/N0U3cpgvV5+cAjtrY=",
+        "lastModified": 1777600596,
+        "narHash": "sha256-W2wt9ciwlX+9P9vFCeXIB91q6d8UPgiJag6ID+2BVwc=",
         "owner": "morrownr",
         "repo": "rtw89",
-        "rev": "3840e2c3e680e6bbbafc341aa5352b39f3f58a23",
+        "rev": "6fdccac8df684bcc283d091d28db0b1e8d2959a6",
         "type": "github"
       },
       "original": {
