@@ -8,7 +8,7 @@ This is public for troubleshooting or as an example for others.
 
 ### gnome-desktop
 
-A self-built gaming PC, with an AMD processor and NVIDIA GPU using an out-of-tree rtw89 driver for WIFI.
+A self-built gaming PC, with an AMD processor and NVIDIA GPU.
 
 ### living-mac
 

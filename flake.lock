@@ -190,25 +190,8 @@
         "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager",
         "powerFlowCardSrc": "powerFlowCardSrc",
-        "rtw89Src": "rtw89Src",
         "t2fanrd": "t2fanrd",
         "ttsServiceSrc": "ttsServiceSrc"
-      }
-    },
-    "rtw89Src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777571594,
-        "narHash": "sha256-EjmBOkPQxhEg2fQ368/YlOXKa/N0U3cpgvV5+cAjtrY=",
-        "owner": "morrownr",
-        "repo": "rtw89",
-        "rev": "3840e2c3e680e6bbbafc341aa5352b39f3f58a23",
-        "type": "github"
-      },
-      "original": {
-        "owner": "morrownr",
-        "repo": "rtw89",
-        "type": "github"
       }
     },
     "t2fanrd": {

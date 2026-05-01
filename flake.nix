@@ -26,12 +26,6 @@
       repo = "networkquality-rs";
       flake = false;
     };
-    rtw89Src = {
-      type = "github";
-      owner = "morrownr";
-      repo = "rtw89";
-      flake = false;
-    };
     foxessModbusSrc = {
       type = "github";
       owner = "nathanmarlor";
@@ -170,7 +164,6 @@
 
             ./machines/gnome-desktop/modules/swapfile.nix
             ./machines/gnome-desktop/modules/graphical.nix
-            ./machines/gnome-desktop/modules/wifi-firmware
             ./machines/gnome-desktop/modules/hardware-configuration.nix
 
             home-manager.nixosModules.home-manager
