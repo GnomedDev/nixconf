@@ -169,6 +169,7 @@
     image = "nipar44/predbat_addon:latest";
     extraOptions = [ "--network=host" ];
     ports = [ "5052" ];
+    pull = "always";
     volumes = [
       "/var/predbat/apps.yaml:/config/apps.yaml:rw"
       "/etc/localtime:/etc/localtime:ro"
