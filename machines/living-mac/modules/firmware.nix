@@ -25,5 +25,4 @@
 
   # Setup networking.
   networking.hostName = "living-mac";
-  networking.networkmanager.enable = true;
 }
