@@ -43,11 +43,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777518431,
-        "narHash": "sha256-SwgiG2T5pbyo33Vz7/vUCAhEMgwCK8Pa2nDSx5a6/WE=",
+        "lastModified": 1777659959,
+        "narHash": "sha256-ax3229dUvNuwTQwo2o68kOQ24dvOlJ/BrVYY4miD1bI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2e54a938cdd4c8e414b2518edc3d82308027c670",
+        "rev": "5c1b74905c7261e8280dcda3623dbe677a1bc158",
         "type": "github"
       },
       "original": {
@@ -108,7 +108,7 @@
         "type": "github"
       }
     },
-    "nixos-hardware": {
+    "nixos-hardware-unpatched": {
       "locked": {
         "lastModified": 1776983936,
         "narHash": "sha256-ZOQyNqSvJ8UdrrqU1p7vaFcdL53idK+LOM8oRWEWh6o=",
@@ -186,7 +186,7 @@
         "jninja2TemplateSrc": "jninja2TemplateSrc",
         "machSrc": "machSrc",
         "nix-index-database": "nix-index-database",
-        "nixos-hardware": "nixos-hardware",
+        "nixos-hardware-unpatched": "nixos-hardware-unpatched",
         "nixpkgs": "nixpkgs",
         "plasma-manager": "plasma-manager",
         "powerFlowCardSrc": "powerFlowCardSrc",

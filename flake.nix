@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware-unpatched.url = "github:NixOS/nixos-hardware";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -55,7 +55,7 @@
   outputs =
     {
       nixpkgs,
-      nixos-hardware,
+      nixos-hardware-unpatched,
       darwin,
       home-manager,
       t2fanrd,
@@ -74,6 +74,19 @@
           };
         }
       );
+
+      nixos-hardware =
+        pkgs:
+        pkgs.applyPatches {
+          name = "nixos-hardware-patched";
+          src = nixos-hardware-unpatched;
+          patches = [
+            (pkgs.fetchpatch2 {
+              url = "https://github.com/NixOS/nixos-hardware/pull/1848.patch";
+              hash = "sha256-DgMWPxEllO/mT4uFNjOHqql6Lz8b263RQkgxTQ55WSY=";
+            })
+          ];
+        };
 
       specialArgs = inputs;
       mkTTSServices =
@@ -198,8 +211,8 @@
             ./machines/living-mac/modules/home-assistant.nix
             ./machines/living-mac/modules/hardware-configuration.nix
 
+            (import "${nixos-hardware pkgs.x86_64-linux}/apple/t2")
             home-manager.nixosModules.home-manager
-            nixos-hardware.nixosModules.apple-t2
             t2fanrd.nixosModules.t2fanrd
           ];
         };
