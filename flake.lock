@@ -88,6 +88,22 @@
         "type": "github"
       }
     },
+    "myEnergiSrc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778516156,
+        "narHash": "sha256-gSDPxwqUsICdwSSqOYpQiiAKOHi+OUptr+VSibLzkoY=",
+        "owner": "CJNE",
+        "repo": "ha-myenergi",
+        "rev": "cd3a7b2e1d06678cd875b19c71e3568498564681",
+        "type": "github"
+      },
+      "original": {
+        "owner": "CJNE",
+        "repo": "ha-myenergi",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -185,6 +201,7 @@
         "home-manager": "home-manager",
         "jninja2TemplateSrc": "jninja2TemplateSrc",
         "machSrc": "machSrc",
+        "myEnergiSrc": "myEnergiSrc",
         "nix-index-database": "nix-index-database",
         "nixos-hardware-unpatched": "nixos-hardware-unpatched",
         "nixpkgs": "nixpkgs",

@@ -3,6 +3,7 @@
 # /var/predbat/apps.yaml is the predbat configuration with secrets
 {
   pkgs,
+  myEnergiSrc,
   foxessModbusSrc,
   powerFlowCardSrc,
   jninja2TemplateSrc,
@@ -12,6 +13,7 @@
   services.home-assistant = {
     enable = true;
     customComponents = [
+      (pkgs.callPackage ../packages/myenergi.nix { inherit myEnergiSrc; })
       (pkgs.callPackage ../packages/foxess_modbus.nix { inherit foxessModbusSrc; })
     ];
     customLovelaceModules = [

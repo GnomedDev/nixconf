@@ -44,6 +44,12 @@
       repo = "power-flow-card-plus";
       flake = false;
     };
+    myEnergiSrc = {
+      type = "github";
+      owner = "CJNE";
+      repo = "ha-myenergi";
+      flake = false;
+    };
     ttsServiceSrc = {
       type = "github";
       owner = "Discord-TTS";
