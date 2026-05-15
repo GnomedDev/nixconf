@@ -83,7 +83,7 @@
           patches = [
             (pkgs.fetchpatch2 {
               url = "https://github.com/NixOS/nixos-hardware/pull/1848.patch";
-              hash = "sha256-DgMWPxEllO/mT4uFNjOHqql6Lz8b263RQkgxTQ55WSY=";
+              hash = "sha256-Te4XV3mPQ5stCuQ9/yK567w8PvP7K7cIRtVyEEiHLjY=";
             })
           ];
         };
