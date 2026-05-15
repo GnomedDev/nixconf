@@ -3,7 +3,6 @@
   home-assistant,
   myEnergiSrc,
 }:
-
 buildHomeAssistantComponent {
   owner = "CJNE";
   domain = "myenergi";

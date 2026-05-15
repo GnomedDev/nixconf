@@ -1,6 +1,7 @@
 {
   buildHomeAssistantComponent,
   foxessModbusSrc,
+  home-assistant,
 }:
 buildHomeAssistantComponent {
   owner = "nathanmarlor";
@@ -8,4 +9,5 @@ buildHomeAssistantComponent {
   version = foxessModbusSrc.shortRev;
 
   src = foxessModbusSrc;
+  dependencies = [ home-assistant.python.pkgs.pyserial ];
 }
