@@ -29,6 +29,7 @@ in
         ares
         localsend
         dolphin-emu
+        prismlauncher
 
         # LibreOffice
         hunspell
