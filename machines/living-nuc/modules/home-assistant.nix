@@ -38,8 +38,8 @@
       default_config = { };
 
       http = {
-        ssl_certificate = "/var/certs/living-mac.tail272b81.ts.net.crt";
-        ssl_key = "/var/certs/living-mac.tail272b81.ts.net.key";
+        ssl_certificate = "/var/certs/living-nuc.tail272b81.ts.net.crt";
+        ssl_key = "/var/certs/living-nuc.tail272b81.ts.net.key";
       };
 
       homeassistant.packages.predbat_conv = {

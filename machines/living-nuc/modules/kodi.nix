@@ -8,12 +8,6 @@ in
   # Enable the ALSA for Kodi Audio.
   hardware.alsa.enable = true;
 
-  # Disable the internal display.
-  boot.kernelParams = [
-    "video=eDP-1:d"
-    "video=HDMI-A-1:3840x2160@60"
-  ];
-
   # Enable graphical drivers.
   hardware.graphics = {
     enable = true;
@@ -25,6 +19,7 @@ in
   };
 
   # Allow any user to power off or reboot the machine.
+  services.upower.enable = true;
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
       if (action.id == "org.freedesktop.login1.power-off" ||
@@ -45,7 +40,7 @@ in
 
   # Enable the Kodi package for the kodi user specifically.
   home-manager.users.kodi =
-    { pkgs, ... }:
+    { ... }:
     {
       programs.kodi = {
         enable = true;
