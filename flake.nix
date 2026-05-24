@@ -195,7 +195,6 @@
           modules = [
             ./configuration.nix
 
-            ./common/modules/beesd.nix
             ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
@@ -206,7 +205,6 @@
             ./common/users/gnome/general/linux.nix
 
             ./common/users/fox/general.nix
-            ./common/users/sleepy/general.nix
 
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/swapfile.nix
