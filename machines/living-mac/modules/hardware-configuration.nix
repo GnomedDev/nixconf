@@ -32,7 +32,7 @@
   };
 
   fileSystems."/mnt/ext-hdd" = {
-    device = "/dev/disk/by-uuid/0ecaf241-a3ea-43e4-b138-52c379c23f6a";
+    device = "/dev/disk/by-uuid/db5c10d4-3e85-4376-9629-82186bbc3d59";
     fsType = "btrfs";
     options = [
       "compress=zstd"
