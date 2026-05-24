@@ -1,7 +1,7 @@
 # Required state:
 # - /var/certs contains HTTPS certificates
 # - Router is set up to port forward TCP/UDP on 31766 to living-nuc
-{ ... }:
+{ config, ... }:
 {
   services.qbittorrent = {
     enable = true;
@@ -19,8 +19,8 @@
 
           HTTPS = {
             Enabled = true;
-            KeyPath = "/var/certs/living-nuc.tail272b81.ts.net.key";
-            CertificatePath = "/var/certs/living-nuc.tail272b81.ts.net.crt";
+            KeyPath = "/var/certs/${config.networking.hostName}.tail272b81.ts.net.key";
+            CertificatePath = "/var/certs/${config.networking.hostName}.tail272b81.ts.net.crt";
           };
         };
       };

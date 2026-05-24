@@ -196,6 +196,7 @@
             ./configuration.nix
 
             ./common/modules/beesd.nix
+            ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
             ./common/modules/disable-sleep.nix
@@ -210,7 +211,6 @@
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/swapfile.nix
             ./machines/living-mac/modules/firmware.nix
-            ./machines/living-mac/modules/qbittorrent.nix
             ./machines/living-mac/modules/hardware-configuration.nix
 
             (import "${nixos-hardware pkgs.x86_64-linux}/apple/t2")
@@ -225,6 +225,7 @@
           modules = [
             ./configuration.nix
 
+            ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
             ./common/modules/disable-sleep.nix
@@ -236,9 +237,8 @@
             ./machines/living-nuc/modules/kodi.nix
             ./machines/living-nuc/modules/samba.nix
             ./machines/living-nuc/modules/swapfile.nix
-            ./machines/living-nuc/modules/qbittorrent.nix
-            ./machines/living-nuc/modules/home-assistant.nix
             ./machines/living-nuc/modules/firmware.nix
+            ./machines/living-nuc/modules/home-assistant.nix
             ./machines/living-nuc/modules/hardware-configuration.nix
 
             home-manager.nixosModules.home-manager
