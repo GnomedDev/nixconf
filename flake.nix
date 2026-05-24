@@ -206,6 +206,7 @@
 
             ./common/users/fox/general.nix
 
+            ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/swapfile.nix
             ./machines/living-mac/modules/firmware.nix
