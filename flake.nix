@@ -172,6 +172,7 @@
 
             ./common/modules/kde.nix
             ./common/modules/nvidia.nix
+            ./common/modules/swapfile.nix
             ./common/modules/systemd-boot.nix
             ./common/modules/home-manager.nix
             ./common/modules/disable-sleep.nix
@@ -181,7 +182,6 @@
             ./common/users/gnome/graphical.nix
             ./common/users/gnome/kde.nix
 
-            ./machines/gnome-desktop/modules/swapfile.nix
             ./machines/gnome-desktop/modules/graphical.nix
             ./machines/gnome-desktop/modules/hardware-configuration.nix
 
@@ -195,6 +195,8 @@
           modules = [
             ./configuration.nix
 
+            ./common/modules/samba.nix
+            ./common/modules/swapfile.nix
             ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
@@ -208,7 +210,6 @@
 
             ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix
-            ./machines/living-mac/modules/swapfile.nix
             ./machines/living-mac/modules/firmware.nix
             ./machines/living-mac/modules/hardware-configuration.nix
 
@@ -224,6 +225,8 @@
           modules = [
             ./configuration.nix
 
+            ./common/modules/samba.nix
+            ./common/modules/swapfile.nix
             ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
@@ -234,8 +237,6 @@
             ./common/users/gnome/general/linux.nix
 
             ./machines/living-nuc/modules/kodi.nix
-            ./machines/living-nuc/modules/samba.nix
-            ./machines/living-nuc/modules/swapfile.nix
             ./machines/living-nuc/modules/firmware.nix
             ./machines/living-nuc/modules/home-assistant.nix
             ./machines/living-nuc/modules/hardware-configuration.nix
