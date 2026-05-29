@@ -59,6 +59,7 @@ in
       (callPackage ../../packages/mach.nix { inherit machSrc; })
 
       # General stuff I just want avaliable
+      screen
       python3
     ];
 
