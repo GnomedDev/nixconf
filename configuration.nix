@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, nixpkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Set your time zone.
@@ -40,6 +40,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+  # Use systemd-resolved instead of legacy scripted networking.
+  services.resolved.enable = true;
 
   # Disable man cache generation which is slow.
   documentation.man.cache.enable = false;
