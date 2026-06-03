@@ -9,5 +9,5 @@ buildHomeAssistantComponent {
   version = foxessModbusSrc.shortRev;
 
   src = foxessModbusSrc;
-  dependencies = [ home-assistant.python.pkgs.pyserial ];
+  dependencies = [ home-assistant.python3Packages.pyserial ];
 }

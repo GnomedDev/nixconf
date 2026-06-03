@@ -14,7 +14,7 @@ buildHomeAssistantComponent {
       let
         pname = "pymyenergi";
         version = "0.2.3";
-        python3Packages = home-assistant.python.pkgs;
+        python3Packages = home-assistant.python3Packages;
       in
       python3Packages.buildPythonPackage {
         inherit pname version;
