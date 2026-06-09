@@ -238,6 +238,8 @@
             ./common/users/gnome/general
             ./common/users/gnome/general/linux.nix
 
+            ./common/users/sleepy/general.nix
+
             ./machines/living-nuc/modules/kodi.nix
             ./machines/living-nuc/modules/firmware.nix
             ./machines/living-nuc/modules/home-assistant.nix
