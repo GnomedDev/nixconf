@@ -42,7 +42,7 @@ in
         libreoffice-bin
         ghostty-bin
         orbstack
-        vlc-bin
+        iina
         utm
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
