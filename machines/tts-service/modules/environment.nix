@@ -1,5 +1,8 @@
 { tailscaleHostname, ... }:
 {
+  # Use cloud-init to retrieve ipv6 block.
+  #
+  # TODO: Replace this with simple script.
   services.cloud-init = {
     enable = true;
     network.enable = true;
@@ -7,6 +10,9 @@
     btrfs.enable = false;
     xfs.enable = false;
   };
+
+  # Spread IRQ load across cores, for an attempt to reduce load.
+  services.irqbalance.enable = true;
 
   services.prometheus.exporters.node = {
     enable = true;
