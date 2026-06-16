@@ -2,14 +2,15 @@
 
 ## TTS-service
 
-1. Create machine on Hetzner Cloud and mount NixOS ISO.
+1. Create ARM machine on Netcup Cloud and mount NixOS ISO.
 2. Connect to the machine via console and set a password.
 3. Run the following script in the Live ISO via ssh:
 ```bash
-sudo mkfs.ext4 /dev/sda1
+sudo fdisk /dev/vda
+sudo mkfs.ext4 /dev/vda1
 
-sudo mount /dev/sda1 /mnt
-sudo mount --mkdir /dev/sda15 /mnt/boot
+sudo mount /dev/vda1 /mnt
+sudo mount --mkdir /dev/vda2 /mnt/boot
 sudo nixos-install --no-root-passwd --flake github:GnomedDev/nixconf#tts-service-${N}-initial
 ```
 4. Shutdown, unmount NixOS ISO and reboot.

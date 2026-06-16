@@ -54,7 +54,7 @@ in
       LOG_LEVEL = "WARN";
       GOOGLE_APPLICATION_CREDENTIALS = "/gcp.json";
       AWS_REGION = "eu-central-1";
-      CACHE_MAX_CAPACITY = "18000"; # Around 8gb of memory usage
+      CACHE_MAX_CAPACITY = 2500 * 30; # Around 30gb of memory usage
     };
     extraOptions = [
       "--init"

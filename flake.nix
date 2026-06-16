@@ -100,6 +100,7 @@
       mkTTSServices =
         index:
         let
+          servicePkgs = pkgs.aarch64-linux;
           serviceSpecialArgs = specialArgs // {
             tailscaleHostname = "tts-service-${index}";
           };
@@ -122,17 +123,17 @@
         in
         {
           "tts-service-${index}" = nixpkgs.lib.nixosSystem {
-            pkgs = pkgs.x86_64-linux;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./machines/tts-service/modules ];
           };
           "tts-service-${index}-setup" = nixpkgs.lib.nixosSystem {
-            pkgs = pkgs.x86_64-linux;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             inherit modules;
           };
           "tts-service-${index}-initial" = nixpkgs.lib.nixosSystem {
-            pkgs = pkgs.x86_64-linux;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./common/users/gnome/ssh.nix ];
           };
