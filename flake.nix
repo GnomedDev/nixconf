@@ -98,9 +98,11 @@
 
       specialArgs = inputs;
       mkTTSServices =
-        index:
+        index: ipBlock:
         let
+          servicePkgs = pkgs.aarch64-linux;
           serviceSpecialArgs = specialArgs // {
+            inherit ipBlock;
             tailscaleHostname = "tts-service-${index}";
           };
           modules = [
@@ -122,17 +124,17 @@
         in
         {
           "tts-service-${index}" = nixpkgs.lib.nixosSystem {
-            pkgs = pkgs.x86_64-linux;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./machines/tts-service/modules ];
           };
           "tts-service-${index}-setup" = nixpkgs.lib.nixosSystem {
-            pkgs = pkgs.x86_64-linux;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             inherit modules;
           };
           "tts-service-${index}-initial" = nixpkgs.lib.nixosSystem {
-            pkgs = pkgs.x86_64-linux;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./common/users/gnome/ssh.nix ];
           };
@@ -265,7 +267,6 @@
           ];
         };
       }
-      // mkTTSServices "1"
-      // mkTTSServices "2";
+      // mkTTSServices "1" "2a03:4000:62:db2::";
     };
 }

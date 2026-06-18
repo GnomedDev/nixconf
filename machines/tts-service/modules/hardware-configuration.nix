@@ -1,20 +1,13 @@
-{
-  lib,
-  modulesPath,
-  ...
-}:
-
-{
+{ lib, modulesPath, ... }: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
   boot.initrd.availableKernelModules = [
-    "ahci"
     "xhci_pci"
     "virtio_pci"
     "virtio_scsi"
-    "sd_mod"
+    "usbhid"
     "sr_mod"
   ];
   boot.initrd.kernelModules = [ ];
@@ -22,16 +15,16 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/sda1";
+    device = "/dev/vda1";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/sda15";
+    device = "/dev/vda2";
     fsType = "vfat";
   };
 
   swapDevices = [ ];
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }
