@@ -20,8 +20,8 @@
   '';
 
   # Disable systemd-resolved
-  services.resolved.enable = false;
-  networking.resolvconf.enable = false;
+  services.resolved.enable = lib.mkForce false;
+  networking.resolvconf.enable = lib.mkForce false;
   environment.etc."resolv.conf".source = "/opt/orbstack-guest/etc/resolv.conf";
 
   # Faster DHCP - OrbStack uses SLAAC exclusively
