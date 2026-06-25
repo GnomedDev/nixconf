@@ -2,8 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nixos-hardware-unpatched.url = "github:NixOS/nixos-hardware";
-    nixos-hardware-unpatched.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -63,7 +63,7 @@
   outputs =
     {
       nixpkgs,
-      nixos-hardware-unpatched,
+      nixos-hardware,
       darwin,
       home-manager,
       t2fanrd,
@@ -82,19 +82,6 @@
           };
         }
       );
-
-      nixos-hardware =
-        pkgs:
-        pkgs.applyPatches {
-          name = "nixos-hardware-patched";
-          src = nixos-hardware-unpatched;
-          patches = [
-            (pkgs.fetchpatch2 {
-              url = "https://github.com/NixOS/nixos-hardware/pull/1848.patch";
-              hash = "sha256-Te4XV3mPQ5stCuQ9/yK567w8PvP7K7cIRtVyEEiHLjY=";
-            })
-          ];
-        };
 
       specialArgs = inputs;
       mkTTSServices =
@@ -217,7 +204,7 @@
             ./machines/living-mac/modules/firmware.nix
             ./machines/living-mac/modules/hardware-configuration.nix
 
-            (import "${nixos-hardware pkgs.x86_64-linux}/apple/t2")
+            nixos-hardware.nixosModules.apple-t2
             home-manager.nixosModules.home-manager
             t2fanrd.nixosModules.t2fanrd
           ];
