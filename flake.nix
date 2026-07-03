@@ -76,6 +76,11 @@
         system:
         import nixpkgs {
           inherit system;
+          overlays = [
+            (final: prev: {
+              pnpm_10_29_2 = final.pnpm_10;
+            })
+          ];
           config = {
             allowUnfree = true;
             android_sdk.accept_license = true;
