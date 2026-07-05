@@ -1,6 +1,13 @@
-{ lib, modulesPath, ... }: {
+{
+  lib,
+  ipv6Block,
+  modulesPath,
+  ...
+}:
+{
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
+    ../../../common/modules/systemd-boot.nix
   ];
 
   boot.initrd.availableKernelModules = [
@@ -25,6 +32,19 @@
   };
 
   swapDevices = [ ];
+
+  systemd.network = {
+    enable = true;
+    networks."10-ethernet" = {
+      enable = true;
+      matchConfig.Name = "enp7s0";
+      networkConfig = {
+        DHCP = "yes";
+        Address = "${ipv6Block}/64";
+        IPv6PrivacyExtensions = "kernel";
+      };
+    };
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }
