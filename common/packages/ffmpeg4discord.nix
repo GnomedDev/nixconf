@@ -6,7 +6,7 @@
 }:
 let
   pname = "ffmpeg4discord";
-  version = "0.2.0";
+  version = "0.2.2";
 in
 python3Packages.buildPythonApplication {
   inherit pname version;
@@ -14,7 +14,7 @@ python3Packages.buildPythonApplication {
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-tl8i1rsErShrErUp5qQkdejaKK++D3cnrgAJpuDbypM=";
+    hash = "sha256-cRn7ucm5AyEUWuZPYvj7TsiCN62WVDhlcaMzZ6TRry8=";
   };
 
   pythonRelaxDeps = [ "flask" ];
@@ -24,6 +24,7 @@ python3Packages.buildPythonApplication {
   build-system = with python3Packages; [ setuptools ];
   dependencies = with python3Packages; [
     flask
+    platformdirs
     ffmpeg-python
   ];
 }

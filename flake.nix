@@ -1,24 +1,24 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unpatched.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware-unpatched.url = "github:NixOS/nixos-hardware";
+    nixos-hardware-unpatched.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     darwin.url = "github:nix-darwin/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     t2fanrd.url = "github:GnomedDev/t2fanrd/feat/min-max-override";
-    t2fanrd.inputs.nixpkgs.follows = "nixpkgs";
+    t2fanrd.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     plasma-manager.url = "github:nix-community/plasma-manager";
-    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs-unpatched";
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
     # Raw inputs
@@ -62,8 +62,8 @@
 
   outputs =
     {
-      nixpkgs,
-      nixos-hardware,
+      nixpkgs-unpatched,
+      nixos-hardware-unpatched,
       darwin,
       home-manager,
       t2fanrd,
@@ -71,22 +71,52 @@
     }@inputs:
 
     let
-      lib = nixpkgs.lib;
-      pkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
+      lib = nixpkgs-unpatched.lib;
+      nixpkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
         system:
-        import nixpkgs {
-          inherit system;
-          overlays = [
-            (final: prev: {
-              pnpm_10_29_2 = final.pnpm_10;
+        let
+          pkgs = import nixpkgs-unpatched { inherit system; };
+        in
+        pkgs.applyPatches {
+          name = "nixpkgs-patched";
+          src = nixpkgs-unpatched;
+          patches = [
+            (pkgs.fetchpatch2 {
+              url = "https://github.com/NixOS/nixpkgs/pull/542528.patch";
+              hash = "sha256-KxVYvPJcC4nkUSoNz06hECxzj8Fvbh4uS5CQRooqe2s=";
             })
           ];
+        }
+      );
+
+      pkgs = lib.mapAttrs (
+        system: nixpkgs:
+        import nixpkgs {
+          inherit system;
           config = {
             allowUnfree = true;
             android_sdk.accept_license = true;
           };
         }
-      );
+      ) nixpkgs;
+
+      nixos-hardware = lib.mapAttrs (
+        system: pkgs:
+        pkgs.applyPatches {
+          name = "nixos-hardware-patched";
+          src = nixos-hardware-unpatched;
+          patches = [
+            (pkgs.fetchpatch2 {
+              url = "https://github.com/NixOS/nixos-hardware/pull/1934.patch";
+              hash = "sha256-A0YQUcXPEfZJ5Z5RjRoIgDZyaWY2xZxutB1RJLftaQA=";
+            })
+            (pkgs.fetchpatch2 {
+              url ="https://github.com/NixOS/nixos-hardware/pull/1933.patch";
+              hash = "sha256-/dD+9rMdilJko+TrKqzjVOpizEXG3l69xMFYI/dJaUA=";
+            })
+          ];
+        }
+      ) pkgs;
 
       specialArgs = inputs;
       mkTTSServices =
@@ -126,17 +156,17 @@
           ];
         in
         {
-          "tts-service-${index}" = nixpkgs.lib.nixosSystem {
+          "tts-service-${index}" = lib.nixosSystem {
             pkgs = providerLookup.${serverProvider}.pkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./machines/tts-service/modules ];
           };
-          "tts-service-${index}-setup" = nixpkgs.lib.nixosSystem {
+          "tts-service-${index}-setup" = lib.nixosSystem {
             pkgs = providerLookup.${serverProvider}.pkgs;
             specialArgs = serviceSpecialArgs;
             inherit modules;
           };
-          "tts-service-${index}-initial" = nixpkgs.lib.nixosSystem {
+          "tts-service-${index}-initial" = lib.nixosSystem {
             pkgs = providerLookup.${serverProvider}.pkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./common/users/gnome/ssh.nix ];
@@ -171,7 +201,7 @@
       };
 
       nixosConfigurations = {
-        gnome-desktop = nixpkgs.lib.nixosSystem {
+        gnome-desktop = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
           inherit specialArgs;
           modules = [
@@ -196,7 +226,7 @@
           ];
         };
 
-        living-mac = nixpkgs.lib.nixosSystem {
+        living-mac = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
           inherit specialArgs;
           modules = [
@@ -220,13 +250,13 @@
             ./machines/living-mac/modules/firmware.nix
             ./machines/living-mac/modules/hardware-configuration.nix
 
-            nixos-hardware.nixosModules.apple-t2
+            (import "${nixos-hardware.x86_64-linux}/apple/t2")
             home-manager.nixosModules.home-manager
             t2fanrd.nixosModules.t2fanrd
           ];
         };
 
-        living-nuc = nixpkgs.lib.nixosSystem {
+        living-nuc = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
           inherit specialArgs;
           modules = [
@@ -255,7 +285,7 @@
           ];
         };
 
-        vm-aarch64-linux = nixpkgs.lib.nixosSystem {
+        vm-aarch64-linux = lib.nixosSystem {
           pkgs = pkgs.aarch64-linux;
           inherit specialArgs;
           modules = [

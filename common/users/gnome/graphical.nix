@@ -26,9 +26,7 @@ in
       with pkgs;
       [
         # Random stuff
-        ares
         localsend
-        dolphin-emu
         prismlauncher
 
         # LibreOffice
