@@ -4,11 +4,11 @@
   config,
   ttsServiceSrc,
   tailscaleHostname,
-  ipv6Block,
+  ipBlock,
   ...
 }:
 let
-  cidr = "${ipv6Block}/64";
+  cidr = "${ipBlock}/64";
   oci-backend = "docker";
 
   getServiceName = name: config.systemd.services.${name}.name;

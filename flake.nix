@@ -120,29 +120,18 @@
 
       specialArgs = inputs;
       mkTTSServices =
-        index: serverProvider: ipv4Addr: ipv6Block:
+        index: ipBlock:
         let
-          providerLookup = {
-            contablo = {
-              hardware = ./machines/tts-service/modules/contablo-hw.nix;
-              pkgs = pkgs.x86_64-linux;
-              ethName = "ens18";
-            };
-            netcup = {
-              hardware = ./machines/tts-service/modules/netcup-hw.nix;
-              pkgs = pkgs.aarch64-linux;
-              ethName = "enp7s0";
-            };
-          };
+          servicePkgs = pkgs.aarch64-linux;
           serviceSpecialArgs = specialArgs // {
-            inherit ipv4Addr ipv6Block;
+            inherit ipBlock;
             tailscaleHostname = "tts-service-${index}";
-            ethName = providerLookup.${serverProvider}.ethName;
           };
           modules = [
             ./configuration.nix
 
             ./common/modules/home-manager.nix
+            ./common/modules/systemd-boot.nix
             ./common/modules/disable-sleep.nix
             ./common/modules/tailscale-server.nix
 
@@ -150,24 +139,24 @@
             ./common/users/gnome/general/linux.nix
 
             ./machines/tts-service/modules/environment.nix
-            providerLookup.${serverProvider}.hardware
+            ./machines/tts-service/modules/hardware-configuration.nix
 
             home-manager.nixosModules.home-manager
           ];
         in
         {
           "tts-service-${index}" = lib.nixosSystem {
-            pkgs = providerLookup.${serverProvider}.pkgs;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./machines/tts-service/modules ];
           };
           "tts-service-${index}-setup" = lib.nixosSystem {
-            pkgs = providerLookup.${serverProvider}.pkgs;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             inherit modules;
           };
           "tts-service-${index}-initial" = lib.nixosSystem {
-            pkgs = providerLookup.${serverProvider}.pkgs;
+            pkgs = servicePkgs;
             specialArgs = serviceSpecialArgs;
             modules = modules ++ [ ./common/users/gnome/ssh.nix ];
           };
@@ -300,10 +289,9 @@
           ];
         };
       }
-      // mkTTSServices "1" "netcup" "" "2a03:4000:65:cbe::"
-      // mkTTSServices "2" "netcup" "" "2a03:4000:65:ce3::"
-      // mkTTSServices "3" "netcup" "" "2a03:4000:65:e46::"
-      // mkTTSServices "4" "netcup" "" "2a03:4000:65:525::"
-      // mkTTSServices "5" "contablo" "77.237.238.56" "2a02:c207:2341:9723::";
+      // mkTTSServices "1" "2a03:4000:65:cbe::"
+      // mkTTSServices "2" "2a03:4000:65:ce3::"
+      // mkTTSServices "3" "2a03:4000:65:e46::"
+      // mkTTSServices "4" "2a03:4000:65:525::";
     };
 }
