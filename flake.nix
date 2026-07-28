@@ -1,7 +1,6 @@
 {
   inputs = {
-    # Using unstable-small until https://nixpk.gs/pr-tracker.html?pr=545346 is in.
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware-unpatched.url = "github:NixOS/nixos-hardware";
     nixos-hardware-unpatched.inputs.nixpkgs.follows = "nixpkgs";
