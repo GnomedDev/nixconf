@@ -1,6 +1,12 @@
-{ tailscaleHostname, ipBlock, ... }:
+{
+  tailscaleHostname,
+  ipBlock,
+  pkgs,
+  ...
+}:
 let
   cidr = "${ipBlock}/64";
+  interface = if pkgs.stdenv.targetPlatform.system == "x86_64-linux" then "enp0s3" else "enp7s0";
 in
 {
   # Spread IRQ load across cores, for an attempt to reduce load.
@@ -18,7 +24,7 @@ in
     enable = true;
     networks."10-ethernet" = {
       enable = true;
-      matchConfig.Name = "enp7s0";
+      matchConfig.Name = interface;
       networkConfig = {
         DHCP = "yes";
         Address = cidr;
@@ -29,7 +35,7 @@ in
 
   services.ndppd = {
     enable = true;
-    proxies.enp7s0.rules.${cidr}.method = "static";
+    proxies.${interface}.rules.${cidr}.method = "static";
   };
 
   security.sudo.wheelNeedsPassword = false;

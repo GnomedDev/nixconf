@@ -94,7 +94,7 @@
               hash = "sha256-A0YQUcXPEfZJ5Z5RjRoIgDZyaWY2xZxutB1RJLftaQA=";
             })
             (pkgs.fetchpatch2 {
-              url ="https://github.com/NixOS/nixos-hardware/pull/1933.patch";
+              url = "https://github.com/NixOS/nixos-hardware/pull/1933.patch";
               hash = "sha256-/dD+9rMdilJko+TrKqzjVOpizEXG3l69xMFYI/dJaUA=";
             })
           ];
@@ -103,9 +103,8 @@
 
       specialArgs = inputs;
       mkTTSServices =
-        index: ipBlock:
+        index: ipBlock: servicePkgs:
         let
-          servicePkgs = pkgs.aarch64-linux;
           serviceSpecialArgs = specialArgs // {
             inherit ipBlock;
             tailscaleHostname = "tts-service-${index}";
@@ -114,7 +113,6 @@
             ./configuration.nix
 
             ./common/modules/home-manager.nix
-            ./common/modules/systemd-boot.nix
             ./common/modules/disable-sleep.nix
             ./common/modules/tailscale-server.nix
 
@@ -122,10 +120,18 @@
             ./common/users/gnome/general/linux.nix
 
             ./machines/tts-service/modules/environment.nix
-            ./machines/tts-service/modules/hardware-configuration.nix
 
             home-manager.nixosModules.home-manager
-          ];
+          ]
+          ++ (
+            if servicePkgs.stdenv.targetPlatform.system == "x86_64-linux" then
+              [ ./machines/tts-service/modules/hw-config-x64.nix ]
+            else
+              [
+                ./common/modules/systemd-boot.nix
+                ./machines/tts-service/modules/hw-config-arm.nix
+              ]
+          );
         in
         {
           "tts-service-${index}" = lib.nixosSystem {
@@ -273,9 +279,10 @@
           ];
         };
       }
-      // mkTTSServices "1" "2a03:4000:65:cbe::"
-      // mkTTSServices "2" "2a03:4000:65:ce3::"
-      // mkTTSServices "3" "2a03:4000:65:e46::"
-      // mkTTSServices "4" "2a03:4000:65:525::";
+      // mkTTSServices "1" "2a03:4000:65:cbe::" pkgs.aarch64-linux
+      // mkTTSServices "2" "2a03:4000:65:ce3::" pkgs.aarch64-linux
+      // mkTTSServices "3" "2a03:4000:65:e46::" pkgs.aarch64-linux
+      // mkTTSServices "4" "2a03:4000:65:525::" pkgs.aarch64-linux
+      // mkTTSServices "5" "2a0a:4cc0:c1:9546::" pkgs.x86_64-linux;
     };
 }
