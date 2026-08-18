@@ -34,7 +34,7 @@ in
         hyphenDicts.en_US
         hunspellDicts.en_GB-ise
       ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
+      ++ lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
         (pkgs.callPackage ../../packages/azahar-bin.nix { })
         (pkgs.callPackage ../../packages/heroic-bin.nix { })
         libreoffice-bin
@@ -50,7 +50,7 @@ in
 
     xdg.configFile.ghostty-config = {
       target = "ghostty/config";
-      enable = pkgs.stdenv.isDarwin;
+      enable = pkgs.stdenv.targetPlatform.isDarwin;
       source = (pkgs.formats.toml { }).generate "ghostty-config.toml" {
         command = lib.getExe pkgs.fish;
         shell-integration = "fish";
