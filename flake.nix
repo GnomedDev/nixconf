@@ -256,6 +256,7 @@
 
             ./machines/living-nuc/modules/kodi.nix
             ./machines/living-nuc/modules/firmware.nix
+            ./machines/living-nuc/modules/minecraft.nix
             ./machines/living-nuc/modules/home-assistant.nix
             ./machines/living-nuc/modules/hardware-configuration.nix
 

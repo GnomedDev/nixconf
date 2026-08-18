@@ -1,0 +1,15 @@
+{ pkgs, lib, ... }: {
+  services.minecraft-server = {
+    enable = false;
+    eula = true;
+    package = pkgs.papermc.overrideAttrs (final: prev: {
+      version = "26_2-112";
+      src = pkgs.fetchurl {
+        url = "https://fill-data.papermc.io/v1/objects/bd3a58cf96874e5ea6643f5f6fe9b4f5bf9e34b795fa078c2f0ee8b98b2f907e/paper-26.2-112.jar";
+        sha256 = "bd3a58cf96874e5ea6643f5f6fe9b4f5bf9e34b795fa078c2f0ee8b98b2f907e";
+      };
+
+      installPhase = lib.replaceString (lib.getExe pkgs.jre) (lib.getExe pkgs.jdk25_headless) prev.installPhase;
+    });
+  };
+}
