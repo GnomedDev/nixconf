@@ -1,7 +1,7 @@
 # Required state:
 # - /var/certs contains HTTPS certificates
 # - Router is set up to port forward TCP/UDP on 31766 to living-nuc
-{ config, ... }:
+{ config, sharePath, ... }:
 {
   services.qbittorrent = {
     enable = true;
@@ -11,7 +11,7 @@
       LegalNotice.Accepted = true;
       Preferences = {
         Queueing.QueueingEnabled = false;
-        Downloads.DefaultSavePath = "/mnt/ext-hdd/Torrenting";
+        Downloads.DefaultSavePath = "${sharePath}/Torrenting";
         WebUI = {
           # Allow any connections from Tailscale skip authentication.
           AuthSubnetWhitelist = "100.64.0.0/10";

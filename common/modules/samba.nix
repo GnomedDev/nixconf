@@ -1,4 +1,4 @@
-{ ... }:
+{ sharePath, ... }:
 {
   # Remember to run `sudo smbpasswd -sa {user}` to set up passwords!
   services.samba = {
@@ -14,7 +14,7 @@
         "server role" = "standalone server";
 
         # Put the logs on the hard drive, in the `logs` folder.
-        "log file" = "/mnt/ext-hdd/logs/samba/log.%m";
+        "log file" = "${sharePath}/logs/samba/log.%m";
         "max log size" = "1000";
         logging = "file";
 
@@ -23,8 +23,7 @@
       };
 
       "External HDD" = {
-        comment = "Share External Drive";
-        path = "/mnt/ext-hdd/";
+        path = sharePath;
         "read only" = false;
         browsable = "yes";
 

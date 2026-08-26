@@ -1,10 +1,10 @@
-{ ... }:
+{ sharePath, ... }:
 {
   services.immich = {
     enable = true;
     host = "0.0.0.0";
 
-    mediaLocation = "/mnt/ext-hdd/Photos/Immich";
+    mediaLocation = "${sharePath}/Photos/Immich";
     accelerationDevices = [ "/dev/dri/renderD128" ];
   };
 

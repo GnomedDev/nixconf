@@ -206,7 +206,9 @@
 
         living-mac = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
-          inherit specialArgs;
+          specialArgs = specialArgs // {
+            sharePath = "/srv";
+          };
           modules = [
             ./configuration.nix
 
@@ -237,7 +239,9 @@
 
         living-nuc = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
-          inherit specialArgs;
+          specialArgs = specialArgs // {
+            sharePath = "/mnt/ext-hdd";
+          };
           modules = [
             ./configuration.nix
 
