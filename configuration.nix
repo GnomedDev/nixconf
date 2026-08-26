@@ -46,6 +46,10 @@
   # Disable man cache generation which is slow.
   documentation.man.cache.enable = false;
 
+  # Enable emergency access for early boot failures, machines do not use secure boot or
+  # encryption anyway so local access is already considered trusted.
+  boot.initrd.systemd.emergencyAccess = true;
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #

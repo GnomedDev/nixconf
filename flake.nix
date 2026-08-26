@@ -91,7 +91,7 @@
           patches = [
             (pkgs.fetchpatch2 {
               url = "https://github.com/NixOS/nixos-hardware/pull/1934.patch";
-              hash = "sha256-A0YQUcXPEfZJ5Z5RjRoIgDZyaWY2xZxutB1RJLftaQA=";
+              hash = "sha256-U5I30nOLstpTsQanqWfnHLSUCiJj93CYbch1VpyKoh0=";
             })
             (pkgs.fetchpatch2 {
               url = "https://github.com/NixOS/nixos-hardware/pull/1933.patch";
@@ -210,9 +210,9 @@
           modules = [
             ./configuration.nix
 
-            ./common/modules/samba.nix
+            # ./common/modules/samba.nix
             ./common/modules/swapfile.nix
-            ./common/modules/qbittorrent.nix
+            # ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
             ./common/modules/disable-sleep.nix
@@ -223,8 +223,8 @@
 
             ./common/users/fox/general.nix
 
-            ./machines/living-mac/modules/unifi.nix
-            ./machines/living-mac/modules/immich.nix
+            # ./machines/living-mac/modules/unifi.nix
+            # ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/firmware.nix
             ./machines/living-mac/modules/hardware-configuration.nix
