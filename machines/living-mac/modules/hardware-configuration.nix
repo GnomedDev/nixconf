@@ -12,10 +12,12 @@
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
-    "nvme"
     "usbhid"
-    "usb_storage"
     "sd_mod"
+  ];
+  boot.initrd.kernelModules = [
+    "nvme"
+    "usb_storage"
     "dm-cache-default"
     "dm-snapshot"
     "uas"

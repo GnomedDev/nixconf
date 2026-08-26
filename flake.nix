@@ -207,12 +207,12 @@
         living-mac = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
           specialArgs = specialArgs // {
-            sharePath = "/srv";
+            sharePath = "/srv/share";
           };
           modules = [
             ./configuration.nix
 
-            # ./common/modules/samba.nix
+            ./common/modules/samba.nix
             ./common/modules/swapfile.nix
             # ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
@@ -225,7 +225,7 @@
 
             ./common/users/fox/general.nix
 
-            # ./machines/living-mac/modules/unifi.nix
+            ./machines/living-mac/modules/unifi.nix
             # ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/firmware.nix

@@ -1,6 +1,6 @@
 { sharePath, ... }:
 {
-  # Remember to run `sudo smbpasswd -sa {user}` to set up passwords!
+  # Remember to run `sudo smbpasswd -a {user}` to set up passwords!
   services.samba = {
     enable = true;
     smbd.enable = true;
