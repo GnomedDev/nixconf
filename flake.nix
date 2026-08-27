@@ -214,7 +214,7 @@
 
             ./common/modules/samba.nix
             ./common/modules/swapfile.nix
-            # ./common/modules/qbittorrent.nix
+            ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
             ./common/modules/disable-sleep.nix
@@ -226,7 +226,7 @@
             ./common/users/fox/general.nix
 
             ./machines/living-mac/modules/unifi.nix
-            # ./machines/living-mac/modules/immich.nix
+            ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/firmware.nix
             ./machines/living-mac/modules/hardware-configuration.nix
