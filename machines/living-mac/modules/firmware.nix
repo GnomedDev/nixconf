@@ -19,6 +19,7 @@
 
   # Enable power management via upower.
   services.upower.enable = true;
+  boot.kernelParams = ["consoleblank=60"];
 
   # Setup networking.
   networking.hostName = "living-mac";
