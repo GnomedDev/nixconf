@@ -9,7 +9,7 @@ pkgs.stdenvNoCC.mkDerivation {
 
   src = pkgs.fetchurl {
     url = "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v${version}/${srcName}.zip";
-    sha256 = "sha256-IpgXKVuxDztPy3N3CKZ56wlRx8g6gLY9i+lKLVEwsaw=";
+    sha256 = "sha256-b+1yxM5DksIxrF65k/RFtjHleylPKnKvJ6viuw6QXJo=";
   };
 
   unpackPhase = "${lib.getExe pkgs.unzip} $src";

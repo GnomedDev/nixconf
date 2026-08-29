@@ -43,7 +43,7 @@ in
         iina
         utm
       ]
-      ++ lib.optionals pkgs.stdenv.isLinux [
+      ++ lib.optionals pkgs.stdenv.targetPlatform.isLinux [
         libreoffice-qt
         azahar
       ];
