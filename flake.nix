@@ -90,12 +90,12 @@
           src = nixos-hardware-unpatched;
           patches = [
             (pkgs.fetchpatch2 {
-              url = "https://github.com/NixOS/nixos-hardware/pull/1934.patch";
-              hash = "sha256-U5I30nOLstpTsQanqWfnHLSUCiJj93CYbch1VpyKoh0=";
-            })
-            (pkgs.fetchpatch2 {
               url = "https://github.com/NixOS/nixos-hardware/pull/1933.patch";
               hash = "sha256-/dD+9rMdilJko+TrKqzjVOpizEXG3l69xMFYI/dJaUA=";
+            })
+            (pkgs.fetchpatch2 {
+              url = "https://github.com/NixOS/nixos-hardware/pull/1934.patch";
+              hash = "sha256-U5I30nOLstpTsQanqWfnHLSUCiJj93CYbch1VpyKoh0=";
             })
           ];
         }
@@ -224,6 +224,7 @@
             ./common/users/gnome/general/linux.nix
 
             ./common/users/fox/general.nix
+            ./common/users/jax/general.nix
 
             ./machines/living-mac/modules/unifi.nix
             ./machines/living-mac/modules/immich.nix

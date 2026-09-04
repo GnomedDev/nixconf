@@ -138,7 +138,7 @@ in
           "xml"
           "nix"
           "toml"
-          "dependi"
+          "depsy"
           "github-actions"
           "vscode-dark-modern"
         ];
