@@ -95,7 +95,7 @@
             })
             (pkgs.fetchpatch2 {
               url = "https://github.com/NixOS/nixos-hardware/pull/1934.patch";
-              hash = "sha256-U5I30nOLstpTsQanqWfnHLSUCiJj93CYbch1VpyKoh0=";
+              hash = "sha256-ypu5VyreLdcDf/dcG/oxAqNlD7p9saNd35QlZMeroCk=";
             })
           ];
         }
