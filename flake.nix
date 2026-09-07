@@ -152,6 +152,7 @@
         };
     in
     {
+      formatter = lib.mapAttrs (_: pkgs: pkgs.nixfmt-tree) pkgs;
       packages = lib.mapAttrs (system: pkgs: {
         mach = pkgs.callPackage ./common/packages/mach.nix specialArgs;
         ff4d = pkgs.callPackage ./common/packages/ffmpeg4discord.nix specialArgs;
