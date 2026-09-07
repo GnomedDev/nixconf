@@ -231,6 +231,7 @@
             ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/firmware.nix
+            ./machines/living-mac/modules/nextcloud.nix
             ./machines/living-mac/modules/hardware-configuration.nix
 
             (import "${nixos-hardware.x86_64-linux}/apple/t2")
