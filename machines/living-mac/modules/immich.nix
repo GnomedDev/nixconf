@@ -1,4 +1,4 @@
-{ sharePath, ... }:
+{ config, sharePath, ... }:
 {
   services.immich = {
     enable = true;
@@ -12,4 +12,14 @@
     "video"
     "render"
   ];
+
+  services.nginx.virtualHosts."photos.t4t.fail" = {
+    useACMEHost = "t4t.fail";
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:${toString config.services.immich.port}";
+      proxyWebsockets = true;
+      recommendedProxySettings = true;
+    };
+  };
 }

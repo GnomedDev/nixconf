@@ -227,6 +227,7 @@
             ./common/users/fox/general.nix
             ./common/users/jax/general.nix
 
+            ./machines/living-mac/modules/acme.nix
             ./machines/living-mac/modules/unifi.nix
             ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix

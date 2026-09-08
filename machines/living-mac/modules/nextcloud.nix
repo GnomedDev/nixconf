@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 let
-  hostName = "${config.networking.hostName}.tail272b81.ts.net";
-  port = 7640;
+  hostName = "cloud.t4t.fail";
 in
 {
   services.nextcloud = {
@@ -15,27 +14,25 @@ in
       adminpassFile = "/var/certs/nextcloud-admin-pass";
     };
     settings = {
-      trusted_domains = [ "${hostName}:${toString port}" ];
       maintenance_window_start = "4";
       default_phone_region = "GB";
       log_type = "systemd";
     };
 
     appstoreEnable = false;
+    extraApps = {
+      inherit (pkgs.nextcloud34Packages.apps) calendar contacts spreed;
+    };
   };
 
-  services.nginx.virtualHosts."${config.services.nextcloud.hostName}" = {
-    extraConfig = ''
-      ssl_certificate      "/var/certs/${hostName}.crt";
-      ssl_certificate_key  "/var/certs/${hostName}.key";
-    '';
-    listen = [
-      {
-        addr = "0.0.0.0";
-        inherit port;
-        ssl = true;
-      }
-    ];
+  # services.nextcloud-spreed-signaling = {
+  #   enable = true;
+  #   configureNginx = true;
+  # };
+
+  services.nginx.virtualHosts."${hostName}" = {
+    forceSSL = true;
+    useACMEHost = "t4t.fail";
   };
 
   environment.systemPackages = [ config.services.nextcloud.occ ];

@@ -1,7 +1,4 @@
-# Required state:
-# - /var/certs contains HTTPS certificates
-# - Router is set up to port forward TCP/UDP on 31766 to living-nuc
-{ config, sharePath, ... }:
+{ lib, config, sharePath, ... }:
 {
   services.qbittorrent = {
     enable = true;
@@ -16,14 +13,25 @@
           # Allow any connections from Tailscale skip authentication.
           AuthSubnetWhitelist = "100.64.0.0/10";
           AuthSubnetWhitelistEnabled = true;
+          ReverseProxySupportEnabled = true;
+          TrustedReverseProxiesList = "127.0.0.1";
 
-          HTTPS = {
+          HTTPS = lib.optionalAttrs (config.networking.hostName == "living-nuc") {
             Enabled = true;
             KeyPath = "/var/certs/${config.networking.hostName}.tail272b81.ts.net.key";
             CertificatePath = "/var/certs/${config.networking.hostName}.tail272b81.ts.net.crt";
           };
         };
       };
+    };
+  };
+
+  services.nginx.virtualHosts."qbit.t4t.fail" = {
+    useACMEHost = "t4t.fail";
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:${toString config.services.qbittorrent.webuiPort}";
+      recommendedProxySettings = true;
     };
   };
 
