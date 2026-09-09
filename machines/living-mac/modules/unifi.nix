@@ -7,6 +7,8 @@
   services.nginx.virtualHosts."unifi.t4t.fail" = {
     useACMEHost = "t4t.fail";
     forceSSL = true;
+    quic = true;
+    http3 = true;
     locations."/" = {
       proxyPass = "https://living-mac:8443";
       proxyWebsockets = true;

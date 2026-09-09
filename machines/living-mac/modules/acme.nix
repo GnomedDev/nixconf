@@ -9,4 +9,10 @@
       group = config.services.nginx.group;
     };
   };
+
+  services.nginx.commonHttpConfig = ''
+    ssl_early_data on;
+    add_header Alt-Svc 'h3=":443"; ma=86400' always;
+    add_header_inherit merge;
+  '';
 }

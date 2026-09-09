@@ -31,6 +31,8 @@ in
   # };
 
   services.nginx.virtualHosts."${hostName}" = {
+    quic = true;
+    http3 = true;
     forceSSL = true;
     useACMEHost = "t4t.fail";
   };

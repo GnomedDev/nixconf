@@ -16,6 +16,8 @@
   services.nginx.virtualHosts."photos.t4t.fail" = {
     useACMEHost = "t4t.fail";
     forceSSL = true;
+    quic = true;
+    http3 = true;
     locations."/" = {
       proxyPass = "http://localhost:${toString config.services.immich.port}";
       proxyWebsockets = true;
