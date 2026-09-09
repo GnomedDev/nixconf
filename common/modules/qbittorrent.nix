@@ -1,4 +1,9 @@
-{ lib, config, sharePath, ... }:
+{
+  lib,
+  config,
+  sharePath,
+  ...
+}:
 {
   services.qbittorrent = {
     enable = true;

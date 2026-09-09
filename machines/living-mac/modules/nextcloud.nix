@@ -1,11 +1,8 @@
 { config, pkgs, ... }:
-let
-  hostName = "cloud.t4t.fail";
-in
 {
   services.nextcloud = {
     enable = true;
-    inherit hostName;
+    hostName = "cloud.t4t.fail";
     package = pkgs.nextcloud34;
     database.createLocally = true;
     https = true;
@@ -25,17 +22,37 @@ in
     };
   };
 
-  # services.nextcloud-spreed-signaling = {
-  #   enable = true;
-  #   configureNginx = true;
-  # };
-
-  services.nginx.virtualHosts."${hostName}" = {
-    quic = true;
-    http3 = true;
-    forceSSL = true;
-    useACMEHost = "t4t.fail";
+  services.nextcloud-spreed-signaling = {
+    enable = true;
+    configureNginx = true;
+    hostName = "talk.t4t.fail";
+    settings = {
+      http.listen = "localhost:7787";
+      clients.internalsecretFile = "/var/certs/nextcloud-talk.internalSecret";
+      sessions = {
+        blockkeyFile = "/var/certs/nextcloud-talk.blockSecret";
+        hashkeyFile = "/var/certs/nextcloud-talk.hashSecret";
+      };
+    };
+    backends.nextcloud = {
+      urls = [ "https://${config.services.nextcloud.hostName}" ];
+      secretFile = "/var/certs/nextcloud-talk.secret";
+    };
   };
+
+  services.nginx.virtualHosts =
+    let
+      h3WithSSL = {
+        quic = true;
+        http3 = true;
+        forceSSL = true;
+        useACMEHost = "t4t.fail";
+      };
+    in
+    {
+      "${config.services.nextcloud.hostName}" = h3WithSSL;
+      "${config.services.nextcloud-spreed-signaling.hostName}" = h3WithSSL;
+    };
 
   environment.systemPackages = [ config.services.nextcloud.occ ];
 }
