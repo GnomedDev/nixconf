@@ -54,5 +54,16 @@
       "${config.services.nextcloud-spreed-signaling.hostName}" = h3WithSSL;
     };
 
+  services.coturn = {
+    enable = true;
+    listening-ips = [ "100.127.75.93" "fd7a:115c:a1e0::5d2e:4b5e" ];
+    listening-port = 3479;
+    no-tls = true;
+
+    use-auth-secret = true;
+    static-auth-secret-file = "/var/certs/nextcloud-talk.coturnSecret";
+    realm = "t4t.fail";
+  };
+
   environment.systemPackages = [ config.services.nextcloud.occ ];
 }
