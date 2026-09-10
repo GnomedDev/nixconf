@@ -18,7 +18,7 @@
 
     appstoreEnable = false;
     extraApps = {
-      inherit (pkgs.nextcloud34Packages.apps) calendar contacts spreed;
+      inherit (pkgs.nextcloud34Packages.apps) calendar contacts spreed cookbook;
     };
   };
 
