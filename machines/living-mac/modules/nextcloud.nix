@@ -18,7 +18,12 @@
 
     appstoreEnable = false;
     extraApps = {
-      inherit (pkgs.nextcloud34Packages.apps) calendar contacts spreed cookbook;
+      inherit (pkgs.nextcloud34Packages.apps)
+        calendar
+        contacts
+        spreed
+        cookbook
+        ;
     };
   };
 
@@ -56,7 +61,10 @@
 
   services.coturn = {
     enable = true;
-    listening-ips = [ "100.127.75.93" "fd7a:115c:a1e0::5d2e:4b5e" ];
+    listening-ips = [
+      "100.127.75.93"
+      "fd7a:115c:a1e0::5d2e:4b5e"
+    ];
     listening-port = 3479;
     no-tls = true;
 

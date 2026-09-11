@@ -4,6 +4,9 @@
   sharePath,
   ...
 }:
+let
+  exposeToLan = config.networking.hostName == "living-nuc";
+in
 {
   services.qbittorrent = {
     enable = true;
@@ -21,7 +24,8 @@
           ReverseProxySupportEnabled = true;
           TrustedReverseProxiesList = "127.0.0.1";
 
-          HTTPS = lib.optionalAttrs (config.networking.hostName == "living-nuc") {
+          Address = if exposeToLan then "0.0.0.0" else "127.0.0.1";
+          HTTPS = lib.optionalAttrs exposeToLan {
             Enabled = true;
             KeyPath = "/var/certs/${config.networking.hostName}.tail272b81.ts.net.key";
             CertificatePath = "/var/certs/${config.networking.hostName}.tail272b81.ts.net.crt";
@@ -31,7 +35,7 @@
     };
   };
 
-  services.nginx.virtualHosts."qbit.t4t.fail" = {
+  services.nginx.virtualHosts."qbit.t4t.fail" = lib.optionalAttrs (!exposeToLan) {
     useACMEHost = "t4t.fail";
     forceSSL = true;
     quic = true;

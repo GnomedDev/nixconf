@@ -2,7 +2,7 @@
 {
   services.immich = {
     enable = true;
-    host = "0.0.0.0";
+    host = "127.0.0.1";
 
     mediaLocation = "${sharePath}/Photos/Immich";
     accelerationDevices = [ "/dev/dri/renderD128" ];
