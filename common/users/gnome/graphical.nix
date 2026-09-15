@@ -145,8 +145,11 @@ in
       };
 
       # Others
-      firefox.enable = true;
       obsidian.enable = true;
+      firefox = {
+        enable = true;
+        configPath = lib.mkIf (pkgs.stdenv.targetPlatform.isDarwin) "Library/Application Support/org.nixos.firefox";
+      };
     };
   };
 }
