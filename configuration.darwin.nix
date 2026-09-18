@@ -40,7 +40,7 @@
   # TODO: Specific to me, set with home-manager?
   system.defaults.dock.persistent-apps = [
     { app = "/System/Applications/Apps.app"; }
-    { app = "${pkgs.firefox}/Applications/Firefox.app"; }
+    { app = "/Users/gnome/Applications/Home Manager Apps/Firefox.app"; }
     { app = "${pkgs.vesktop}/Applications/Vesktop.app"; }
     { app = "${pkgs.zed-editor}/Applications/Zed.app"; }
     { app = "${pkgs.iina}/Applications/IINA.app"; }
