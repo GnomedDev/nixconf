@@ -36,7 +36,6 @@ in
       ]
       ++ lib.optionals pkgs.stdenv.targetPlatform.isDarwin [
         (pkgs.callPackage ../../packages/azahar-bin.nix { })
-        (pkgs.callPackage ../../packages/heroic-bin.nix { })
         libreoffice-bin
         ghostty-bin
         orbstack
