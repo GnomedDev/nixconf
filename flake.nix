@@ -90,12 +90,8 @@
           src = nixos-hardware-unpatched;
           patches = [
             (pkgs.fetchpatch2 {
-              url = "https://github.com/NixOS/nixos-hardware/pull/1933.patch";
-              hash = "sha256-/dD+9rMdilJko+TrKqzjVOpizEXG3l69xMFYI/dJaUA=";
-            })
-            (pkgs.fetchpatch2 {
               url = "https://github.com/NixOS/nixos-hardware/pull/1934.patch";
-              hash = "sha256-ypu5VyreLdcDf/dcG/oxAqNlD7p9saNd35QlZMeroCk=";
+              hash = "sha256-A1mQKkFGhAR7bHecoiZHDpc0MxFfOXRVcBx535LheZY=";
             })
           ];
         }
@@ -264,6 +260,7 @@
             ./common/users/sleepy/general.nix
 
             ./machines/living-nuc/modules/kodi.nix
+            ./machines/living-nuc/modules/restic.nix
             ./machines/living-nuc/modules/firmware.nix
             ./machines/living-nuc/modules/minecraft.nix
             ./machines/living-nuc/modules/home-assistant.nix
