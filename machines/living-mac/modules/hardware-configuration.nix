@@ -270,8 +270,9 @@
           SND_USB_AUDIO_MIDI_V2 = unset;
           SND_USB_CAIAQ_INPUT = unset;
           T2BCE_AUDIO = unset;
+          T2BCE_AVE = unset;
 
-          # Misc and obvious
+          # Disable media (video/tv/etc) support
           MEDIA_SUPPORT = no;
           MEDIA_ATTACH = unset;
           MEDIA_CONTROLLER = unset;
@@ -280,6 +281,12 @@
           MEDIA_DIGITAL_TV_SUPPORT = unset;
           MEDIA_PCI_SUPPORT = unset;
           MEDIA_USB_SUPPORT = unset;
+          MEDIA_PLATFORM_SUPPORT = unset;
+          MEDIA_RADIO_SUPPORT = unset;
+          MEDIA_SDR_SUPPORT = unset;
+          MEDIA_TEST_SUPPORT = unset;
+
+          # Misc and obvious
           X86_PLATFORM_DRIVERS_DELL = no;
           X86_PLATFORM_DRIVERS_HP = no;
           IIO = no;

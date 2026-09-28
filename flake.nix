@@ -226,6 +226,7 @@
             ./machines/living-mac/modules/acme.nix
             ./machines/living-mac/modules/unifi.nix
             ./machines/living-mac/modules/iperf3.nix
+            ./machines/living-mac/modules/restic.nix
             ./machines/living-mac/modules/immich.nix
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/firmware.nix
