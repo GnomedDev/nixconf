@@ -3,7 +3,7 @@
   services.nextcloud = {
     enable = true;
     hostName = "cloud.t4t.fail";
-    package = pkgs.nextcloud34;
+    package = pkgs.nextcloud35;
     database.createLocally = true;
     https = true;
     config = {
@@ -18,7 +18,7 @@
 
     appstoreEnable = false;
     extraApps = {
-      inherit (pkgs.nextcloud34Packages.apps)
+      inherit (pkgs.nextcloud35Packages.apps)
         calendar
         contacts
         spreed
