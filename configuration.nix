@@ -45,8 +45,9 @@
   # Use systemd-resolved instead of legacy scripted networking.
   services.resolved.enable = true;
 
-  # Disable man cache generation which is slow.
+  # Disable documentation generation which is slow.
   documentation.man.cache.enable = false;
+  documentation.nixos.enable = false;
 
   # Enable emergency access for early boot failures, machines do not use secure boot or
   # encryption anyway so local access is already considered trusted.

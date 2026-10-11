@@ -12,6 +12,9 @@
     btop
   ];
 
+  # Disable documentation generation which is slow.
+  documentation.enable = false;
+
   # Allow sudo to authenticate with touch ID
   security.pam.services.sudo_local.touchIdAuth = true;
 

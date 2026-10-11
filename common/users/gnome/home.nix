@@ -50,6 +50,10 @@ in
 
   programs.home-manager.enable = true;
 
+  manual = {
+    json.enable = false;
+    manpages.enable = false;
+  };
   home = {
     username = "gnome";
     inherit homeDirectory;
