@@ -14,6 +14,8 @@
   nix.settings = {
     # Expand trusted users to anyone in wheel group, instead of just root.
     trusted-users = [ "@wheel" ];
+    # Automatically replace identical files with hard-links.
+    auto-optimise-store = true;
     # Allow nix command/flakes
     experimental-features = [
       "nix-command"
