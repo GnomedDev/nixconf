@@ -155,11 +155,6 @@
         azahar-bin = pkgs.callPackage ./common/packages/azahar-bin.nix specialArgs;
       }) pkgs;
 
-      homeConfigurations.gnome = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs.aarch64-linux;
-        modules = [ ./common/users/gnome/home.nix ];
-      };
-
       darwinConfigurations.gnome = darwin.lib.darwinSystem {
         pkgs = pkgs.aarch64-darwin;
         inherit specialArgs;
@@ -176,31 +171,6 @@
       };
 
       nixosConfigurations = {
-        gnome-desktop = lib.nixosSystem {
-          pkgs = pkgs.x86_64-linux;
-          inherit specialArgs;
-          modules = [
-            ./configuration.nix
-
-            ./common/modules/kde.nix
-            ./common/modules/nvidia.nix
-            ./common/modules/swapfile.nix
-            ./common/modules/systemd-boot.nix
-            ./common/modules/home-manager.nix
-            ./common/modules/disable-sleep.nix
-
-            ./common/users/gnome/general
-            ./common/users/gnome/general/linux.nix
-            ./common/users/gnome/graphical.nix
-            ./common/users/gnome/kde.nix
-
-            ./machines/gnome-desktop/modules/graphical.nix
-            ./machines/gnome-desktop/modules/hardware-configuration.nix
-
-            home-manager.nixosModules.home-manager
-          ];
-        };
-
         living-mac = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
           specialArgs = specialArgs // {
