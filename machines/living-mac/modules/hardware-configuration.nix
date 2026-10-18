@@ -237,6 +237,9 @@
           INFINIBAND_IPOIB = unset;
           INFINIBAND_IPOIB_CM = unset;
 
+          # Don't care for NFC
+          NFC = no;
+
           # Don't care for sound
           SOUND = no;
           SND_AC97_POWER_SAVE = unset;

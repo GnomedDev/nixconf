@@ -9,7 +9,7 @@ pkgs.stdenvNoCC.mkDerivation {
 
   src = pkgs.fetchurl {
     url = "https://github.com/azahar-emu/azahar/releases/download/${version}/${srcName}.zip";
-    sha256 = "sha256-OKRRXNl51Sk9ZsrDgZfxTWnDETaPOg/LVH/ltljvHKc=";
+    sha256 = "sha256-wk3sK9URG315UT1obFrs5mEs2/lzey5uqZz8Qm8dSu8=";
   };
 
   unpackPhase = "${lib.getExe pkgs.unzip} $src";
