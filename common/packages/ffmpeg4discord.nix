@@ -6,7 +6,7 @@
 }:
 let
   pname = "ffmpeg4discord";
-  version = "0.2.3";
+  version = "0.4.0";
 in
 python3Packages.buildPythonApplication {
   inherit pname version;
@@ -14,11 +14,11 @@ python3Packages.buildPythonApplication {
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-KwBl+VEZfz7OyJ+tnu4zDR+1Lct55ujvtC0yNCuT6wc=";
+    hash = "sha256-GJrf4ocyIzF/jiBAHjWyYbUjGu1S/e1fQAAZeiz/y2g=";
   };
 
   pythonRelaxDeps = [ "flask" ];
-  buildInputs = with pkgs; [ ffmpeg_8 ]; # zfleeman/ffmpeg4discord#6666
+  buildInputs = with pkgs; [ ffmpeg ];
   nativeBuildInputs = with python3Packages; [ pythonRelaxDepsHook ];
 
   build-system = with python3Packages; [ setuptools ];
