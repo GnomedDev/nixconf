@@ -6,10 +6,7 @@
     package = pkgs.nextcloud35;
     database.createLocally = true;
     https = true;
-    config = {
-      dbtype = "pgsql";
-      adminpassFile = "/var/certs/nextcloud-admin-pass";
-    };
+    config.dbtype = "pgsql";
     settings = {
       maintenance_window_start = "4";
       default_phone_region = "GB";
