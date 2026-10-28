@@ -47,6 +47,9 @@ in
         azahar
       ];
 
+    # Add Tailscale Standalone to PATH on MacOS
+    home.sessionPath = lib.optional (pkgs.stdenv.targetPlatform.isDarwin) "/Applications/Tailscale.app/Contents/MacOS";
+
     xdg.configFile.ghostty-config = {
       target = "ghostty/config";
       enable = pkgs.stdenv.targetPlatform.isDarwin;
