@@ -17,9 +17,8 @@
     t2fanrd.url = "github:GnomedDev/t2fanrd/feat/min-max-override";
     t2fanrd.inputs.nixpkgs.follows = "nixpkgs";
 
-    plasma-manager.url = "github:nix-community/plasma-manager";
-    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
-    plasma-manager.inputs.home-manager.follows = "home-manager";
+    aac-board.url = "git+ssh://git@github.com/saltyfoxes/aac-board";
+    aac-board.inputs.nixpkgs.follows = "nixpkgs";
 
     # Raw inputs
     machSrc = {
@@ -108,6 +107,7 @@
           modules = [
             ./configuration.nix
 
+            ./common/modules/tts-service.nix
             ./common/modules/home-manager.nix
             ./common/modules/disable-sleep.nix
             ./common/modules/tailscale-server.nix
@@ -181,6 +181,7 @@
 
             ./common/modules/samba.nix
             ./common/modules/swapfile.nix
+            ./common/modules/tts-service.nix
             ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
@@ -201,6 +202,7 @@
             ./machines/living-mac/modules/t2fanrd.nix
             ./machines/living-mac/modules/firmware.nix
             ./machines/living-mac/modules/nextcloud.nix
+            ./machines/living-mac/modules/aac-board.nix
             ./machines/living-mac/modules/hardware-configuration.nix
 
             (import "${nixos-hardware.x86_64-linux}/apple/t2")

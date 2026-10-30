@@ -2,14 +2,13 @@
   lib,
   pkgs,
   config,
-  ttsServiceSrc,
   tailscaleHostname,
   ipBlock,
   ...
 }:
 let
   cidr = "${ipBlock}/64";
-  oci-backend = "docker";
+  oci-backend = config.virtualisation.oci-containers.backend;
 
   getServiceName = name: config.systemd.services.${name}.name;
 in
@@ -24,31 +23,16 @@ in
     };
   };
 
-  virtualisation.oci-containers.backend = oci-backend;
-  virtualisation.oci-containers.containers.tts-service = {
-    image = "gnomeddev/tts-service:${ttsServiceSrc.rev}";
-    volumes = [
-      "/var/tts-service/gcloud_tts.json:/gcp.json"
-    ];
-    environmentFiles = [
-      # AWS_ACCESS_KEY_ID=
-      # AWS_SECRET_ACCESS_KEY=
-      # DEEPL_KEY=
-      "/var/tts-service/env"
-    ];
-    environment = {
-      BIND_ADDR = "${tailscaleHostname}:58174";
-      IPV6_BLOCK = cidr;
-      LOG_LEVEL = "WARN";
-      GOOGLE_APPLICATION_CREDENTIALS = "/gcp.json";
-      AWS_REGION = "eu-central-1";
-      CACHE_MAX_CAPACITY = lib.toString (4000 * 8); # Around 8gb of memory usage
+  services.tts-service = {
+    enable = true;
+    bindAddr = "${tailscaleHostname}:58174";
+    secrets = {
+      envFile = "/var/tts-service/env";
+      googleServiceAccountPath = "/var/tts-service/gcloud_tts.json";
     };
-    extraOptions = [
-      "--init"
-      "--network=host"
-      "--ulimit"
-      "nofile=65535"
-    ];
+    settings = {
+      ipv6Block = cidr;
+      cacheMaxCapacity = 4000 * 8; # Around 8gb of memory usage
+    };
   };
 }

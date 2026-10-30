@@ -10,9 +10,16 @@
     };
   };
 
-  services.nginx.commonHttpConfig = ''
-    ssl_early_data on;
-    add_header Alt-Svc 'h3=":443"; ma=86400' always;
-    add_header_inherit merge;
-  '';
+  services.nginx = {
+    recommendedTlsSettings = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedBrotliSettings = true;
+    commonHttpConfig = ''
+      ssl_early_data on;
+      add_header Alt-Svc 'h3=":443"; ma=86400' always;
+      add_header_inherit merge;
+    '';
+  };
 }

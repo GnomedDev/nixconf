@@ -12,7 +12,6 @@
     locations."/" = {
       proxyPass = "https://living-mac:8443";
       proxyWebsockets = true;
-      recommendedProxySettings = true;
     };
   };
 }
