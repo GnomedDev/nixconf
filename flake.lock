@@ -271,11 +271,11 @@
     "ttsServiceSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1793452042,
-        "narHash": "sha256-OUfKqID/hgKLG1SP3jrxaGFfAF5DqGkRDSfrJfXWUuo=",
+        "lastModified": 1793546186,
+        "narHash": "sha256-3pxBxwRlHH02LYWltoJT/5/t/Dl1uUE7wVz6B263sg8=",
         "owner": "Discord-TTS",
         "repo": "tts-service",
-        "rev": "5e5869609f449fde9cf933dab19032e5a570555c",
+        "rev": "c9744f61ed04432b7b9822485ea4f9d0bc0d2a76",
         "type": "github"
       },
       "original": {
