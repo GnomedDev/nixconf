@@ -39,6 +39,39 @@
           KEXEC = no;
           KEXEC_HANDOVER = no;
 
+          # God does not support such sins
+          SECURITY_SELINUX = no;
+          SECURITY_APPARMOR = no;
+          DEFAULT_SECURITY_APPARMOR = unset;
+
+          # Not using network filesystems in kernel
+          NETWORK_FILESYSTEMS = no;
+          NFS_V4_SECURITY_LABEL = unset;
+          SUNRPC_DEBUG = unset;
+          NFSD_V3_ACL = unset;
+          NFSD_V4 = unset;
+          NFSD_V4_SECURITY_LABEL = unset;
+          NFS_FS = unset;
+          NFS_FSCACHE = unset;
+          NFS_LOCALIO = unset;
+          NFS_SWAP = unset;
+          NFS_V3_ACL = unset;
+          NFS_V4_2 = unset;
+          FSCACHE_STATS = unset;
+          CEPH_FSCACHE = unset;
+          CEPH_FS_POSIX_ACL = unset;
+          CIFS_DFS_UPCALL = unset;
+          CIFS_FSCACHE = unset;
+          CIFS_POSIX = unset;
+          CIFS_UPCALL = unset;
+          CIFS_XATTR = unset;
+
+          # Not using accessiblity devices (eg: speakup)
+          ACCESSIBILITY = no;
+
+          # Home server laptop, not a car/phone/etc
+          CAN = no;
+
           # WIFI/BT hardware is buggy
           WLAN = no;
           BRCMFMAC = unset;
@@ -119,6 +152,9 @@
 
           # Not using a gamepad
           GAMEPORT = no;
+          RC_CORE = no;
+          LIRC = unset;
+          MEDIA_CEC_RC = unset;
           HID_ACRUX = no;
           HID_DRAGONRISE = no;
           HID_GREENASIA = no;
@@ -296,6 +332,7 @@
           HID_SENSOR_ALS = unset;
           GNSS = no;
           WWAN = no;
+          FIREWIRE = no;
         };
     }
   ];
