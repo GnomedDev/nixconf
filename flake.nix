@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs-unpatched.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-unpatched.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
 
     nixos-hardware-unpatched.url = "github:NixOS/nixos-hardware";
     nixos-hardware-unpatched.inputs.nixpkgs.follows = "nixpkgs-unpatched";
@@ -17,8 +17,15 @@
     t2fanrd.url = "github:GnomedDev/t2fanrd/feat/min-max-override";
     t2fanrd.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
+    tts-service.url = "github:Discord-TTS/tts-service";
+    tts-service.inputs.nixpkgs.follows = "nixpkgs-unpatched";
+    tts-service.inputs.flake-utils.follows = "flake-utils";
+
+    flake-utils.url = "github:numtide/flake-utils";
+
     aac-board.url = "git+ssh://git@github.com/saltyfoxes/aac-board";
     aac-board.inputs.nixpkgs.follows = "nixpkgs-unpatched";
+    aac-board.inputs.flake-utils.follows = "flake-utils";
 
     # Raw inputs
     machSrc = {
@@ -49,12 +56,6 @@
       type = "github";
       owner = "CJNE";
       repo = "ha-myenergi";
-      flake = false;
-    };
-    ttsServiceSrc = {
-      type = "github";
-      owner = "Discord-TTS";
-      repo = "tts-service";
       flake = false;
     };
   };

@@ -1,7 +1,8 @@
 {
   lib,
+  pkgs,
   config,
-  ttsServiceSrc,
+  tts-service,
   ...
 }:
 let
@@ -47,25 +48,20 @@ in
   };
 
   config = mkIf cfg.enable {
-    virtualisation.oci-containers.backend = "docker";
-    virtualisation.oci-containers.containers.tts-service = mkIf cfg.enable {
-      image = "gnomeddev/tts-service:${ttsServiceSrc.rev}";
-      volumes = [ "${cfg.secrets.googleServiceAccountPath}:/gcp.json" ];
-      environmentFiles = [ cfg.secrets.envFile ];
+    systemd.services.tts-service = {
+      serviceConfig = {
+        ExecStart = lib.getExe tts-service.packages.${pkgs.stdenv.targetPlatform.system}.default;
+        EnvironmentFile = [ cfg.secrets.envFile ];
+        LimitNOFILE = "infinity";
+      };
       environment = {
         LOG_LEVEL = "WARN";
-        GOOGLE_APPLICATION_CREDENTIALS = "/gcp.json";
 
         BIND_ADDR = cfg.bindAddr;
         IPV6_BLOCK = cfg.settings.ipv6Block;
         CACHE_MAX_CAPACITY = lib.toString cfg.settings.cacheMaxCapacity;
+        GOOGLE_APPLICATION_CREDENTIALS = cfg.secrets.googleServiceAccountPath;
       };
-      extraOptions = [
-        "--init"
-        "--network=host"
-        "--ulimit"
-        "nofile=65535"
-      ];
     };
   };
 }

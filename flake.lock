@@ -2,7 +2,9 @@
   "nodes": {
     "aac-board": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nixpkgs": [
           "nixpkgs-unpatched"
         ]
@@ -185,18 +187,15 @@
     },
     "nixpkgs-unpatched": {
       "locked": {
-        "lastModified": 1794041552,
-        "narHash": "sha256-MVSrPp7q0OSbEsr2N8NWHrc0+MfIQS1r9TgFxnd3jXM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "085af13c1607f4f73ab1e7a51071faf6577a7e87",
-        "type": "github"
+        "lastModified": 1794070417,
+        "narHash": "sha256-6NCYl4eLJCZjT/WvgPGWkh1Q0aEfU7HBRR3tBuSOgyg=",
+        "rev": "d63e5b96ca17ae27b5d248d29564e31ff7a83f02",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1113519.d63e5b96ca17/nixexprs.tar.zst"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable-small",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst"
       }
     },
     "powerFlowCardSrc": {
@@ -219,6 +218,7 @@
       "inputs": {
         "aac-board": "aac-board",
         "darwin": "darwin",
+        "flake-utils": "flake-utils",
         "foxessModbusSrc": "foxessModbusSrc",
         "home-manager": "home-manager",
         "jninja2TemplateSrc": "jninja2TemplateSrc",
@@ -229,7 +229,7 @@
         "nixpkgs-unpatched": "nixpkgs-unpatched",
         "powerFlowCardSrc": "powerFlowCardSrc",
         "t2fanrd": "t2fanrd",
-        "ttsServiceSrc": "ttsServiceSrc"
+        "tts-service": "tts-service"
       }
     },
     "systems": {
@@ -268,8 +268,16 @@
         "type": "github"
       }
     },
-    "ttsServiceSrc": {
-      "flake": false,
+    "tts-service": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unpatched"
+        ],
+        "tts-utils": "tts-utils"
+      },
       "locked": {
         "lastModified": 1794059427,
         "narHash": "sha256-X9g2m5C/gQaE75aim1VGhcekyT2zN1za9WOf07hOYxE=",
@@ -281,6 +289,21 @@
       "original": {
         "owner": "Discord-TTS",
         "repo": "tts-service",
+        "type": "github"
+      }
+    },
+    "tts-utils": {
+      "locked": {
+        "lastModified": 1772477505,
+        "narHash": "sha256-0VdO1L/VWq3BK6+32mKPTThMB6L6eNKGfTFEKB+lOwk=",
+        "owner": "Discord-TTS",
+        "repo": "shared-workflows",
+        "rev": "25d7ca8a1e6cf3ed6c236073d368a03db736cd64",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Discord-TTS",
+        "repo": "shared-workflows",
         "type": "github"
       }
     }
