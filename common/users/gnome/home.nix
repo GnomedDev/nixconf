@@ -62,9 +62,10 @@ in
       (callPackage ../../packages/ffmpeg4discord.nix { })
       (callPackage ../../packages/mach.nix { inherit machSrc; })
 
-      # General stuff I just want avaliable
+      # General stuff I just want avaliable
       screen
       python3
+      nixos-rebuild-ng
     ];
 
     # Do not change.

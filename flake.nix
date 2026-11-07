@@ -1,24 +1,24 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-unpatched.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     nixos-hardware-unpatched.url = "github:NixOS/nixos-hardware";
-    nixos-hardware-unpatched.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware-unpatched.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     darwin.url = "github:nix-darwin/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     t2fanrd.url = "github:GnomedDev/t2fanrd/feat/min-max-override";
-    t2fanrd.inputs.nixpkgs.follows = "nixpkgs";
+    t2fanrd.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     aac-board.url = "git+ssh://git@github.com/saltyfoxes/aac-board";
-    aac-board.inputs.nixpkgs.follows = "nixpkgs";
+    aac-board.inputs.nixpkgs.follows = "nixpkgs-unpatched";
 
     # Raw inputs
     machSrc = {
@@ -61,18 +61,34 @@
 
   outputs =
     {
-      nixpkgs,
+      nixpkgs-unpatched,
       nixos-hardware-unpatched,
       darwin,
       home-manager,
       t2fanrd,
       ...
     }@inputs:
-
     let
-      lib = nixpkgs.lib;
-      pkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
+      lib = nixpkgs-unpatched.lib;
+      nixpkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
         system:
+        let
+          pkgs = (import nixpkgs-unpatched { inherit system; });
+        in
+        pkgs.applyPatches {
+          name = "nixpkgs-patched";
+          src = nixpkgs-unpatched;
+          patches = [
+            (pkgs.fetchpatch2 {
+              url = "https://github.com/NixOS/nixpkgs/pull/584581.patch";
+              hash = "sha256-0LAsyuX/gByRZLDxWcTmUe9a4b+NLxop7W9bzWmKlTA=";
+            })
+          ];
+        }
+      );
+
+      pkgs = lib.mapAttrs (
+        system: nixpkgs:
         import nixpkgs {
           inherit system;
           config = {
@@ -80,7 +96,7 @@
             android_sdk.accept_license = true;
           };
         }
-      );
+      ) nixpkgs;
 
       nixos-hardware = lib.mapAttrs (
         system: pkgs:
