@@ -70,22 +70,10 @@
       ...
     }@inputs:
     let
+      # No-op for now, do not currently need to apply any patches.
       lib = nixpkgs-unpatched.lib;
       nixpkgs = lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (
-        system:
-        let
-          pkgs = (import nixpkgs-unpatched { inherit system; });
-        in
-        pkgs.applyPatches {
-          name = "nixpkgs-patched";
-          src = nixpkgs-unpatched;
-          patches = [
-            (pkgs.fetchpatch2 {
-              url = "https://github.com/NixOS/nixpkgs/pull/584581.patch";
-              hash = "sha256-0LAsyuX/gByRZLDxWcTmUe9a4b+NLxop7W9bzWmKlTA=";
-            })
-          ];
-        }
+        system: nixpkgs-unpatched
       );
 
       pkgs = lib.mapAttrs (

@@ -152,11 +152,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793543282,
-        "narHash": "sha256-PHtGxKYM99f8WhGR5YD7iiCiwemKa2wUD4yVI2oALFg=",
+        "lastModified": 1794132860,
+        "narHash": "sha256-iGNtQnUZsi+v6/4NbtYr+dsmASa6GkzXtUcTpE8F3mE=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "cee0f879d338cf08f814210fa6c2b280594ade0a",
+        "rev": "af9249ca33bc2efaae5d071e4c67ddef19dcb681",
         "type": "github"
       },
       "original": {
@@ -187,11 +187,11 @@
     },
     "nixpkgs-unpatched": {
       "locked": {
-        "lastModified": 1794070417,
-        "narHash": "sha256-6NCYl4eLJCZjT/WvgPGWkh1Q0aEfU7HBRR3tBuSOgyg=",
-        "rev": "d63e5b96ca17ae27b5d248d29564e31ff7a83f02",
+        "lastModified": 1794157196,
+        "narHash": "sha256-gMI8yA9ZwoXZvjN4lZbObE7dt2iCiZEH6Su+6nEWKg0=",
+        "rev": "4d6a01a11146f4691c0991682885ad9e4686e3ee",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1113519.d63e5b96ca17/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1114595.4d6a01a11146/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -201,11 +201,11 @@
     "powerFlowCardSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1777409451,
-        "narHash": "sha256-78ch4XW7dlp32FWjuUCanYsSY9T6Dh3+1VvNReLGTUM=",
+        "lastModified": 1794134464,
+        "narHash": "sha256-nste+eMkLAhW4TcA01EfsjxilgUrtkorPhx9YlWRCgs=",
         "owner": "flixlix",
         "repo": "power-flow-card-plus",
-        "rev": "9f396c83c227ce3bf93c3675aa412ad438ecc15d",
+        "rev": "d9f3a9255776b3e1a270bf72b2c8039e22047104",
         "type": "github"
       },
       "original": {
@@ -279,11 +279,11 @@
         "tts-utils": "tts-utils"
       },
       "locked": {
-        "lastModified": 1794059427,
-        "narHash": "sha256-X9g2m5C/gQaE75aim1VGhcekyT2zN1za9WOf07hOYxE=",
+        "lastModified": 1794167017,
+        "narHash": "sha256-rlZ/9MoKBjs0xdBqhl+BeFaS4aRH5RRCZfHumA541Zc=",
         "owner": "Discord-TTS",
         "repo": "tts-service",
-        "rev": "af7fe60a7ced152e1ee692224ac3140bbbfd91d0",
+        "rev": "66ae96910faf14c72a54a3d4a755306cf5ebf561",
         "type": "github"
       },
       "original": {
