@@ -8,14 +8,12 @@
 }:
 let
   cidr = "${ipBlock}/64";
-  oci-backend = config.virtualisation.oci-containers.backend;
-
   getServiceName = name: config.systemd.services.${name}.name;
 in
 {
   systemd.services.setup-local-bind = {
-    requiredBy = [ (getServiceName "${oci-backend}-tts-service") ];
-    before = [ (getServiceName "${oci-backend}-tts-service") ];
+    requiredBy = [ (getServiceName "tts-service") ];
+    before = [ (getServiceName "tts-service") ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
