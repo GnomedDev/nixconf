@@ -49,8 +49,9 @@ in
 
   config = mkIf cfg.enable {
     systemd.services.tts-service = {
-      after = [ "network-online.target" "tailscaled.service" ];
       wantedBy = [ "multi-user.target" ];
+      after = [ "network-online.target" "tailscaled.service" ];
+      requires = [ "network-online.target" "tailscaled.service" ];
       serviceConfig = {
         ExecStart = lib.getExe tts-service.packages.${pkgs.stdenv.targetPlatform.system}.default;
         EnvironmentFile = [ cfg.secrets.envFile ];
