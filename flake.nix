@@ -68,7 +68,7 @@
       home-manager,
       t2fanrd,
       ...
-    }@inputs:
+    }@specialArgs:
     let
       # No-op for now, do not currently need to apply any patches.
       lib = nixpkgs-unpatched.lib;
@@ -100,57 +100,6 @@
           ];
         }
       ) pkgs;
-
-      specialArgs = inputs;
-      mkTTSServices =
-        index: ipBlock: servicePkgs:
-        let
-          serviceSpecialArgs = specialArgs // {
-            inherit ipBlock;
-            tailscaleHostname = "tts-service-${index}";
-          };
-          modules = [
-            ./configuration.nix
-
-            ./common/modules/tts-service.nix
-            ./common/modules/home-manager.nix
-            ./common/modules/disable-sleep.nix
-            ./common/modules/tailscale-server.nix
-
-            ./common/users/gnome/general
-            ./common/users/gnome/general/linux.nix
-
-            ./machines/tts-service/modules/environment.nix
-
-            home-manager.nixosModules.home-manager
-          ]
-          ++ (
-            if servicePkgs.stdenv.targetPlatform.system == "x86_64-linux" then
-              [ ./machines/tts-service/modules/hw-config-x64.nix ]
-            else
-              [
-                ./common/modules/systemd-boot.nix
-                ./machines/tts-service/modules/hw-config-arm.nix
-              ]
-          );
-        in
-        {
-          "tts-service-${index}" = lib.nixosSystem {
-            pkgs = servicePkgs;
-            specialArgs = serviceSpecialArgs;
-            modules = modules ++ [ ./machines/tts-service/modules ];
-          };
-          "tts-service-${index}-setup" = lib.nixosSystem {
-            pkgs = servicePkgs;
-            specialArgs = serviceSpecialArgs;
-            inherit modules;
-          };
-          "tts-service-${index}-initial" = lib.nixosSystem {
-            pkgs = servicePkgs;
-            specialArgs = serviceSpecialArgs;
-            modules = modules ++ [ ./common/users/gnome/ssh.nix ];
-          };
-        };
     in
     {
       formatter = lib.mapAttrs (_: pkgs: pkgs.nixfmt-tree) pkgs;
@@ -186,7 +135,6 @@
 
             ./common/modules/samba.nix
             ./common/modules/swapfile.nix
-            ./common/modules/tts-service.nix
             ./common/modules/qbittorrent.nix
             ./common/modules/home-manager.nix
             ./common/modules/systemd-boot.nix
@@ -263,11 +211,6 @@
             home-manager.nixosModules.home-manager
           ];
         };
-      }
-      // mkTTSServices "1" "2a03:4000:65:cbe::" pkgs.aarch64-linux
-      // mkTTSServices "2" "2a03:4000:65:ce3::" pkgs.aarch64-linux
-      // mkTTSServices "3" "2a03:4000:65:e46::" pkgs.aarch64-linux
-      // mkTTSServices "4" "2a03:4000:65:525::" pkgs.aarch64-linux
-      // mkTTSServices "5" "2a0a:4cc0:c1:9546::" pkgs.x86_64-linux;
+      };
     };
 }

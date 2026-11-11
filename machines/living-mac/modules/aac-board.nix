@@ -1,7 +1,9 @@
 {
   config,
   pkgs,
+  lib,
   aac-board,
+  tts-service,
   ...
 }:
 {
@@ -12,23 +14,36 @@
     useACMEHost = "t4t.fail";
 
     root = aac-board.packages.${pkgs.stdenv.buildPlatform.system}.default;
-    locations."/api/".proxyPass = "http://${config.services.tts-service.bindAddr}/";
+    locations."/api/".proxyPass =
+      "http://${config.systemd.services.tts-service.environment.BIND_ADDR}/";
     locations."/images".extraConfig = ''
       autoindex on;
       autoindex_format json;
     '';
   };
 
-  services.tts-service = {
-    enable = true;
-    bindAddr = "localhost:58174";
-    secrets = {
-      envFile = "/var/certs/aws-aac-credentials.env";
-      googleServiceAccountPath = "/var/certs/gcp-aac-credentials.json";
+  systemd.services.tts-service = {
+    wantedBy = [ "multi-user.target" ];
+    after = [
+      "network-online.target"
+      "tailscaled.service"
+    ];
+    requires = [
+      "network-online.target"
+      "tailscaled.service"
+    ];
+    serviceConfig = {
+      ExecStart = lib.getExe tts-service.packages.${pkgs.stdenv.targetPlatform.system}.default;
+      EnvironmentFile = [ "/var/certs/aws-aac-credentials.env" ];
+      LimitNOFILE = "infinity";
     };
-    settings = {
-      ipv6Block = "DISABLE";
-      cacheMaxCapacity = 1000;
+    environment = {
+      LOG_LEVEL = "WARN";
+
+      BIND_ADDR = "localhost:58174";
+      IPV6_BLOCK = "DISABLE";
+      CACHE_MAX_CAPACITY = lib.toString 1000;
+      GOOGLE_APPLICATION_CREDENTIALS = "/var/certs/gcp-aac-credentials.json";
     };
   };
 }
