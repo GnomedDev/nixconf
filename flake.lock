@@ -10,11 +10,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794439129,
-        "narHash": "sha256-Fi8EEjFXDfjHYIBbHXUZ4U+xM3cyrgWSMQebJ4NFfZU=",
+        "lastModified": 1794512519,
+        "narHash": "sha256-beu+9fK30yDrNW3AGqPCoOD2GfslOlS+7Z8DZPRzhb0=",
         "ref": "refs/heads/main",
-        "rev": "b76095e30e2c690c0aca46dd6a79dbf011f20816",
-        "revCount": 19,
+        "rev": "a816cc2b9ef08cb34656159dbe166e148508c5b5",
+        "revCount": 20,
         "type": "git",
         "url": "ssh://git@github.com/saltyfoxes/aac-board"
       },
@@ -172,11 +172,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794425805,
-        "narHash": "sha256-4s5CRvkYX4oAJVZ+zu2bBKFH2gG2GqN6OKHEWgJr1AY=",
+        "lastModified": 1794567267,
+        "narHash": "sha256-rNEpg5aWAPgBPdF1vhhwztYtV7hgzE3fQiby+FZMuCQ=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "b6ca87f78ec5bafc4b2aef7b29803dcf419266af",
+        "rev": "75206a855c8de3bc71f8b513edf29ca427941c3a",
         "type": "github"
       },
       "original": {
@@ -187,11 +187,11 @@
     },
     "nixpkgs-unpatched": {
       "locked": {
-        "lastModified": 1794435240,
-        "narHash": "sha256-t+xPCSAczNKJBG0a7dkjZDJXKDtN9th6bqOCrdx8Sz4=",
-        "rev": "18808198c9047939daaaefad3772c72b4e955116",
+        "lastModified": 1794580336,
+        "narHash": "sha256-J3Jyeo240OyIbvqDuGSOYaXMOBGMBRnSFBMT9cvuNb0=",
+        "rev": "ac9af266ee64ddb2eafeb4b250cac6a88147b43a",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1118267.18808198c904/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1119847.ac9af266ee64/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -201,11 +201,11 @@
     "powerFlowCardSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1794339209,
-        "narHash": "sha256-yiy4PaQcnd0uwKXSZZixP7rTMGXpay70bhd00E5bbjc=",
+        "lastModified": 1794507697,
+        "narHash": "sha256-c4/Zd2FxvkM+lIV2V1VasT9OahYXrdRdjPNskAIsSF8=",
         "owner": "flixlix",
         "repo": "power-flow-card-plus",
-        "rev": "95a5b4c246c23b46a3681b9b71257ced93ba525d",
+        "rev": "9396868efd09be6f12c8d009dc970a946348fbe8",
         "type": "github"
       },
       "original": {
