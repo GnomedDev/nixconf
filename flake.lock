@@ -187,11 +187,11 @@
     },
     "nixpkgs-unpatched": {
       "locked": {
-        "lastModified": 1795098731,
-        "narHash": "sha256-iJQmGZrFFhTyw/U6GdAoTYhUw1ih9R71LMqMAARMP+o=",
-        "rev": "b8a59ac94c4c495610130c08e5b4c99c2758b571",
+        "lastModified": 1795251022,
+        "narHash": "sha256-HktP1U+GGf5qAo89M6Ev4yyHMV7oh23H45prjON9vpw=",
+        "rev": "d114a7aa9a8976cb42b67409932c5733689a80aa",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1124578.b8a59ac94c4c/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1125914.d114a7aa9a89/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -279,11 +279,11 @@
         "tts-utils": "tts-utils"
       },
       "locked": {
-        "lastModified": 1794167017,
-        "narHash": "sha256-rlZ/9MoKBjs0xdBqhl+BeFaS4aRH5RRCZfHumA541Zc=",
+        "lastModified": 1795210021,
+        "narHash": "sha256-CbeuiRYo8yjXuAOZCsQ4lc4tnveWgC/LkoqVX5rbqoI=",
         "owner": "Discord-TTS",
         "repo": "tts-service",
-        "rev": "66ae96910faf14c72a54a3d4a755306cf5ebf561",
+        "rev": "c5876c2b54025096827ffe39b161b36c26ab291c",
         "type": "github"
       },
       "original": {
