@@ -1,4 +1,4 @@
-{ pkgs, machSrc, ... }:
+{ nixpkgs, pkgs, machSrc, ... }:
 let
   homeDirectory = if pkgs.stdenv.targetPlatform.isDarwin then "/Users/gnome" else "/home/gnome";
   sshKey = "${homeDirectory}/.ssh/id_rsa";
@@ -47,6 +47,10 @@ in
   };
 
   programs.nix-index-database.comma.enable = true;
+  nix.registry.nixpkgs.to = {
+    type = "path";
+    path = nixpkgs;
+  };
 
   programs.home-manager.enable = true;
 

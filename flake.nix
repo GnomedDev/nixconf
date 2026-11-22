@@ -80,6 +80,7 @@
         system: nixpkgs:
         import nixpkgs {
           inherit system;
+          overlays = import ./common/overlays/system-nix.nix { inherit lib system; };
           config = {
             allowUnfree = true;
             android_sdk.accept_license = true;
@@ -111,7 +112,9 @@
 
       darwinConfigurations.gnome = darwin.lib.darwinSystem {
         pkgs = pkgs.aarch64-darwin;
-        inherit specialArgs;
+        specialArgs = specialArgs // {
+          nixpkgs = nixpkgs.aarch64-darwin;
+        };
         modules = [
           home-manager.darwinModules.home-manager
           ./configuration.darwin.nix
@@ -128,6 +131,7 @@
         living-mac = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
           specialArgs = specialArgs // {
+            nixpkgs = nixpkgs.x86_64-linux;
             sharePath = "/srv/share";
           };
           modules = [
@@ -167,6 +171,7 @@
         living-nuc = lib.nixosSystem {
           pkgs = pkgs.x86_64-linux;
           specialArgs = specialArgs // {
+            nixpkgs = nixpkgs.x86_64-linux;
             sharePath = "/mnt/ext-hdd";
           };
           modules = [
@@ -199,7 +204,9 @@
 
         vm-aarch64-linux = lib.nixosSystem {
           pkgs = pkgs.aarch64-linux;
-          inherit specialArgs;
+          specialArgs = specialArgs // {
+            nixpkgs = nixpkgs.aarch64-linux;
+          };
           modules = [
             ./configuration.nix
 
