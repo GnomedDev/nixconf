@@ -10,11 +10,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795039659,
-        "narHash": "sha256-C810dOAIvkMHX/krheELpBvJ5MjHf9pp7ZlzNX9Oiig=",
+        "lastModified": 1795555243,
+        "narHash": "sha256-d1WRq4c4/n5+k8od+FQY7gwVlVU62ltnH0xmp449hIE=",
         "ref": "refs/heads/main",
-        "rev": "2b45ac2818c1ef10057e189e8d3186169d8fc924",
-        "revCount": 26,
+        "rev": "b001213277bf01865cbb78f9424a36dc4e6f2096",
+        "revCount": 28,
         "type": "git",
         "url": "ssh://git@github.com/saltyfoxes/aac-board"
       },
@@ -30,11 +30,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795309925,
-        "narHash": "sha256-xpgrKyUvEMz0yCb+zklEpOFd0VnHyH0oBYce4Umj4e8=",
+        "lastModified": 1795373241,
+        "narHash": "sha256-Gd1+Oaj8nS+p1qLpKk4MGv/qGh62+lTkX4262e2UDgc=",
         "owner": "nix-darwin",
         "repo": "nix-darwin",
-        "rev": "f673885103fa92c1c5b1d16b8bf2b858906809e2",
+        "rev": "663d8b962a11cda261b6e9f14e03911fac94baf0",
         "type": "github"
       },
       "original": {
@@ -84,11 +84,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795340038,
-        "narHash": "sha256-RtgZbV+4BDtJqMImbiPJri3fmVDbCbrz/B0cuPQUJQY=",
+        "lastModified": 1795534022,
+        "narHash": "sha256-xkRZ+PcPWaAyf9YrEBszYD5w2S6/Ac2tIfsufzd4dEQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "03885bcd0b477bdecebebc57b213b0f8f0826d51",
+        "rev": "b56bcd042b5e69ad188eca20d9bec1bfbf3dd453",
         "type": "github"
       },
       "original": {
@@ -152,11 +152,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794739050,
-        "narHash": "sha256-PCGNIyAydZcdUXCxEXTjrS1+wWS+k9E+ENqBkUK2Mpg=",
+        "lastModified": 1795345257,
+        "narHash": "sha256-p1dA8lUFQTLJfDI2gaTZQ+CcMKw3nxvyHNbwpVMy2rY=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "9bd074026d6db75b59aae8cd6071b5f2fe27a36c",
+        "rev": "905f3e6f1e78165e79457c0bbe7ec4b885a5fce1",
         "type": "github"
       },
       "original": {
@@ -172,11 +172,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795018746,
-        "narHash": "sha256-glQAHvZGgBVjzGIWgIZYSf3X10gvtO2LPR4rtyP/Soc=",
+        "lastModified": 1795549782,
+        "narHash": "sha256-0mlYwyAv7lUDD6HBgPMqBXjMcIfIZBsLryNnkspeIGs=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "33475966110df258f52d05ec4d4cd6394637cbb9",
+        "rev": "97a30ee0974b815496bec7b136af6b945bd65aef",
         "type": "github"
       },
       "original": {
@@ -187,11 +187,11 @@
     },
     "nixpkgs-unpatched": {
       "locked": {
-        "lastModified": 1795310876,
-        "narHash": "sha256-NsW9jRuy2odv1/CPcr2McxYTHrh5c0tiYwSFjyWZaqE=",
-        "rev": "73c38e38fb74519300e45ff24029a6278f57e8af",
+        "lastModified": 1795527036,
+        "narHash": "sha256-Qk+sKFcPJbHF1wIwagDYSJdmRCzgBMVHLfg6sL97bMo=",
+        "rev": "52a93865f031ba894c0d19121dda6b75c0f2b2b8",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1126481.73c38e38fb74/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1129347.52a93865f031/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
@@ -201,11 +201,11 @@
     "powerFlowCardSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1794755134,
-        "narHash": "sha256-m81ohIxOezR2j+kl6z96mE7336ycLurBC6x7VIG8/ac=",
+        "lastModified": 1795515593,
+        "narHash": "sha256-FgaVtviL2PnSDbRsmIOm2B8klJ9rLYz6aV5g28xy708=",
         "owner": "flixlix",
         "repo": "power-flow-card-plus",
-        "rev": "59b2b7266c0d9455d7b3e36a369003d415f18fb7",
+        "rev": "55a254407bdd657255012deb75db6c0a5728a122",
         "type": "github"
       },
       "original": {

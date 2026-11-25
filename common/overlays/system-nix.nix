@@ -12,10 +12,11 @@ lib.optionals (system == "aarch64-darwin") [
         '';
       }
     );
-    nixos-rebuild-ng = prevPkgs.nixos-rebuild-ng.overrideAttrs (
-      final: prev: {
-        propagatedBuildInputs = [ ];
-      }
-    );
+    # Currently appears to be broken.
+    # nixos-rebuild-ng = prevPkgs.nixos-rebuild-ng.overrideAttrs (
+    #   final: prev: {
+    #     propagatedBuildInputs = [ ];
+    #   }
+    # );
   })
 ]

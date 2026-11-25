@@ -64,10 +64,12 @@ in
       };
     };
 
+    home.file."Library/Application Support/vesktop/settings.json".force = true;
     programs = {
       # Vesktop (Discord)
       vesktop = {
         enable = true;
+        vencord.useSystem = true;
         settings = {
           discordBranch = "stable";
           minimizeToTray = true;

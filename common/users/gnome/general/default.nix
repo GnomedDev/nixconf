@@ -1,4 +1,9 @@
-{ nixpkgs, nix-index-database, machSrc, ... }:
+{
+  nixpkgs,
+  nix-index-database,
+  machSrc,
+  ...
+}:
 {
   programs.fish.enable = true;
 
